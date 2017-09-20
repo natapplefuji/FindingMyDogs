@@ -5,6 +5,22 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { RegisterPage } from '../pages/register/register'
+import { AdoptDetailPage } from '../pages/adopt-detail/adopt-detail';
+import { AdoptGetPage } from '../pages/adopt-get/adopt-get';
+import { AdoptGivePage } from '../pages/adopt-give/adopt-give';
+import { AdoptTabPage } from '../pages/adopt-tab/adopt-tab';
+import { LoginPage } from '../pages/login/login';
+import { MyAnnouncePage } from '../pages/my-announce/my-announce'
+import { UserProfilePage } from '../pages/user-profile/user-profile';
+import { LostFindFailPage } from '../pages/lost-find-fail/lost-find-fail';
+import { LostInformPage } from '../pages/lost-inform/lost-inform';
+import { LostInformThankPage } from '../pages/lost-inform-thank/lost-inform-thank';
+import { LostMainPage } from '../pages/lost-main/lost-main';
+import { LostRelatedPage } from '../pages/lost-related/lost-related';
+import { LostRelatedDetailPage } from '../pages/lost-related-detail/lost-related-detail';
+import { LostStockFoundPage } from '../pages/lost-stock-found/lost-stock-found';
+import { LostStockMissPage } from '../pages/lost-stock-miss/lost-stock-miss';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -13,7 +29,23 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    RegisterPage,
+    AdoptDetailPage,
+    AdoptGetPage,
+    AdoptGivePage,
+    AdoptTabPage,
+    LoginPage,
+    MyAnnouncePage,
+    UserProfilePage,
+    LostFindFailPage,
+    LostInformPage,
+    LostInformThankPage,
+    LostMainPage,
+    LostRelatedPage,
+    LostRelatedDetailPage,
+    LostStockFoundPage,
+    LostStockMissPage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +55,22 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    RegisterPage,
+    AdoptDetailPage,
+    AdoptGetPage,
+    AdoptGivePage,
+    AdoptTabPage,
+    LoginPage,
+    MyAnnouncePage,
+    UserProfilePage,
+    LostFindFailPage,
+    LostInformPage,
+    LostInformThankPage,
+    LostMainPage,
+    LostRelatedPage,
+    LostRelatedDetailPage,
+    LostStockFoundPage,LostStockMissPage
   ],
   providers: [
     StatusBar,
