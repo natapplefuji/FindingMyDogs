@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { AdoptGetPage } from '../adopt-get/adopt-get';
+import { AdoptGivePage } from '../adopt-give/adopt-give';
 /**
  * Generated class for the AdoptTabPage page.
  *
@@ -14,8 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'adopt-tab.html',
 })
 export class AdoptTabPage {
-
+  tabAdoptGet: any;
+  tabAdoptGive: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+      this.tabAdoptGet = AdoptGetPage;
+      this.tabAdoptGive = AdoptGivePage;
   }
 
   ionViewDidLoad() {
