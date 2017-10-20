@@ -39,8 +39,9 @@ $colors: (
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  navcolor: #FF7920
+  navcolor: #e67e22
 );
+$toolbar-background: #e67e22;
 
 
 // App iOS Variables
@@ -87,3 +88,15 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+@font-face {
+  font-family: 'thaisanslite';
+  src: url('../assets/fonts/thaisanslite_r1.otf'),
+       url('../assets/fonts/thaisanslite_r1.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: 'thaisanslite',sans-serif;
+  font-size: 2rem;
+}
