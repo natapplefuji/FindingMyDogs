@@ -14,12 +14,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'lost-inform.html',
 })
 export class LostInformPage {
-
+  infoLost = {
+    dogName: '',
+    dogAge: '',
+    breed:'',
+    contactMiss: '',
+    dogDetail: '',
+    dogImage: '',
+    reward: '',
+    status: 'lost'
+  }
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
+  infoForm() { 
+    console.dir(this.infoLost);
+  }
+  upload() { 
+    console.log("Hello");
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostInformPage');
   }
-
+  
 }

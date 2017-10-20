@@ -1,18 +1,48 @@
-<!--
-  Generated template for the LostInformPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>lostInform</ion-title>
+    <ion-title>ลงประกาศแจ้งสุนัขหาย</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <form (ngSubmit)="infoForm()">
+    <ion-item>
+      <ion-label>ชื่อสุนัขของคุณ</ion-label>
+      <ion-input type="text" [(ngModel)]="infoLost.dogName" name="dogName" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>อายุ</ion-label>
+      <ion-select [(ngModel)]="infoLost.dogAge" name="dogAge" required>
+        <ion-option value="l3" checked>0-6 เดือน</ion-option>
+        <ion-option value="l6">6-12 เดือน</ion-option>
+        <ion-option value="y1">1-3 ปี</ion-option>
+        <ion-option value="y3">มากกว่า 3 ปี</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>พันธุ์</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>ข้อมูลติดต่อ</ion-label>
+      <ion-textarea [(ngModel)]="infoLost.contactMiss" name="contactMiss" required></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>ข้อมูลสุนัขเพิ่มเติม</ion-label>
+      <ion-textarea [(ngModel)]="infoLost.dogDetail" name="dogDetail" required></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>รางวัล</ion-label>
+      <ion-input type="text" [(ngModel)]="infoLost.reward" name="reward" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>รูปภาพ</ion-label>
+      <button ion-button item-end (click)="upload()">Button</button>
+    </ion-item>
+    <!-- <button ion-item click="buttonclick()">+ เพิ่ม</button>       -->
+    <button ion-button type="submit" small>ยืนยัน</button>
+    <button ion-button type small>ยกเลิก</button>
+  </form>
 </ion-content>
