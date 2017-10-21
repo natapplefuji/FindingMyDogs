@@ -17,29 +17,29 @@
   <ion-list>
       <h4>โปรดกรอกรายละเอียดของท่าน</h4>
       <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" [(ngModel)]="email"></ion-input>
       </ion-item>
     
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Display name</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="displayName"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>ชื่อ</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="firstName"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>นามสกุล</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="lastName"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>เบอร์โทรศัพท์</ion-label>
-        <ion-input type="tel"></ion-input>
+        <ion-input type="tel" [(ngModel)]="tel"></ion-input>
       </ion-item>
       <ion-item no-lines>
       <button ion-button icon-start small>
@@ -51,7 +51,7 @@
           <ion-label>ยอมรับเงื่อนไขการใช้บริการ</ion-label>
           <ion-checkbox checked="false"></ion-checkbox>
       </ion-item>
-      <button ion-button icon-start>
+      <button ion-button icon-start type = "submit" (click)= "SignUp()">
         <ion-icon name='create'></ion-icon>
         ลงทะเบียน
       </button>

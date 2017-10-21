@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth} from 'angularfire2/auth'
+import * as firebase from 'firebase';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -24,7 +27,17 @@ import { LostStockMissPage } from '../pages/lost-stock-miss/lost-stock-miss';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AuthProvider } from '../providers/auth/auth';
 
+const config = {
+  apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
+  authDomain: "findingmydogs-kmitl.firebaseapp.com",
+  databaseURL: "https://findingmydogs-kmitl.firebaseio.com",
+  projectId: "findingmydogs-kmitl",
+  storageBucket: "findingmydogs-kmitl.appspot.com",
+  messagingSenderId: "20173837686"
+};
+firebase.initializeApp(config);
 @NgModule({
   declarations: [
     MyApp,
@@ -50,6 +63,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(config),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -75,7 +89,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider,
+    AngularFireModule,
+    AngularFireAuth
   ]
 })
-export class AppModule {}
+export class AppModule {
+  
+}
