@@ -43,7 +43,7 @@ export class LoginPage {
       .then(authData => {
         this.loading.dismiss().then(() => {
           this.navCtrl.setRoot(HomePage);
-          this.navCtrl.push(HomePage);
+          //this.navCtrl.push(HomePage);
         });
       }, error => {
         this.loading.dismiss().then(() => {

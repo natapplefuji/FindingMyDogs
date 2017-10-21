@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { AdoptGetPage } from '../adopt-get/adopt-get';
+import { LoginPage} from '../login/login'
+
+import { AuthProvider} from '../../providers/auth/auth'
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public authProvider:AuthProvider,public navCtrl: NavController) {
 
   }
   lostTapped() { 
@@ -16,5 +19,9 @@ export class HomePage {
   }
   adoptTapped() { 
     this.navCtrl.push(AdoptGetPage);
+  }
+  logout(){
+    this.authProvider.logoutUser();
+    this.navCtrl.push(LoginPage);
   }
 }
