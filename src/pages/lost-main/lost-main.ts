@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the LostMainPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import { LostInformPage } from '../lost-inform/lost-inform';
 @IonicPage()
 @Component({
   selector: 'page-lost-main',
@@ -21,5 +14,7 @@ export class LostMainPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostMainPage');
   }
-
+  lostInformTapped() { 
+    this.navCtrl.push(LostInformPage);
+  }
 }
