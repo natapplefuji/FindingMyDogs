@@ -18,17 +18,27 @@ import { LoginPage } from '../login/login'
   templateUrl: 'register.html',
 })
 export class RegisterPage {
-  
-  email: string = '';
+
+  user = {
+    email: '',
+    password: '',
+    displayName: '',
+    firstName: '',
+    lastName: '',
+    photo: '',
+    tel: ''
+
+  };
+  /*email: string = '';
   password: string = '';
   displayName: string = '';
   firstName: string = '';
   lastName: string = '';
   photo: any;
-  tel: string = '';
+  tel: string = '';*/
   loading: Loading;
 
-  isenabled:boolean;
+  isenabled: boolean;
   constructor(public authProvider: AuthProvider,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -48,29 +58,29 @@ export class RegisterPage {
   }
 
   SignUp() {
-    this.authProvider.signupUser(this.email, this.password,this.displayName,this.firstName,this.lastName,this.tel)
-    .then(() => {
-      this.loading.dismiss().then( () => {
-        this.navCtrl.setRoot(LoginPage);
-      });
-    }, (error) => {
-      this.loading.dismiss().then( () => {
-        let alert = this.alertCtrl.create({
-          message: error.message,
-          buttons: [
-            {
-              text: "Ok",
-              role: 'cancel'
-            }
-          ]
+    this.authProvider.signupUser(this.user.email, this.user.password, this.user.displayName, this.user.firstName, this.user.lastName, this.user.tel)
+      .then(() => {
+        this.loading.dismiss().then(() => {
+          this.navCtrl.setRoot(LoginPage);
         });
-        alert.present();
+      }, (error) => {
+        this.loading.dismiss().then(() => {
+          let alert = this.alertCtrl.create({
+            message: error.message,
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
+        });
       });
-    });
     this.loading = this.loadingCtrl.create();
     this.loading.present();
     this.navCtrl.push(LoginPage);
   }
-  
-  
+
+
 }

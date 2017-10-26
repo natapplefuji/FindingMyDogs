@@ -92,7 +92,7 @@ firebase.initializeApp(config);
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     AngularFireModule,
-    AngularFireAuth
+    AngularFireAuth,
   ]
 })
 export class AppModule {
