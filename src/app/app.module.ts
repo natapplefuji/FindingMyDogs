@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth} from 'angularfire2/auth'
 import * as firebase from 'firebase';
+import { Facebook } from '@ionic-native/facebook'
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -93,6 +94,7 @@ firebase.initializeApp(config);
     AuthProvider,
     AngularFireModule,
     AngularFireAuth,
+    Facebook
   ]
 })
 export class AppModule {

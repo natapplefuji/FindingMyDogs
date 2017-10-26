@@ -89,4 +89,8 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
+        <variable name="APP_ID" value="127638901273526" />
+        <variable name="APP_NAME" value="Find­i­n­g­M­y­Dogs" />
+    </plugin>
 </widget>

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { HomePage } from '../home/home'
 import { RegisterPage } from '../register/register'
 
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase/app'
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Facebook } from '@ionic-native/facebook';
 /**
  * Generated class for the LoginPage page.
  *
@@ -34,7 +35,9 @@ export class LoginPage {
 
   loading: Loading;
   constructor(public authProvider: AuthProvider,
+    private platform: Platform,
     public afAuth: AngularFireAuth,
+    public facebook: Facebook,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
@@ -70,7 +73,71 @@ export class LoginPage {
     this.loading.present();
   }
   loginWithFB() {
-    this.afAuth.auth
+    if (this.platform.is('cordova')) {
+      return this.facebook.login(['email', 'public_profile']).then(res => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        return firebase.auth().signInWithCredential(facebookCredential)
+          .then(res => {
+            var uid = firebase.auth().currentUser.uid;
+            this.facebook.api('me?fields=id,name,email,first_name,last_name,picture.width(360).height(360).as(picture_large)', []).then((profile) => {
+              this.user.email = profile['email'];
+              this.user.uid = uid;
+              this.user.displayName = profile['name'];
+              this.user.lastName = profile['last_name'];
+              this.user.firstName = profile['first_name'];
+              this.user.photo = profile['picture_large']['data']['url'];
+              firebase
+              .database()
+              .ref('/userProfile')
+              .child(this.user.uid)
+              .set({
+                email: this.user.email,
+                displayName: this.user.displayName,
+                firstName: this.user.firstName,
+                lastName: this.user.lastName,
+                tel: this.user.tel,
+                photo: this.user.photo,
+                provider: 'facebook'
+              });
+            })
+            this.navCtrl.setRoot(HomePage);
+          })
+
+      })
+    }
+    else {
+      return this.afAuth.auth
+        .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+        .then(res => {
+          console.log(res);
+          this.user.email = res.additionalUserInfo.profile.email;
+          this.user.uid = res.user.uid;
+          this.user.displayName = res.additionalUserInfo.profile.name;
+          this.user.lastName = res.additionalUserInfo.profile.last_name;
+          this.user.firstName = res.additionalUserInfo.profile.first_name;
+          this.user.photo = res.additionalUserInfo.profile.picture.data.url;
+          if (res.user.phoneNumber) {
+            this.user.tel = res.user.phoneNumber;
+          }
+  
+          firebase
+          .database()
+          .ref('/userProfile')
+          .child(this.user.uid)
+          .set({
+            email: this.user.email,
+            displayName: this.user.displayName,
+            firstName: this.user.firstName,
+            lastName: this.user.lastName,
+            tel: this.user.tel,
+            photo: this.user.photo,
+            provider: 'facebook'
+          });
+          this.navCtrl.setRoot(HomePage);
+        });
+    }
+
+    /*this.afAuth.auth
     .signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then((res) => {
         console.log(res);
@@ -98,12 +165,13 @@ export class LoginPage {
           provider: 'facebook'
         });
         this.navCtrl.setRoot(HomePage);
-      });
+      });*/
+
     /*this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
       let credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
       firebase.auth().signInWithCredential(credential).then(() => {
         this.navCtrl.setRoot(HomePage);
-        this.facebook.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', []).then((profile) => {
+        this.facebook.api('me?fields=id,name,email,first_name,last_name,picture.width(360).height(360).as(picture_large)', []).then((profile) => {
           this.user.email = profile['email'];
           this.user.uid = response.authResponse.userID;
           this.user.displayName = profile['name'];
@@ -123,7 +191,7 @@ export class LoginPage {
         alert(JSON.stringify(error));
       })
     })*/
-    
+
 
   }
 
