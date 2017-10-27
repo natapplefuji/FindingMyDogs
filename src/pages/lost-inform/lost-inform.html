@@ -38,11 +38,11 @@
       <ion-input type="text" [(ngModel)]="infoLost.reward" name="reward" required></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label>รูปภาพ</ion-label>
-      <button ion-button item-end (click)="upload()">Button</button>
+      <input type="file" name="file" (change)="isSelected($event)">      
     </ion-item>
+    <img [src]="infoLost.dogImage" style="min-width:300px;">
     <!-- <button ion-item click="buttonclick()">+ เพิ่ม</button>       -->
-    <button ion-button type="submit" small>ยืนยัน</button>
-    <button ion-button type small>ยกเลิก</button>
+    <button ion-button type="submit" color="secondary" small>ยืนยัน</button>
+    <button ion-button type="reset" color="danger" small>ยกเลิก</button>
   </form>
 </ion-content>
