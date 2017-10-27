@@ -9,6 +9,7 @@ import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import * as firebase from 'firebase';
+import { Facebook } from '@ionic-native/facebook'
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -97,12 +98,17 @@ firebase.initializeApp(config);
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     AngularFireModule,
+<<<<<<< HEAD
     AngularFireDatabase,
     AngularFireAuth,
     File,
     Transfer,
     Camera,
     FilePath
+=======
+    AngularFireAuth,
+    Facebook
+>>>>>>> 8423e97b85cc1bf09374f85c9fcdc4675811d1ae
   ]
 })
 export class AppModule {

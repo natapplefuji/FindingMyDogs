@@ -28,7 +28,9 @@ export class AuthProvider {
             displayName: displayName,
             firstName: firstName,
             lastName: lastName,
-            tel: tel
+            tel: tel,
+            photo: '',
+            provider: 'email'
           });
       });
   }
