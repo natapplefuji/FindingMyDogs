@@ -30,7 +30,6 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 
-!node_modules/@ionic-native/*
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
