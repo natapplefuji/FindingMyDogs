@@ -1,15 +1,45 @@
 <ion-menu [content]="content">
-  <ion-header>
+  <!--<ion-header>
     <ion-toolbar color='navcolor'>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header>-->
 
-  <ion-content>
-    <p>test menu</p>
-    <ion-list>
+<ion-content>
+    <div class="profileSection">
+      <ion-item class="itemBackground" no-lines>
+        <ion-avatar item-start>
+          <img style="width: 75px; height: 75px;" src="{{(userInfo | async)?.photo}}">
+        </ion-avatar>
+        <p style="font-size:30px;">Hello</p>
+        <p style="font-size:20px;">{{(userInfo | async)?.displayName}}</p>
+      </ion-item>
+    </div>
+    <!--<ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
+      </button>
+    </ion-list>-->
+    <ion-list>
+      <button ion-item menuClose (click)="goToProfile()">
+        <ion-icon style="margin-right:7%;" name='person'></ion-icon>
+        ข้อมูลส่วนตัว
+      </button>
+      <button ion-item menuClose (click)="goToAnnounce()">
+        <ion-icon style="margin-right:7%;" name='list-box'></ion-icon>
+        ประกาศของฉัน
+      </button>
+      <button ion-item menuClose (click)="goToAdopt()">
+        <ion-icon style="margin-right:7%;" name='paw'></ion-icon>
+        รับ/หาการรับอุปการะ
+      </button>
+      <button ion-item menuClose (click)="goToLost()">
+        <ion-icon style="margin-right:7%;" name='search'></ion-icon>
+        ตามหา/แจ้งพบสัตว์หาย
+      </button>
+      <button ion-item menuClose (click)="logoutUser()">
+        <ion-icon style="margin-right:7%;" name='log-out'></ion-icon>
+        ออกจากระบบ
       </button>
     </ion-list>
   </ion-content>
@@ -17,4 +47,4 @@
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav #Nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -29,7 +29,7 @@ export class AuthProvider {
             firstName: firstName,
             lastName: lastName,
             tel: tel,
-            photo: '',
+            photo: '../assets/img/avatar.png',
             provider: 'email'
           });
       });

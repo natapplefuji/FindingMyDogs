@@ -78,7 +78,7 @@ export class LoginPage {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
         return firebase.auth().signInWithCredential(facebookCredential)
           .then(res => {
-            var uid = firebase.auth().currentUser.uid;
+            var uid = firebase.auth().currentUser.uid; //uid จาก firebase authen
             this.facebook.api('me?fields=id,name,email,first_name,last_name,picture.width(360).height(360).as(picture_large)', []).then((profile) => {
               this.user.email = profile['email'];
               this.user.uid = uid;

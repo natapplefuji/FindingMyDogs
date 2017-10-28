@@ -4,15 +4,17 @@ import { LostMainPage } from '../lost-main/lost-main';
 import { AdoptGetPage } from '../adopt-get/adopt-get';
 import { LoginPage} from '../login/login'
 
-import { AuthProvider} from '../../providers/auth/auth'
+import { AuthProvider } from '../../providers/auth/auth'
+import { UserServiceProvider } from '../../providers/user-service/user-service'
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+ 
 export class HomePage {
-
-  constructor(public authProvider:AuthProvider,public navCtrl: NavController) {
-
+  test: any;
+  constructor(public authProvider: AuthProvider, public navCtrl: NavController, public userService: UserServiceProvider) {
+    this.test = userService.getUserInfo();
   }
   lostTapped() { 
     this.navCtrl.push(LostMainPage);
@@ -24,4 +26,5 @@ export class HomePage {
     this.authProvider.logoutUser();
     this.navCtrl.push(LoginPage);
   }
+  
 }

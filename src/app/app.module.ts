@@ -2,13 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
+import { AngularFireDatabase, FirebaseListObservable} from "angularfire2/database-deprecated";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook'
 
 import { MyApp } from './app.component';
@@ -34,6 +34,7 @@ import { LostStockMissPage } from '../pages/lost-stock-miss/lost-stock-miss';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
@@ -98,17 +99,10 @@ firebase.initializeApp(config);
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     AngularFireModule,
-<<<<<<< HEAD
+    AngularFireAuth,
     AngularFireDatabase,
-    AngularFireAuth,
-    File,
-    Transfer,
-    Camera,
-    FilePath
-=======
-    AngularFireAuth,
-    Facebook
->>>>>>> 8423e97b85cc1bf09374f85c9fcdc4675811d1ae
+    Facebook,
+    UserServiceProvider
   ]
 })
 export class AppModule {

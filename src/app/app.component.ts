@@ -1,36 +1,32 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform,NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
-import { AdoptTabPage } from '../pages/adopt-tab/adopt-tab'
+import { AdoptTabPage } from '../pages/adopt-tab/adopt-tab';
+import { UserProfilePage } from '../pages/user-profile/user-profile'
+import { MyAnnouncePage } from '../pages/my-announce/my-announce'
+import { LostMainPage} from '../pages/lost-main/lost-main'
 import firebase from 'firebase';
-
+import { UserServiceProvider } from '../providers/user-service/user-service';
+import { AuthProvider } from '../providers/auth/auth'
 
 @Component({
   templateUrl: 'app.html'
 })
   
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) nav: NavController;
   
   rootPage: any;
-
+  userInfo: any;
   
-
-  pages: Array<{title: string, component: any}>;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public authProvider : AuthProvider,public userService:UserServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
 
   }
   
@@ -40,6 +36,7 @@ export class MyApp {
         this.rootPage = LoginPage;
         unsubscribe();
       } else { 
+        this.userInfo = this.userService.getUserInfo(); //ไว้ตรงนี้เพราะถ้า initapp()แล้ว จะข้าม method ใน constructor เลย
         this.rootPage = HomePage;
         unsubscribe();
       }
@@ -51,10 +48,22 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
+  logoutUser() {
+    this.authProvider.logoutUser();
+    this.nav.setRoot(LoginPage);
+  }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+//ใช้ไปก่อน รอแก้บัค push จาก component.ts ค่อยรวบ fn()
+  goToAnnounce() {
+    this.nav.push(MyAnnouncePage);
+  }
+  goToProfile() {
+    this.nav.push(UserProfilePage);
+  }
+  goToAdopt() {
+    this.nav.push(AdoptTabPage);
+  }
+  goToLost() {
+    this.nav.push(LostMainPage);
   }
 }
