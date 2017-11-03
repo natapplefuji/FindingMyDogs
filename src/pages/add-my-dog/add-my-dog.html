@@ -1,0 +1,44 @@
+<!--
+  Generated template for the AddMyDogPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>addMyDog</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="dog" (ngSubmit)="addDog()">
+    <ion-item>
+      <ion-label>ชื่อสุนัข</ion-label>
+      <ion-input type="text" formControlName="dogName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>พันธุ์</ion-label>
+      <ion-input type="text" formControlName="breed"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>เพศ</ion-label>
+      <ion-select formControlName="gender">
+        <ion-option value="เพศผู้">เพศผู้</ion-option>
+        <ion-option value="เพศเมีย">เพศเมีย</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>อายุ(ปี)</ion-label>
+      <ion-input type="text" formControlName="age"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>รายละเอียดเพิ่มเติม</ion-label>
+      <ion-textarea formControlName="detail"></ion-textarea>
+    </ion-item>
+
+    <button ion-button type="submit" [disabled]="!dog.valid">Submit</button>
+  </form>
+</ion-content>
