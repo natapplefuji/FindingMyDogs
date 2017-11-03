@@ -1,11 +1,11 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" persistent="true">
   <!--<ion-header>
     <ion-toolbar color='navcolor'>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>-->
 
-<ion-content>
+  <ion-content>
     <div class="profileSection">
       <ion-item class="itemBackground" no-lines>
         <ion-avatar item-start>
@@ -21,19 +21,23 @@
       </button>
     </ion-list>-->
     <ion-list>
-      <button ion-item menuClose (click)="goToProfile()">
+      <button ion-item menuClose (click)="goToPage('goToProfile')">
         <ion-icon style="margin-right:7%;" name='person'></ion-icon>
         ข้อมูลส่วนตัว
       </button>
-      <button ion-item menuClose (click)="goToAnnounce()">
+      <button ion-item menuClose (click)="goToPage('goToMyDog')">
+        <ion-icon style="margin-right:7%;" name='paw'></ion-icon>
+        สุนัขของฉัน
+      </button>
+      <button ion-item menuClose (click)="goToPage('goToAnnounce')">
         <ion-icon style="margin-right:7%;" name='list-box'></ion-icon>
         ประกาศของฉัน
       </button>
-      <button ion-item menuClose (click)="goToAdopt()">
-        <ion-icon style="margin-right:7%;" name='paw'></ion-icon>
+      <button ion-item menuClose (click)="goToPage('goToAdopt')">
+        <ion-icon style="margin-right:7%;" name='swap'></ion-icon>
         รับ/หาการรับอุปการะ
       </button>
-      <button ion-item menuClose (click)="goToLost()">
+      <button ion-item menuClose (click)="goToPage('goToLost')">
         <ion-icon style="margin-right:7%;" name='search'></ion-icon>
         ตามหา/แจ้งพบสัตว์หาย
       </button>

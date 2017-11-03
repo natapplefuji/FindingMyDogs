@@ -30,6 +30,9 @@ import { LostRelatedPage } from '../pages/lost-related/lost-related';
 import { LostRelatedDetailPage } from '../pages/lost-related-detail/lost-related-detail';
 import { LostStockFoundPage } from '../pages/lost-stock-found/lost-stock-found';
 import { LostStockMissPage } from '../pages/lost-stock-miss/lost-stock-miss';
+import { MyDogPage } from '../pages/my-dog/my-dog'
+import { AddMyDogPage } from '../pages/add-my-dog/add-my-dog'
+import { MyDogDetailPage} from '../pages/my-dog-detail/my-dog-detail'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -65,7 +68,10 @@ firebase.initializeApp(config);
     LostRelatedPage,
     LostRelatedDetailPage,
     LostStockFoundPage,
-    LostStockMissPage
+    LostStockMissPage,
+    MyDogPage,
+    AddMyDogPage,
+    MyDogDetailPage
   ],
   imports: [
     BrowserModule,
@@ -91,7 +97,11 @@ firebase.initializeApp(config);
     LostMainPage,
     LostRelatedPage,
     LostRelatedDetailPage,
-    LostStockFoundPage,LostStockMissPage
+    LostStockFoundPage,
+    LostStockMissPage,
+    MyDogPage,
+    AddMyDogPage,
+    MyDogDetailPage
   ],
   providers: [
     StatusBar,

@@ -9,7 +9,9 @@ import { LoginPage } from '../pages/login/login';
 import { AdoptTabPage } from '../pages/adopt-tab/adopt-tab';
 import { UserProfilePage } from '../pages/user-profile/user-profile'
 import { MyAnnouncePage } from '../pages/my-announce/my-announce'
-import { LostMainPage} from '../pages/lost-main/lost-main'
+import { LostMainPage } from '../pages/lost-main/lost-main'
+import { MyDogPage } from '../pages/my-dog/my-dog'
+
 import firebase from 'firebase';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { AuthProvider } from '../providers/auth/auth'
@@ -23,7 +25,7 @@ export class MyApp {
   
   rootPage: any;
   userInfo: any;
-  
+
   constructor(public authProvider : AuthProvider,public userService:UserServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     
     this.initializeApp();
@@ -53,17 +55,19 @@ export class MyApp {
     this.nav.setRoot(LoginPage);
   }
 
+  goToPage(page) {
+    if (page == 'goToProfile') {
+      this.nav.push(UserProfilePage);
+    } else if (page == 'goToMyDog') {
+      this.nav.push(MyDogPage);
+    }else if (page == 'goToAnnounce') {
+      this.nav.push(MyAnnouncePage);
+    }else if (page == 'goToAdopt') {
+      this.nav.push(AdoptTabPage);
+    }else if (page == 'goToLost') {
+      this.nav.push(LostMainPage);
+    }
+  }
 //ใช้ไปก่อน รอแก้บัค push จาก component.ts ค่อยรวบ fn()
-  goToAnnounce() {
-    this.nav.push(MyAnnouncePage);
-  }
-  goToProfile() {
-    this.nav.push(UserProfilePage);
-  }
-  goToAdopt() {
-    this.nav.push(AdoptTabPage);
-  }
-  goToLost() {
-    this.nav.push(LostMainPage);
-  }
+
 }
