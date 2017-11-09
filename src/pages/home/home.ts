@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { AdoptGetPage } from '../adopt-get/adopt-get';
-import { LoginPage} from '../login/login'
-
+import { LoginPage} from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 @Component({

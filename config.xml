@@ -88,7 +88,6 @@
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <allow-navigation href="http://192.168.1.105:8100" />
-    <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-buildinfo" spec="^2.0.1" />
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
@@ -103,4 +102,5 @@
         <variable name="APP_ID" value="127638901273526" />
         <variable name="APP_NAME" value="Find­i­n­g­M­y­Dogs" />
     </plugin>
+    <engine name="android" spec="~6.2.3" />
 </widget>

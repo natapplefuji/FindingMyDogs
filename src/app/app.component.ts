@@ -11,7 +11,7 @@ import { UserProfilePage } from '../pages/user-profile/user-profile'
 import { MyAnnouncePage } from '../pages/my-announce/my-announce'
 import { LostMainPage } from '../pages/lost-main/lost-main'
 import { MyDogPage } from '../pages/my-dog/my-dog'
-
+import { TabPage } from '../pages/tab/tab';
 import firebase from 'firebase';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { AuthProvider } from '../providers/auth/auth'
@@ -26,8 +26,7 @@ export class MyApp {
   rootPage: any;
   userInfo: any;
 
-  constructor(public authProvider : AuthProvider,public userService:UserServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    
+  constructor(public authProvider : AuthProvider,public userService:UserServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) { 
     this.initializeApp();
 
   }
@@ -39,7 +38,7 @@ export class MyApp {
         unsubscribe();
       } else { 
         this.userInfo = this.userService.getUserInfo(); //ไว้ตรงนี้เพราะถ้า initapp()แล้ว จะข้าม method ใน constructor เลย
-        this.rootPage = HomePage;
+        this.rootPage = TabPage;
         unsubscribe();
       }
     });
@@ -53,6 +52,7 @@ export class MyApp {
   logoutUser() {
     this.authProvider.logoutUser();
     this.nav.setRoot(LoginPage);
+    
   }
 
   goToPage(page) {

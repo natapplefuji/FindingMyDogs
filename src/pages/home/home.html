@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="card-background-page">
+<!-- <ion-content class="card-background-page">
   
     <ion-card (click)="adoptTapped()">
       <img src="../../assets/img/dog.png"/>
@@ -22,5 +22,82 @@
     </ion-card>
     <p>{{(test | async)?.displayName}}</p>
     <button (click) = "logout()">Logout</button>
- </ion-content>
-                
+ </ion-content> -->
+<ion-content>
+  <ion-grid>
+    <ion-row>
+
+      <ion-item no-lines>
+        <ion-thumbnail item-start>
+          <img src="../../assets/img/scroll0015.jpg">
+        </ion-thumbnail>
+        <h2>Turkey lost Today at 9.51 AM</h2>
+        <p>หากพบโปรดแจ้งเบาะแส</p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card>
+          <ion-card-header>
+            <h2>สุนัขหายใกล้เคียง</h2>
+          </ion-card-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6>
+                <img src="../../assets/img/scroll0015.jpg">
+              </ion-col>
+              <ion-col col-6>
+                <img src="../../assets/img/scroll0015.jpg">
+              </ion-col>
+              <ion-col col-6>
+                <img src="../../assets/img/scroll0015.jpg">
+              </ion-col>
+              <ion-col col-6>
+                <img src="../../assets/img/scroll0015.jpg">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card>
+          <ion-card-header>
+            <h2>อุปการะสุนัขใกล้เคียง</h2>
+          </ion-card-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6>
+                <img src="../../assets/img/scroll0015.jpg">
+              </ion-col>
+              <ion-col col-6>
+                <img src="../../assets/img/scroll0015.jpg">
+              </ion-col>
+              <ion-col col-6>
+                <img src="../../assets/img/scroll0015.jpg">
+              </ion-col>
+              <ion-col col-6>
+                <img src="../../assets/img/scroll0015.jpg">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item-divider color="light">
+        <ion-icon name="book"></ion-icon> Tip</ion-item-divider>
+      <ion-item inset>
+        <ion-thumbnail item-start>
+          <img src="../../assets/img/scroll0015.jpg">
+        </ion-thumbnail>
+        <h2>เรื่องหน้ารู้เกี่ยวกับการฝึกสุนัข</h2>
+        <p>จำนวนคนที่ชื่นชอบ 100 คน</p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

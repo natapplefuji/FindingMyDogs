@@ -43,6 +43,7 @@ $colors: (
 );
 $toolbar-background: #e67e22;
 
+
 @function colors($key) {
   @if map-has-key($colors, $key) {
     @return map-get($colors, $key);

@@ -16,6 +16,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register'
 import { AdoptDetailPage } from '../pages/adopt-detail/adopt-detail';
+import { AdoptMainPage } from '../pages/adopt-main/adopt-main';
 import { AdoptGetPage } from '../pages/adopt-get/adopt-get';
 import { AdoptGivePage } from '../pages/adopt-give/adopt-give';
 import { AdoptTabPage } from '../pages/adopt-tab/adopt-tab';
@@ -30,10 +31,11 @@ import { LostRelatedPage } from '../pages/lost-related/lost-related';
 import { LostRelatedDetailPage } from '../pages/lost-related-detail/lost-related-detail';
 import { LostStockFoundPage } from '../pages/lost-stock-found/lost-stock-found';
 import { LostStockMissPage } from '../pages/lost-stock-miss/lost-stock-miss';
-import { MyDogPage } from '../pages/my-dog/my-dog'
-import { AddMyDogPage } from '../pages/add-my-dog/add-my-dog'
-import { MyDogDetailPage} from '../pages/my-dog-detail/my-dog-detail'
-
+import { MyDogPage } from '../pages/my-dog/my-dog';
+import { AddMyDogPage } from '../pages/add-my-dog/add-my-dog';
+import { MyDogDetailPage } from '../pages/my-dog-detail/my-dog-detail';
+import { TabPage } from '../pages/tab/tab';
+import { TipPage } from '../pages/tip/tip';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
@@ -58,6 +60,8 @@ firebase.initializeApp(config);
     AdoptGetPage,
     AdoptGivePage,
     AdoptTabPage,
+    AdoptMainPage,
+    TipPage,
     LoginPage,
     MyAnnouncePage,
     UserProfilePage,
@@ -71,7 +75,8 @@ firebase.initializeApp(config);
     LostStockMissPage,
     MyDogPage,
     AddMyDogPage,
-    MyDogDetailPage
+    MyDogDetailPage,
+    TabPage
   ],
   imports: [
     BrowserModule,
@@ -88,6 +93,8 @@ firebase.initializeApp(config);
     AdoptGetPage,
     AdoptGivePage,
     AdoptTabPage,
+    AdoptMainPage,
+    TipPage,
     LoginPage,
     MyAnnouncePage,
     UserProfilePage,
@@ -101,7 +108,8 @@ firebase.initializeApp(config);
     LostStockMissPage,
     MyDogPage,
     AddMyDogPage,
-    MyDogDetailPage
+    MyDogDetailPage,
+    TabPage
   ],
   providers: [
     StatusBar,
