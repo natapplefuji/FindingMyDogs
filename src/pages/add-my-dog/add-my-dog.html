@@ -38,6 +38,14 @@
       <ion-label>รายละเอียดเพิ่มเติม</ion-label>
       <ion-textarea formControlName="detail"></ion-textarea>
     </ion-item>
+    <ion-item no-lines>
+      <button ion-button type=button (click)="getImage()">อัพโหลดภาพ
+      </button>
+      <div *ngIf="uploadedImage != null">
+        <img [src]="uploadedImage">
+        <p>{{uploadedImage}}</p>
+      </div>
+    </ion-item>
 
     <button ion-button type="submit" [disabled]="!dog.valid">Submit</button>
   </form>

@@ -8,6 +8,7 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import { Toast} from '@ionic-native/toast'
 import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook'
 
@@ -40,6 +41,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { ImageProvider } from '../providers/image/image';
+import { DatabaseProvider } from '../providers/database/database';
 
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
@@ -120,7 +123,12 @@ firebase.initializeApp(config);
     AngularFireAuth,
     AngularFireDatabase,
     Facebook,
-    UserServiceProvider
+    UserServiceProvider,
+    ImageProvider,
+    Camera,
+    File,
+    Toast,
+    DatabaseProvider
   ]
 })
 export class AppModule {

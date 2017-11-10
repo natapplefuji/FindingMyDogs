@@ -14,7 +14,7 @@ export class AuthProvider {
   constructor() {
     console.log('Hello AuthProvider Provider');
   }
-  signupUser(email: string, password: string, displayName: string, firstName: string, lastName: string, tel: string): Promise<any> {
+  signupUser(email: string, password: string, displayName: string, firstName: string, lastName: string, tel: string,photo): Promise<any> {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password, )
@@ -29,7 +29,7 @@ export class AuthProvider {
             firstName: firstName,
             lastName: lastName,
             tel: tel,
-            photo: '../assets/img/avatar.png',
+            photo: photo,
             provider: 'email'
           });
       });

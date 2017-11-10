@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthProvider } from '../../providers/auth/auth';
+import { DatabaseProvider } from '../../providers/database/database'
+import { ImageProvider} from '../../providers/image/image'
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 
 import { LoginPage } from '../login/login'
@@ -25,21 +27,17 @@ export class RegisterPage {
     displayName: '',
     firstName: '',
     lastName: '',
-    photo: '',
+    photo: null,
     tel: ''
 
   };
-  /*email: string = '';
-  password: string = '';
-  displayName: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  photo: any;
-  tel: string = '';*/
+  profile_image_dataurl: string;
+
   loading: Loading;
 
-  isenabled: boolean;
   constructor(public authProvider: AuthProvider,
+    private image: ImageProvider,
+    private _DB:DatabaseProvider,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
@@ -48,17 +46,13 @@ export class RegisterPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
-    /*if(this.email !== '' && this.password !== ''&& this.displayName !== ''&& this.firstName !== ''&& this.lastName !== ''&& this.tel !== ''){
-      //enable the button
-      this.isenabled=true; 
-      }else{
-      //disable the button
-      this.isenabled=false;
-      }*/
   }
 
   SignUp() {
-    this.authProvider.signupUser(this.user.email, this.user.password, this.user.displayName, this.user.firstName, this.user.lastName, this.user.tel)
+    if (this.user.photo == null) {
+      this.user.photo = '../../assets/img/avatar.png'
+    }
+    this.authProvider.signupUser(this.user.email, this.user.password, this.user.displayName, this.user.firstName, this.user.lastName, this.user.tel,this.user.photo)
       .then(() => {
         this.loading.dismiss().then(() => {
           this.navCtrl.setRoot(LoginPage);
@@ -80,6 +74,13 @@ export class RegisterPage {
     this.loading = this.loadingCtrl.create();
     this.loading.present();
     this.navCtrl.push(LoginPage);
+  }
+  getImage() {
+    this.profile_image_dataurl = this.image.presentActionSheet();
+    this._DB.uploadImageProfile(this.profile_image_dataurl)
+      .then((snapshot: any) => {
+        this.user.photo = snapshot.downloadURL;
+      })
   }
 
 
