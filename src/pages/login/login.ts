@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { HomePage } from '../home/home'
 import { RegisterPage } from '../register/register'
-
+import { TabPage } from '../tab/tab'
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase/app'
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -52,7 +52,7 @@ export class LoginPage {
       this.password)
       .then(authData => {
         this.loading.dismiss().then(() => {
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(TabPage);
           //this.navCtrl.push(HomePage);
         });
       }, error => {
@@ -100,7 +100,7 @@ export class LoginPage {
                 provider: 'facebook'
               });
             })
-            this.navCtrl.setRoot(HomePage);
+            this.navCtrl.setRoot(TabPage);
           })
 
       })
@@ -133,7 +133,7 @@ export class LoginPage {
             photo: this.user.photo,
             provider: 'facebook'
           });
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(TabPage);
         });
     }
 
