@@ -15,11 +15,6 @@
         <p style="font-size:20px;">{{(userInfo | async)?.displayName}}</p>
       </ion-item>
     </div>
-    <!--<ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>-->
     <ion-list>
       <button ion-item menuClose (click)="goToPage('goToProfile')">
         <ion-icon style="margin-right:7%;" name='person'></ion-icon>

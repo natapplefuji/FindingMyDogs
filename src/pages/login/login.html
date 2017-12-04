@@ -11,30 +11,26 @@
 </ion-header>
 
 
-<ion-content padding class="loginpage" overflow-scroll="false">
+<ion-content  overflow-scroll="false" fixed>
+  <ion-content class="banner">
+    <ion-label>Login</ion-label>
+  </ion-content>
+  <ion-content padding class="loginpage">
   <ion-list inset>
-
-    <ion-item>
-      <ion-label>Username</ion-label>
-      <ion-input [(ngModel)]="email" type="email"></ion-input>
+    <ion-item class="label1">
+      <ion-input [(ngModel)]="email" type="email" placeholder="Email"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Password</ion-label>
-      <ion-input [(ngModel)]="password" type="password"></ion-input>
+    <ion-item class="label1">
+      <ion-input [(ngModel)]="password" type="password" placeholder="Password"></ion-input>
     </ion-item>
-    <ion-item>
-      <button ion-button clear (click)= "login()">Login</button>
-    </ion-item>
-  </ion-list>
+  <button ion-button full class="buttonLogin" (click)= "login()">ลงชื่อเข้าใช้</button>
+  <button ion-button icon-left full class="buttonFace" (click)= "loginWithFB()"><ion-icon name="logo-facebook"> </ion-icon>ลงชื่อเข้าใช้ด้วย Facebook</button>
+</ion-list>
+<div><a (click)="goToRegisterPage()">Create account</a></div>
 
-  <button ion-button full (click)= "loginWithFB()">Facebook Login</button>
   
-  <ion-list>
-    <ion-item>
-      <button ion-button  clear (click)="goToRegisterPage()">Create account</button>
-    </ion-item>
-  </ion-list>
-  
+
+</ion-content>
 
 </ion-content>
