@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { AdoptGetPage } from '../adopt-get/adopt-get';
 /**
  * Generated class for the AdoptMainPage page.
  *
@@ -20,5 +20,7 @@ export class AdoptMainPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdoptMainPage');
   }
-
+  adoptMore() { 
+    this.navCtrl.push(AdoptGetPage);
+  }
 }

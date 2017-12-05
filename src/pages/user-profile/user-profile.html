@@ -11,8 +11,28 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
-
+    <img class = "photo"src="{{userInfo.photo}}" />
+    <ion-list>
+      <ion-item>
+        <h2>ชื่อ Display</h2>
+        <p>{{userInfo.displayName}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>email/Username</h2>
+        <p>{{userInfo.email}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>ชื่อ</h2>
+        <p>{{userInfo.firstName}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>นามสกุล</h2>
+        <p>{{userInfo.lastName}}</p>
+      </ion-item>
+      <ion-item>
+        <h2>เบอร์โทรศัพท์</h2>
+        <p>{{userInfo.tel}}</p>
+      </ion-item>
+    </ion-list>
 </ion-content>

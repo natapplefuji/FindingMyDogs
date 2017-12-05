@@ -14,8 +14,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'adopt-get.html',
 })
 export class AdoptGetPage {
-
+  location:string
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.location = "nearby";
   }
 
   ionViewDidLoad() {

@@ -38,6 +38,7 @@ export class MyApp {
         unsubscribe();
       } else { 
         this.userInfo = this.userService.getUserInfo(); //ไว้ตรงนี้เพราะถ้า initapp()แล้ว จะข้าม method ใน constructor เลย
+        console.log(this.userInfo);
         this.rootPage = TabPage;
         unsubscribe();
       }
@@ -57,7 +58,8 @@ export class MyApp {
 
   goToPage(page) {
     if (page == 'goToProfile') {
-      this.nav.push(UserProfilePage);
+      console.log(this.userInfo);
+      this.nav.push(UserProfilePage, {userInfo:this.userInfo});
     } else if (page == 'goToMyDog') {
       this.nav.push(MyDogPage);
     }else if (page == 'goToAnnounce') {

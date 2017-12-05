@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabase, FirebaseListObservable} from "angularfire2/database-deprecated";
+import { AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireDatabase,FirebaseListObservable} from "angularfire2/database-deprecated";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
@@ -87,6 +88,7 @@ firebase.initializeApp(config);
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -120,7 +122,6 @@ firebase.initializeApp(config);
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     AngularFireModule,
     AngularFireAuth,
@@ -131,7 +132,8 @@ firebase.initializeApp(config);
     Camera,
     File,
     Toast,
-    DatabaseProvider
+    DatabaseProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {

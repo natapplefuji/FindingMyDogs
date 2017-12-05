@@ -29,7 +29,7 @@
             <ion-row>
               <ion-item-divider color="light">
                 <ion-icon name="megaphone"></ion-icon> ประกาศหาคนอุปการะสุนัข
-                <button ion-button clear item-end>more</button>
+                <button ion-button clear item-end (tap)="adoptMore($event)">more</button>
               </ion-item-divider>
               
               <ion-col col-4>
@@ -70,13 +70,4 @@
                         </ion-col>
             </ion-row>
           </ion-grid>
-      <!-- <ion-card (click)="lostInformTapped()">
-        <div class="card-title">สุนัขของฉันหาย</div>
-      </ion-card>
-      <ion-card>
-        <div class="card-title">ฉันพบสุนัข</div>
-      </ion-card>
-      <ion-card>
-        <div class="card-title">ดูสุนัขในระบบ</div>
-      </ion-card> -->
     </ion-content>
