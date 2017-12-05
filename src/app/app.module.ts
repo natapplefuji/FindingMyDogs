@@ -24,6 +24,7 @@ import { AdoptTabPage } from '../pages/adopt-tab/adopt-tab';
 import { LoginPage } from '../pages/login/login';
 import { MyAnnouncePage } from '../pages/my-announce/my-announce'
 import { UserProfilePage } from '../pages/user-profile/user-profile';
+import {LostAnnouncePage} from '../pages/lost-announce/lost-announce';
 import { LostFindFailPage } from '../pages/lost-find-fail/lost-find-fail';
 import { LostInformPage } from '../pages/lost-inform/lost-inform';
 import { LostInformThankPage } from '../pages/lost-inform-thank/lost-inform-thank';
@@ -68,6 +69,7 @@ firebase.initializeApp(config);
     LoginPage,
     MyAnnouncePage,
     UserProfilePage,
+    LostAnnouncePage,
     LostFindFailPage,
     LostInformPage,
     LostInformThankPage,
@@ -101,6 +103,7 @@ firebase.initializeApp(config);
     LoginPage,
     MyAnnouncePage,
     UserProfilePage,
+    LostAnnouncePage,
     LostFindFailPage,
     LostInformPage,
     LostInformThankPage,

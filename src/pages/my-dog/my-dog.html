@@ -13,24 +13,31 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="background">
   <ion-fab top right edge>
-    <button ion-fab color="primary" (click)="goToAddDog()">
+    <button ion-fab color="fabcolor" (click)="goToAddDog()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
+  
   <ion-card *ngFor="let dog of dogList | async" (click)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status)">
+    <ion-grid>
+    <ion-row>
+    <ion-col col-5>
     <img src="{{dog.photo}}" />
-    <ion-card-content>
-      <ion-card-title>
+  </ion-col >
+  <ion-col col-7>
+      <h1>
         {{dog.dogName}}
-      </ion-card-title>
+      </h1>
       <p class = "subhead">
         {{dog.breed}}
       </p>
       <p class = "subhead">
         สถานะ : <span class = "safe">{{dog.status}}</span>
       </p>
-    </ion-card-content>
+  </ion-col>
+    </ion-row>
+  </ion-grid>
   </ion-card>
 </ion-content>

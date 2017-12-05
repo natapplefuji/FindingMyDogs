@@ -14,8 +14,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'lost-announce.html',
 })
 export class LostAnnouncePage {
-
+  location: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.location = "nearby";
   }
 
   ionViewDidLoad() {
