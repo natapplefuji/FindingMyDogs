@@ -82,7 +82,7 @@ firebase.initializeApp(config);
     MyDogPage,
     AddMyDogPage,
     MyDogDetailPage,
-    TabPage
+    TabPage,
   ],
   imports: [
     BrowserModule,
@@ -117,7 +117,7 @@ firebase.initializeApp(config);
     MyDogPage,
     AddMyDogPage,
     MyDogDetailPage,
-    TabPage
+    TabPage,
   ],
   providers: [
     StatusBar,
