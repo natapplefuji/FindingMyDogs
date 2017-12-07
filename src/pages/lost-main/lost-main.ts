@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LostInformPage } from '../lost-inform/lost-inform';
 import { LostAnnouncePage } from '../lost-announce/lost-announce';
+import { InformFoundPage} from '../inform-found/inform-found';
 @IonicPage()
 @Component({
   selector: 'page-lost-main',
@@ -20,5 +21,8 @@ export class LostMainPage {
   }
   lostAnnounce() { 
     this.navCtrl.push(LostAnnouncePage);
+  }
+  foundInformTapped() { 
+    this.navCtrl.push(InformFoundPage);
   }
 }

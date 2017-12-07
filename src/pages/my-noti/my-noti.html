@@ -1,0 +1,37 @@
+<!--
+  Generated template for the MyNotiPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>แจ้งเตือน</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card *ngFor="let dog of dogPhoto ; let i=index" (click)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status)">
+        <ion-grid>
+        <ion-row>
+        <ion-col col-5>
+        <img src="{{dogPhoto[i]}}" />
+      </ion-col >
+      <ion-col col-7>
+          <h2>
+            พบเห็นสุนัขที่ลักษณะใกล้เคียง
+          </h2>
+          <p class = "subhead">
+            ดูรายละเอียดว่าใช่หรือไม่?
+          </p>
+          <p class = "subhead">
+              สถานะ : <span class = "safe">อยู่กับผู้พบ</span>
+          </p>
+      </ion-col>
+        </ion-row>
+      </ion-grid>
+      </ion-card>
+</ion-content>

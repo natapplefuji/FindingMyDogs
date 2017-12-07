@@ -41,47 +41,12 @@
           <ion-input type="text" [(ngModel)]="infoLost.reward" name="reward" required></ion-input>
         </ion-item>
         <ion-item>
-                <input type="file" name="file" (change)="isSelected($event)">      
-                       
+          <input class="file" type="file" name="file" (change)="isSelected($event)">              
       </ion-item>
-      <img [src]="infoLost.dogImage" style="min-width:250px;">  
-      <button ion-button type="submit" color="secondary" small (tap)= "infoForm()">ยืนยัน</button>
-      <button ion-button type="reset" color="danger" small>ยกเลิก</button>
+      <img [src]="infoLost.dogImage" style="min-width:250px;"> 
+      <br> 
+      <button ion-button type="submit" color="secondary" (tap)= "infoForm()">ยืนยัน</button>
+      <button ion-button type="reset" color="danger" (tap)= "cancelForm()">ยกเลิก</button>
       </ion-list>
-  <!-- <form (ngSubmit)="infoForm()">
-    <ion-item>
-      <ion-label>ชื่อสุนัขของคุณ</ion-label>
-      <ion-input type="text" [(ngModel)]="infoLost.dogName" name="dogName" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>อายุ</ion-label>
-      <ion-select [(ngModel)]="infoLost.dogAge" name="dogAge" required>
-        <ion-option value="l3" checked>0-6 เดือน</ion-option>
-        <ion-option value="l6">6-12 เดือน</ion-option>
-        <ion-option value="y1">1-3 ปี</ion-option>
-        <ion-option value="y3">มากกว่า 3 ปี</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>พันธุ์</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>ข้อมูลติดต่อ</ion-label>
-      <ion-textarea [(ngModel)]="infoLost.contactMiss" name="contactMiss" required></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label>ข้อมูลสุนัขเพิ่มเติม</ion-label>
-      <ion-textarea [(ngModel)]="infoLost.dogDetail" name="dogDetail" required></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label>รางวัล</ion-label>
-      <ion-input type="text" [(ngModel)]="infoLost.reward" name="reward" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <input type="file" name="file" (change)="isSelected($event)">      
-    </ion-item>
-    <img [src]="infoLost.dogImage" style="min-width:300px;">
-    <button ion-button type="submit" color="secondary" small>ยืนยัน</button>
-    <button ion-button type="reset" color="danger" small>ยกเลิก</button>
-  </form> -->
+  
 </ion-content>

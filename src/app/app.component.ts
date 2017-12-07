@@ -6,7 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
-import { AdoptTabPage } from '../pages/adopt-tab/adopt-tab';
+import { AdoptMainPage } from '../pages/adopt-main/adopt-main'
 import { UserProfilePage } from '../pages/user-profile/user-profile'
 import { MyAnnouncePage } from '../pages/my-announce/my-announce'
 import { LostMainPage } from '../pages/lost-main/lost-main'
@@ -15,6 +15,7 @@ import { TabPage } from '../pages/tab/tab';
 import firebase from 'firebase';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { AuthProvider } from '../providers/auth/auth'
+import {MyNotiPage} from '../pages/my-noti/my-noti';
 
 @Component({
   templateUrl: 'app.html'
@@ -59,15 +60,17 @@ export class MyApp {
   goToPage(page) {
     if (page == 'goToProfile') {
       console.log(this.userInfo);
-      this.nav.push(UserProfilePage, {userInfo:this.userInfo});
+      this.nav.push(UserProfilePage);
     } else if (page == 'goToMyDog') {
       this.nav.push(MyDogPage);
-    }else if (page == 'goToAnnounce') {
+    } else if (page == 'goToAnnounce') {
       this.nav.push(MyAnnouncePage);
-    }else if (page == 'goToAdopt') {
-      this.nav.push(AdoptTabPage);
-    }else if (page == 'goToLost') {
-      this.nav.push(LostMainPage);
+    } else if (page == 'goToAdopt') {
+      this.nav.push(TabPage, { index: 2 });
+    } else if (page == 'goToLost') {
+      this.nav.push(TabPage, { index: 1 });
+    } else if (page == 'goToNoti') { 
+      this.nav.push(MyNotiPage)
     }
   }
 //ใช้ไปก่อน รอแก้บัค push จาก component.ts ค่อยรวบ fn()

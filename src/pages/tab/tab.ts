@@ -20,7 +20,11 @@ export class TabPage {
   tab2 = LostMainPage;
   tab3 = AdoptMainPage;
   tab4 = TipPage;
+  index = 0
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    if (navParams) { 
+      this.index = this.navParams.get('index')
+    }
   }
 
   ionViewDidLoad() {

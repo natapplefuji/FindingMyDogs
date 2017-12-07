@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LostMainPage} from '../lost-main/lost-main';
+import {LostMainPage} from '../lost-main/lost-main';
+import {LostInformThankPage} from '../lost-inform-thank/lost-inform-thank';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 /**
- * Generated class for the LostInformPage page.
+ * Generated class for the InformFoundPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
-  selector: 'page-lost-inform',
-  templateUrl: 'lost-inform.html',
+  selector: 'page-inform-found',
+  templateUrl: 'inform-found.html',
 })
-export class LostInformPage {
+export class InformFoundPage {
+
   infoLost = {
     dogName: '',
     dogAge: '',
@@ -23,17 +24,21 @@ export class LostInformPage {
     dogDetail: '',
     dogImage: '',
     reward: '',
-    status: 'lost'
+    status: 'found'
   }
   announceMissing: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
     this.announceMissing = af.list('/announceMissing');
   }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad InformFoundPage');
+  }
   infoForm() { 
     console.dir(this.infoLost);
     if (this.infoLost.dogImage) {
-      this.uploadImg(this.infoLost.dogImage);     
+      this.uploadImg(this.infoLost.dogImage);
+      this.navCtrl.push(LostInformThankPage);
     }
     else { 
       alert("please select image");
@@ -66,4 +71,7 @@ export class LostInformPage {
   cancelForm() { 
     this.navCtrl.push(LostMainPage)
   }
+
+  
+
 }

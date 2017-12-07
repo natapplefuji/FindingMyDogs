@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LostMainPage} from '../lost-main/lost-main';
+
 /**
- * Generated class for the LostInformThankPage page.
+ * Generated class for the MyNotiDetailPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,19 +10,16 @@ import { LostMainPage} from '../lost-main/lost-main';
 
 @IonicPage()
 @Component({
-  selector: 'page-lost-inform-thank',
-  templateUrl: 'lost-inform-thank.html',
+  selector: 'page-my-noti-detail',
+  templateUrl: 'my-noti-detail.html',
 })
-export class LostInformThankPage {
+export class MyNotiDetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LostInformThankPage');
-  }
-  goToLost() { 
-    this.navCtrl.push(LostMainPage)
+    console.log('ionViewDidLoad MyNotiDetailPage');
   }
 
 }

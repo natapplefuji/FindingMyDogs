@@ -1,0 +1,25 @@
+page-my-noti {
+    p.subhead{
+        font-size: 18px;
+        
+    }
+    span.safe {
+        display:inline-block;
+        background: #12be1b;
+        color:#ffffff;
+        border-radius: 20px;
+        font-size: 18px;
+        width: 80px;
+        text-align: center;
+    
+    }
+    ion-card-title {
+        font-weight: bold;
+    }
+    img{
+        width: 100%;
+        height: 130px;
+        display:block;
+       
+    }
+}
