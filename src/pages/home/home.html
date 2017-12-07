@@ -39,7 +39,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-6>
-        <ion-card>
+        <ion-card (tap)="lostAnnounce()">
           <ion-card-header>
             <h2>สุนัขหายใกล้เคียง</h2>
           </ion-card-header>
@@ -62,7 +62,7 @@
         </ion-card>
       </ion-col>
       <ion-col col-6>
-        <ion-card>
+        <ion-card (tap)="adoptMore($event)">
           <ion-card-header>
             <h2>อุปการะสุนัขใกล้เคียง</h2>
           </ion-card-header>

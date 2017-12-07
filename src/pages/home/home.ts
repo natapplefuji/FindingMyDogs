@@ -3,7 +3,8 @@ import { NavController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { AdoptGetPage } from '../adopt-get/adopt-get';
 import { LoginPage} from '../login/login';
-import { AuthProvider } from '../../providers/auth/auth'
+import { AuthProvider } from '../../providers/auth/auth';
+import { LostAnnouncePage } from '../lost-announce/lost-announce';
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 @Component({
   selector: 'page-home',
@@ -25,5 +26,10 @@ export class HomePage {
     this.authProvider.logoutUser();
     this.navCtrl.push(LoginPage);
   }
-  
+  lostAnnounce() { 
+    this.navCtrl.push(LostAnnouncePage);
+  }
+  adoptMore() { 
+    this.navCtrl.push(AdoptGetPage);
+  }
 }
