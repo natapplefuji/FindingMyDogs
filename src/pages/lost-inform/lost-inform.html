@@ -10,6 +10,13 @@
 <ion-content padding>
     <ion-list>
         <h4>โปรดกรอกรายละเอียดของท่าน</h4>
+        <ion-item no-lines>
+          <ion-label>โปรดเพิ่มภาพสุนัขของท่าน</ion-label>
+        </ion-item>
+        <ion-item>
+          <input class="file" type="file" name="file" (change)="isSelected($event)">              
+      </ion-item>
+      <img [src]="infoLost.dogImage" style="min-width:250px;"> 
         <ion-item>
           <ion-label floating>ชื่อสุนัขของคุณ</ion-label>
           <ion-input type="text" [(ngModel)]="infoLost.dogName" name="dogName" required></ion-input>
@@ -40,11 +47,6 @@
           <ion-label floating>สินน้ำใจ</ion-label>
           <ion-input type="text" [(ngModel)]="infoLost.reward" name="reward" required></ion-input>
         </ion-item>
-        <ion-item>
-          <input class="file" type="file" name="file" (change)="isSelected($event)">              
-      </ion-item>
-      <img [src]="infoLost.dogImage" style="min-width:250px;"> 
-      <br> 
       <button ion-button type="submit" color="secondary" (tap)= "infoForm()">ยืนยัน</button>
       <button ion-button type="reset" color="danger" (tap)= "cancelForm()">ยกเลิก</button>
       </ion-list>

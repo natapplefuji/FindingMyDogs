@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AdoptGetPage } from '../adopt-get/adopt-get';
+import { AdoptGivePage }from '../adopt-give/adopt-give';
 /**
  * Generated class for the AdoptMainPage page.
  *
@@ -22,5 +23,8 @@ export class AdoptMainPage {
   }
   adoptMore() { 
     this.navCtrl.push(AdoptGetPage);
+  }
+  addAdopt() { 
+    this.navCtrl.push(AdoptGivePage);
   }
 }
