@@ -26,7 +26,6 @@ export class UserProfilePage {
     lastName: '',
     photo: '',
     tel: ''
-
   };
   constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase) {
     this.userid = firebase.auth().currentUser.uid;

@@ -73,7 +73,7 @@ export class LoginPage {
     this.loading.present();
   }
   loginWithFB() {
-    if (this.platform.is('cordova') || this.platform.is('android')) {
+    if (this.platform.is('cordova') || this.platform.is('android')) {      
       return this.facebook.login(['email', 'public_profile']).then(res => {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
         return firebase.auth().signInWithCredential(facebookCredential)
