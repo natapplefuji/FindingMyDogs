@@ -8,15 +8,52 @@
 
 
 <ion-content padding>
-    <ion-list>
-        <h4>โปรดกรอกรายละเอียดของท่าน</h4>
-        <ion-item no-lines>
-          <ion-label>โปรดเพิ่มภาพสุนัขของท่าน</ion-label>
+    <form [formGroup]="annoucelost" (ngSubmit)="addAnnounceLost()">
+        <ion-item>
+          <ion-label>ชื่อสุนัข</ion-label>
+          <ion-input type="text" formControlName="dogName"></ion-input>
         </ion-item>
         <ion-item>
-          <input class="file" type="file" name="file" (change)="isSelected($event)">              
-      </ion-item>
-      <img [src]="infoLost.dogImage" style="min-width:250px;"> 
+          <ion-label>พันธุ์</ion-label>
+          <ion-input type="text" formControlName="breed"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>เพศ</ion-label>
+          <ion-select formControlName="gender">
+            <ion-option value="male">เพศผู้</ion-option>
+            <ion-option value="female">เพศเมีย</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>อายุ(ปี)</ion-label>
+          <ion-input type="text" formControlName="age"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>ข้อมูลติดต่อ</ion-label>
+            <ion-input type="text" formControlName="contactMiss"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>ข้อมูลสุนัขเพิ่มเติม</ion-label>
+          <ion-textarea formControlName="dogDetail"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label>สินน้ำใจ</ion-label>
+            <ion-input type="text" formControlName="reward"></ion-input>
+          </ion-item>
+        <ion-item no-lines>
+          <button ion-button type=button (click)="getImage()">อัพโหลดภาพ
+          </button>
+          <div *ngIf="uploadedImage != null">
+            <img [src]="uploadedImage">
+            <p>{{uploadedImage}}</p>
+          </div>
+        </ion-item>
+    
+        <button ion-button type="submit" [disabled]="!annoucelost.valid">Submit</button>
+      </form>
+    <!-- <ion-list> -->
+        
+      <!-- <img [src]="infoLost.dogImage" style="min-width:250px;"> 
         <ion-item>
           <ion-label floating>ชื่อสุนัขของคุณ</ion-label>
           <ion-input type="text" [(ngModel)]="infoLost.dogName" name="dogName" required></ion-input>
@@ -49,6 +86,6 @@
         </ion-item>
       <button ion-button type="submit" color="secondary" (tap)= "infoForm()">ยืนยัน</button>
       <button ion-button type="reset" color="danger" (tap)= "cancelForm()">ยกเลิก</button>
-      </ion-list>
+      </ion-list> -->
   
 </ion-content>
