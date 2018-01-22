@@ -12,6 +12,7 @@ import { Camera } from '@ionic-native/camera';
 import { Toast} from '@ionic-native/toast'
 import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook'
+import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -48,6 +49,7 @@ import { DatabaseProvider } from '../providers/database/database';
 import { InformFoundPage } from '../pages/inform-found/inform-found';
 import {MyNotiPage} from '../pages/my-noti/my-noti';
 import {MyNotiDetailPage} from '../pages/my-noti-detail/my-noti-detail';
+import { AwsProvider } from '../providers/aws/aws';
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
   authDomain: "findingmydogs-kmitl.firebaseapp.com",
@@ -93,7 +95,8 @@ firebase.initializeApp(config);
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -142,6 +145,7 @@ firebase.initializeApp(config);
     Toast,
     DatabaseProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AwsProvider,
   ]
 })
 export class AppModule {
