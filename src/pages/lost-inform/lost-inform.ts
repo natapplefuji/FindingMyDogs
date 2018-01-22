@@ -42,7 +42,7 @@ export class LostInformPage {
   }
   addAnnounceLost() {
     if (this.uploadedImage == null) {
-      this.uploadedImage = 'https://firebasestorage.googleapis.com/v0/b/findingmydogs-kmitl.appspot.com/o/dogs%2F8-side.jpg?alt=media&token=c84f0afe-9880-4d8e-82b2-743e5ab92c70';
+      this.uploadedImage = '../../assets/img/dog_test.jpeg';
     }
     this.db.database.ref('/announceMissing').push().set({
       uid: this.uid,
@@ -62,6 +62,7 @@ export class LostInformPage {
 
     this._DB.uploadImageDog(this.dog_image_dataurl) //อัพขึ้นไปบน storage ได้ downloadURL
       .then((snapshot: any) => {
+        console.dir(snapshot)
         this.uploadedImage = snapshot.downloadURL; //เอา downloadURL มาแสดง
         console.log(this.uploadedImage)
       })
