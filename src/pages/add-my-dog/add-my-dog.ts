@@ -24,7 +24,7 @@ export class AddMyDogPage {
   uid: '';
   dog_image_dataurl: string;
   uploadedImage: any = null;
-
+  photoName: string;
   constructor(private loadingCtrl: LoadingController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
     this.uid = userService.uid;
     this.dog = this.formBuilder.group({
@@ -51,6 +51,7 @@ export class AddMyDogPage {
       age: this.dog.value.age,
       detail: this.dog.value.detail,
       photo: this.uploadedImage,
+      photoName: this.photoName,
       status: 'ปลอดภัย'
     }).then(() => { this.navCtrl.pop() })
   }
@@ -61,6 +62,7 @@ export class AddMyDogPage {
     this._DB.uploadImageDog(this.dog_image_dataurl) //อัพขึ้นไปบน storage ได้ downloadURL
       .then((snapshot: any) => {
         this.uploadedImage = snapshot.downloadURL; //เอา downloadURL มาแสดง
+        this.photoName = this._DB.imageName;
       })
   }
 }

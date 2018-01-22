@@ -10,18 +10,18 @@ import { LoadingController } from 'ionic-angular';
 */
 @Injectable()
 export class DatabaseProvider {
-
+  imageName: string = 'defaultName';
   constructor(public loadingCtrl: LoadingController) {
     console.log('Hello DatabaseProvider Provider');
   }
 
   uploadImageDog(imageString): Promise<any> {
-    let image: string = 'dog-' + new Date().getTime() + '.jpg',
-      storageRef: any,
-      parseUpload: any;
+    this.imageName = 'dog-' + new Date().getTime() + '.jpg';
+      let storageRef: any;
+      let parseUpload: any;
 
     return new Promise((resolve, reject) => {
-      storageRef = firebase.storage().ref('dogs/' + image);
+      storageRef = firebase.storage().ref('dogs/' + this.imageName);
       parseUpload = storageRef.putString(imageString, 'data_url');
 
       parseUpload.on('state_changed', (_snapshot) => {

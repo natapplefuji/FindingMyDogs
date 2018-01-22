@@ -12,6 +12,7 @@ import { Camera } from '@ionic-native/camera';
 import { Toast} from '@ionic-native/toast'
 import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook'
+import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -94,7 +95,8 @@ firebase.initializeApp(config);
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
