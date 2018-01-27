@@ -42,7 +42,7 @@ export class LostInformPage {
   }
   addAnnounceLost() {
     if (this.uploadedImage == null) {
-      this.uploadedImage = '../../assets/img/dog_test.jpeg';
+      this.uploadedImage = 'assets/img/dog_test.jpeg';
     }
     this.db.database.ref('/announceMissing').push().set({
       uid: this.uid,
@@ -58,7 +58,7 @@ export class LostInformPage {
   }
   getImage() {
 
-    this.dog_image_dataurl = this.image.presentActionSheet(); //ได้ภาพ base64
+    // this.dog_image_dataurl = this.image.presentActionSheet(); //ได้ภาพ base64
 
     this._DB.uploadImageDog(this.dog_image_dataurl) //อัพขึ้นไปบน storage ได้ downloadURL
       .then((snapshot: any) => {
