@@ -49,7 +49,7 @@ import { DatabaseProvider } from '../providers/database/database';
 import { InformFoundPage } from '../pages/inform-found/inform-found';
 import {MyNotiPage} from '../pages/my-noti/my-noti';
 import {MyNotiDetailPage} from '../pages/my-noti-detail/my-noti-detail';
-import { AwsProvider } from '../providers/aws/aws';
+import { BreedProvider } from '../providers/breed/breed';
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
   authDomain: "findingmydogs-kmitl.firebaseapp.com",
@@ -145,7 +145,7 @@ firebase.initializeApp(config);
     Toast,
     DatabaseProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AwsProvider,
+    BreedProvider,
   ]
 })
 export class AppModule {

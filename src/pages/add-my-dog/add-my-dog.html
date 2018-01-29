@@ -21,7 +21,9 @@
     </ion-item>
     <ion-item>
       <ion-label>พันธุ์</ion-label>
-      <ion-input type="text" formControlName="breed"></ion-input>
+      <ion-select placeholder="กรุณาเลือกพันธุ์สุนัข" [(ngModel)]="dog.value.breed" formControlName="breed">
+        <ion-option *ngFor="let item of breed" value="{{item}}">{{item}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>เพศ</ion-label>

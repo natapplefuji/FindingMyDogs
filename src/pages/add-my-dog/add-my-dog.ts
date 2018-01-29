@@ -6,6 +6,7 @@ import { ImageProvider } from '../../providers/image/image'
 import { AngularFireDatabase } from 'angularfire2/database-deprecated'
 import { DatabaseProvider } from '../../providers/database/database'
 import { MyDogPage } from '../my-dog/my-dog'
+import { BreedProvider } from '../../providers/breed/breed';
 /**
  * Generated class for the AddMyDogPage page.
  *
@@ -25,8 +26,18 @@ export class AddMyDogPage {
   dog_image_dataurl: string;
   uploadedImage: any = null;
   photoName: string;
-  constructor(private loadingCtrl: LoadingController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
+  breed;
+  constructor(private loadingCtrl: LoadingController,
+    private _DB: DatabaseProvider,
+    private db: AngularFireDatabase,
+    private _breed : BreedProvider,
+    private userService: UserServiceProvider,
+    private image: ImageProvider,
+    private formBuilder: FormBuilder,
+    public navCtrl: NavController,
+    public navParams: NavParams) {
     this.uid = userService.uid;
+    this.breed = _breed.breeds;
     this.dog = this.formBuilder.group({
       dogName: ['', Validators.required],
       breed: ['', Validators.required],

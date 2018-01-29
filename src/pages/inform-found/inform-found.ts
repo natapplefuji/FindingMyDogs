@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {LostMainPage} from '../lost-main/lost-main';
 import {LostInformThankPage} from '../lost-inform-thank/lost-inform-thank';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { DatabaseProvider } from '../../providers/database/database'
+import { ImageProvider } from '../../providers/image/image'
+import { UserServiceProvider } from '../../providers/user-service/user-service'
 /**
  * Generated class for the InformFoundPage page.
  *
@@ -15,61 +19,60 @@ import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/databa
   templateUrl: 'inform-found.html',
 })
 export class InformFoundPage {
-
-  infoLost = {
-    dogName: '',
-    dogAge: '',
-    breed:'',
-    contactMiss: '',
-    dogDetail: '',
-    dogImage: '',
-    reward: '',
-    status: 'found'
-  }
-  announceMissing: FirebaseListObservable<any>;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
-    this.announceMissing = af.list('/announceMissing');
+  private infoFound: FormGroup;
+  announceFound: FirebaseListObservable<any>;
+  uid;
+  breed;
+  dog_image_dataurl;
+  uploadedImage;
+  photoName;
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public af: AngularFireDatabase,
+    private formBuilder: FormBuilder,
+    private image: ImageProvider,
+    private userService: UserServiceProvider,
+    private _DB: DatabaseProvider,
+    private db: AngularFireDatabase,
+  ) {
+    this.announceFound = af.list('/announceMissing');
+    this.uid = userService.uid;
+    this.infoFound = this.formBuilder.group({
+      founder: ['', Validators.required],
+      breed: ['', Validators.required],
+      contactMiss: ['', Validators.required],
+      dogDetail: ['', Validators.required],
+      dogWithYou: ['', Validators.required]    
+    });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad InformFoundPage');
   }
-  infoForm() { 
-    console.dir(this.infoLost);
-    if (this.infoLost.dogImage) {
-      this.uploadImg(this.infoLost.dogImage);
-      this.navCtrl.push(LostInformThankPage);
-    }
-    else { 
-      alert("please select image");
-    }
+  addAnnouce() {
+    this.db.database.ref('/announceFound').push().set({
+      founder : this.uid,
+      breed: this.breed,
+      contactMiss : this.infoFound.value.contactMiss,
+      dogDetail: this.infoFound.value.dogDetail,
+      dogWithYou: this.infoFound.value.dogWithYou,
+      photoName: this.photoName
+    })
+  
   }
-  isSelected(e) { 
-    console.log(e);
-    let dogImage:any = e.target.files[0];
-    let reader = new FileReader();
-    reader.onload = (e:any) => { 
-      this.infoLost.dogImage = e.target.result;
-      
-    }
-    reader.readAsDataURL(dogImage);
-  }
-  uploadImg(img64) { 
-    // this.announceMissing.push({
-    //   dogName: this.infoLost.dogName,
-    //   dogAge: this.infoLost.dogAge,
-    //   breed:'',
-    //   contactMiss: this.infoLost.contactMiss,
-    //   dogDetail: this.infoLost.dogDetail,
-    //   dogImage: img64,
-    //   reward: this.infoLost.reward,
-    //   status: 'lost'
-    // }).then((data) => { 
-    //   alert("upload success");
-    // })
-  }
+
+  getImage() {
+    
+        this.dog_image_dataurl = this.image.presentActionSheet(); //ได้ภาพ base64
+    
+        this._DB.uploadImageDog(this.dog_image_dataurl) //อัพขึ้นไปบน storage ได้ downloadURL
+          .then((snapshot: any) => {
+            this.uploadedImage = snapshot.downloadURL; //เอา downloadURL มาแสดง
+            this.photoName = this._DB.imageName;
+          })
+      }
+
   cancelForm() { 
-    this.navCtrl.push(LostMainPage)
+    this.navCtrl.pop();
   }
 
   
