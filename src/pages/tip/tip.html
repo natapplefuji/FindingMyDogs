@@ -14,5 +14,16 @@
 
 
 <ion-content padding>
-
+    <ion-card (tap)="getPredict()">
+        <ion-item >
+            ตรวจสอบพันธ์ุสุนัข
+        </ion-item>
+      </ion-card>
+    <ion-list inset>
+        <ion-item ion-item *ngFor="let dog of dogs">
+          {{ dog.dogName }} {{dog.score}}%
+        </ion-item> 
+    </ion-list>
+  <!-- <p>{{dog|json}}</p> -->
+  <!-- <p>{{dog2|json}}</p> -->
 </ion-content>

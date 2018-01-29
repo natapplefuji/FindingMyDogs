@@ -8,30 +8,35 @@
   
   
   <ion-content padding>
-      <ion-list>
+      <form [formGroup]="infoFound" (ngSubmit)="addAnnounce()">
           <h4>โปรดกรอกรายละเอียดของท่าน</h4>
           <ion-item no-lines>
-            <ion-label>โปรดเพิ่มภาพสุนัขที่ท่านเจอ</ion-label>
+            <ion-label>โปรดเพิ่มภาพสุนัขที่ท่านพบ</ion-label>
           </ion-item>
           <ion-item>
-            <input class="file" type="file" name="file" (change)="isSelected($event)">              
+            <button ion-button (tap)="getImage()">upload</button>            
         </ion-item>
-        <img [src]="infoLost.dogImage" style="min-width:250px;"> 
+        <ion-item no-lines>
+          <img src={{dogPicture}}>
+        </ion-item>
           <ion-item>
             <ion-label floating>ข้อมูลติดต่อ</ion-label>
-            <ion-textarea [(ngModel)]="infoLost.contactMiss" name="contactMiss" required></ion-textarea>
+            <ion-textarea [(ngModel)]="infoFound.contactMiss" formControlName="contactMiss" required></ion-textarea>
           </ion-item>
           <ion-item>
             <ion-label floating>ข้อมูลสุนัขเพิ่มเติม</ion-label>
-            <ion-textarea [(ngModel)]="infoLost.dogDetail" name="dogDetail" required></ion-textarea>
+            <ion-textarea [(ngModel)]="infoFound.dogDetail" formControlName="dogDetail" required></ion-textarea>
           </ion-item>
         <ion-item>
           <ion-label>สุนัขอยู่กับท่านหรือไม่ ?</ion-label>
-          <ion-toggle checked="false"></ion-toggle>
+          <ion-select formControlName="dogWithYou">
+            <ion-option value="yes">ใช่</ion-option>
+            <ion-option value="no">ไม่ใช่</ion-option>
+          </ion-select>
         </ion-item> 
-        <button ion-button type="submit" color="secondary" (tap)= "infoForm()">ยืนยัน</button>
-        <button ion-button type="reset" color="danger" (tap)= "cancelForm()">ยกเลิก</button>
-        </ion-list>
+        <button ion-button type="submit" [disabled]="!infoFound.valid" color="secondary" >ยืนยัน</button>
+        <!--<button ion-button type="reset" color="danger" (tap)= "cancelForm()">ยกเลิก</button>-->
+      </form>
     
   </ion-content>
   

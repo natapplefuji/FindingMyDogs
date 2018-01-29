@@ -50,6 +50,7 @@ import { InformFoundPage } from '../pages/inform-found/inform-found';
 import {MyNotiPage} from '../pages/my-noti/my-noti';
 import {MyNotiDetailPage} from '../pages/my-noti-detail/my-noti-detail';
 import { BreedProvider } from '../providers/breed/breed';
+import { PredictProvider } from '../providers/predict/predict';
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
   authDomain: "findingmydogs-kmitl.firebaseapp.com",
@@ -146,6 +147,7 @@ firebase.initializeApp(config);
     DatabaseProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BreedProvider,
+    PredictProvider,
   ]
 })
 export class AppModule {

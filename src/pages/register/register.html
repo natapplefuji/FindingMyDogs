@@ -42,13 +42,16 @@
         <ion-input type="tel" [(ngModel)]="user.tel"></ion-input>
       </ion-item>
       <ion-item no-lines>
-      <button ion-button icon-start small (click)= "getImage()">
-        <ion-icon name='image'></ion-icon>
+      <button ion-button icon-start (click)= "selectImage()">
+      <ion-icon name='image'></ion-icon>
+        เลือกรูปโปรไฟล์
+      </button>
+      <button ion-button icon-start (click)= "getImage()">
         อัพโหลดรูปโปรไฟล์
       </button>
-      <div *ngIf="this.user.photo != null">
-          <img [src]="this.user.photo">
-        </div>
+      <!-- <div *ngIf="this.user.photo != null"> -->
+          <img src="{{profileImage}}">
+        <!-- </div> -->
     </ion-item>
       <ion-item no-lines>
           <ion-label>ยอมรับเงื่อนไขการใช้บริการ</ion-label>

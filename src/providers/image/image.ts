@@ -14,39 +14,42 @@ import 'rxjs/add/operator/map';
 export class ImageProvider {
   fbRef: any;
   image: string;
-  
   constructor(private camera: Camera, public actionSheetCtrl: ActionSheetController) {
     console.log('Hello ImageProvider Provider');
   }
-  presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'โปรดเลือกแหล่งที่มา',
-      buttons: [
-        {
-          text: 'คลังรูปภาพ',
-          handler: () => {
-            this.getDogPicture(this.camera.PictureSourceType.PHOTOLIBRARY).then((data) => {
-              this.image = data;
-            });
-          }
-        },
-        {
-          text: 'กล้องถ่ายภาพ',
-          handler: () => {
-            this.getDogPicture(this.camera.PictureSourceType.CAMERA).then((data) => {
-              this.image = data;
-            });
-          }
-        },
-        {
-          text: 'ยกเลิก',
-          role: 'cancel'
-        }
-      ]
-    });
-    actionSheet.present();
-    return this.image;
-  }
+  // presentActionSheet() {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: 'โปรดเลือกแหล่งที่มา',
+  //     buttons: [
+  //       {
+  //         text: 'คลังรูปภาพ',
+  //         handler: () => {
+  //           this.getDogPicture(this.camera.PictureSourceType.PHOTOLIBRARY).then((data) => {
+  //             this.image = data;
+  //             //console.log("handler"+ this.image)
+  //           });
+            
+  //         }
+  //       },
+  //       {
+  //         text: 'กล้องถ่ายภาพ',
+  //         handler: () => {
+  //           this.getDogPicture(this.camera.PictureSourceType.CAMERA).then((data) => {
+  //             this.image = data;
+  //             //console.log("handler"+ this.image)
+  //           });
+  //         }
+  //       },
+  //       {
+  //         text: 'ยกเลิก',
+  //         role: 'cancel'
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  //   console.log("action"+ this.image)
+  //   return this.image;
+  // }
 
   getDogPicture(sourceType: any): Promise<any> {
     return new Promise(resolve => {

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AuthProvider } from '../../providers/auth/auth';
 import { DatabaseProvider } from '../../providers/database/database'
 import { ImageProvider} from '../../providers/image/image'
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController,ToastController } from 'ionic-angular';
+import { ActionSheetController } from 'ionic-angular'
+import { Camera } from '@ionic-native/camera';
 import { LoginPage } from '../login/login'
 
 
@@ -32,11 +33,14 @@ export class RegisterPage {
 
   };
   profile_image_dataurl: string;
-
+  profileImage: string;
   loading: Loading;
 
   constructor(public authProvider: AuthProvider,
     private image: ImageProvider,
+    private camera: Camera,
+    private toastCtrl: ToastController,
+    public actionSheetCtrl: ActionSheetController,
     private _DB:DatabaseProvider,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -50,7 +54,7 @@ export class RegisterPage {
 
   SignUp() {
     if (this.user.photo == null) {
-      this.user.photo = '../../assets/img/avatar.png'
+      this.user.photo = 'assets/img/avatar.png'
     }
     this.authProvider.signupUser(this.user.email, this.user.password, this.user.displayName, this.user.firstName, this.user.lastName, this.user.tel,this.user.photo)
       .then(() => {
@@ -75,12 +79,59 @@ export class RegisterPage {
     this.loading.present();
     this.navCtrl.push(LoginPage);
   }
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'โปรดเลือกแหล่งที่มา',
+      buttons: [
+        {
+          text: 'คลังรูปภาพ',
+          handler: () => {
+            this.image.getDogPicture(this.camera.PictureSourceType.PHOTOLIBRARY).then((data) => {
+              this.profileImage = data;
+            });
+            
+          }
+        },
+        {
+          text: 'กล้องถ่ายภาพ',
+          handler: () => {
+            this.image.getDogPicture(this.camera.PictureSourceType.CAMERA).then((data) => {
+              this.profileImage = data;
+            });
+          }
+        },
+        {
+          text: 'ยกเลิก',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Upload successfully',
+      duration: 3000,
+      position: 'top'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+  
+    toast.present();
+  }
+
+  selectImage() { 
+    this.presentActionSheet();
+  }
   getImage() {
-    this.profile_image_dataurl = this.image.presentActionSheet();
-    this._DB.uploadImageProfile(this.profile_image_dataurl)
-      .then((snapshot: any) => {
-        this.user.photo = snapshot.downloadURL;
-      })
+    this._DB.uploadImageProfile(this.profileImage)
+    .then((snapshot: any) => {
+      this.user.photo = snapshot.downloadURL;
+      this.presentToast();
+    })
   }
 
 

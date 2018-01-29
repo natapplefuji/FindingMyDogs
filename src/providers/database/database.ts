@@ -44,7 +44,6 @@ export class DatabaseProvider {
     return new Promise((resolve, reject) => {
       storageRef = firebase.storage().ref('profiles/' + image);
       parseUpload = storageRef.putString(imageString, 'data_url');
-
       parseUpload.on('state_changed', (_snapshot) => {
         // We could log the progress here IF necessary
         // console.log('snapshot progess ' + _snapshot);
