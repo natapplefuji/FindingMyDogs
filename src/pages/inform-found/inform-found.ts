@@ -29,6 +29,11 @@ export class InformFoundPage {
   uploadedImage;
   photoName = 'default';
   dogPicture: string;
+  date = new Date();
+  day;
+  month;
+  year;
+  milliTime;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -47,6 +52,11 @@ export class InformFoundPage {
       dogDetail: ['', Validators.required],
       dogWithYou: ['', Validators.required]
     });
+    this.milliTime = this.date.getTime();
+    this.day = this.date.getDate();
+    this.month = this.date.getMonth() + 1;
+    this.year = this.date.getFullYear();
+    console.log('date is '+this.day+'/'+this.month+'/'+this.year+' at millitime: '+this.milliTime);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad InformFoundPage');
@@ -60,7 +70,12 @@ export class InformFoundPage {
         contactMiss: this.infoFound.value.contactMiss,
         dogDetail: this.infoFound.value.dogDetail,
         dogWithYou: this.infoFound.value.dogWithYou,
-        photoName: this.photoName
+        photoName: this.photoName,
+        day: this.day,
+        month: this.month,
+        year: this.year,
+        millisec : this.milliTime
+
       }).then(() => { this.navCtrl.pop() })
     })
 

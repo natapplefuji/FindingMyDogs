@@ -59,7 +59,8 @@ export class ImageProvider {
         destinationType: this.camera.DestinationType.DATA_URL,
         saveToPhotoAlbum: true,
         encodingType: this.camera.EncodingType.JPEG,
-        correctOrientation: true
+        correctOrientation: true,
+        targetHeight: 500
       };
       this.camera.getPicture(options).then(data => {
         this.image = "data:image/jpeg;base64," + data;
