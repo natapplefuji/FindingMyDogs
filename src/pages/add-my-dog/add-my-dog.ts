@@ -6,6 +6,7 @@ import { ImageProvider } from '../../providers/image/image'
 import { AngularFireDatabase } from 'angularfire2/database-deprecated'
 import { DatabaseProvider } from '../../providers/database/database'
 import { MyDogPage } from '../my-dog/my-dog'
+import { BreedProvider } from '../../providers/breed/breed';
 import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
 /**
@@ -28,8 +29,10 @@ export class AddMyDogPage {
   dog_image_dataurl: string = null;
   uploadedImage: string;
   photoName: string;
-  constructor(private loadingCtrl: LoadingController,private camera: Camera, public actionSheetCtrl: ActionSheetController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
+  breed;
+  constructor(private _breed :BreedProvider,private loadingCtrl: LoadingController,private camera: Camera, public actionSheetCtrl: ActionSheetController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
     this.uid = userService.uid;
+    this.breed = _breed.breeds;
     this.dog = this.formBuilder.group({
       dogName: ['', Validators.required],
       breed: ['', Validators.required],
@@ -96,10 +99,7 @@ presentActionSheet() {
     });
     actionSheet.present();
   }
-  selectImage() { 
-    this.presentActionSheet();
-    console.log("select"+this.dogPicture)
-}
+
   getImage() {
     this.presentActionSheet();
     //ได้ภาพ base64
