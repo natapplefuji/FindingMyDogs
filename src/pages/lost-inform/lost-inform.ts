@@ -23,7 +23,7 @@ export class LostInformPage {
   uid: '';
   dog_image_dataurl: string;
   uploadedImage: any = null;
-
+  
   constructor(private loadingCtrl: LoadingController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
     this.uid = userService.uid;
     this.annoucelost = this.formBuilder.group({

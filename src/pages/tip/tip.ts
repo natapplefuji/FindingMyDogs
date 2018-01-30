@@ -27,12 +27,12 @@ export class TipPage {
     // this.dog = this._predict.getJsonData();
     // console.log(this.dog)
   }
-  getPredict() { 
-    this._predict.getJsonData().subscribe((data) => { 
-      this.dogs = data
-      console.log(this.dogs)
-    })
-  }
+  // getPredict() { 
+  //   this._predict.getJsonData().subscribe((data) => { 
+  //     this.dogs = data
+  //     console.log(this.dogs)
+  //   })
+  // }
 
 
 

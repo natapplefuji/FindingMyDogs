@@ -9,6 +9,7 @@ import { ImageProvider } from '../../providers/image/image'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
+
 /**
  * Generated class for the InformFoundPage page.
  *
@@ -76,7 +77,7 @@ export class InformFoundPage {
         year: this.year,
         millisec : this.milliTime
 
-      }).then(() => { this.navCtrl.pop() })
+      }).then(() => { this.navCtrl.push(LostInformThankPage, { photo: this.photoName }) })
     })
 
 

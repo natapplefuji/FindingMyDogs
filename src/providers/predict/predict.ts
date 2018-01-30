@@ -17,11 +17,14 @@ export class PredictProvider {
     console.log('Hello PredictProvider Provider');
   }
   
-  public getJsonData():Observable<any>{
-    console.log("baba")
-    return this.http.get('https://dog-tensor3.herokuapp.com/predict2/beagle.jpg')
-      .map((res:Response) => res.json())
-      .catch(error => { return Observable.throw(error) })
+  public getJsonData(photoName:string): Observable<any>{
+    //let photoName = "beagle.jpg"
+    if (photoName != null) {
+      console.log("baba")
+      return this.http.get('https://dog-tensor3.herokuapp.com/predict2/' + photoName)
+        .map((res: Response) => res.json())
+        .catch(error => { return Observable.throw(error) })
+    }
   }
     
 }
