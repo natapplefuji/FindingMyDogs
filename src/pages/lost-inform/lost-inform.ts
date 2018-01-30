@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,LoadingController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { ImageProvider } from '../../providers/image/image'
 import { DatabaseProvider } from '../../providers/database/database'
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
+import { ActionSheetController } from 'ionic-angular'
+import { Camera } from '@ionic-native/camera';
 /**
  * Generated class for the LostInformPage page.
  *
@@ -23,8 +25,23 @@ export class LostInformPage {
   uid: '';
   dog_image_dataurl: string;
   uploadedImage: any = null;
-
-  constructor(private loadingCtrl: LoadingController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
+  date = new Date();
+  day;
+  month;
+  year;
+  milliTime;
+  dogPicture;
+  photoName;
+  constructor(private loadingCtrl: LoadingController,
+    private _DB: DatabaseProvider,
+    private db: AngularFireDatabase,
+    private userService: UserServiceProvider,
+    private image: ImageProvider,
+    private formBuilder: FormBuilder,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public actionSheetCtrl: ActionSheetController,
+    private camera: Camera) {
     this.uid = userService.uid;
     this.annoucelost = this.formBuilder.group({
       dogName: ['', Validators.required],
@@ -35,6 +52,10 @@ export class LostInformPage {
       dogDetail: [''],
       reward: [''],
     });
+    this.milliTime = this.date.getTime();
+    this.day = this.date.getDate();
+    this.month = this.date.getMonth() + 1;
+    this.year = this.date.getFullYear();
   }
 
   ionViewDidLoad() {
@@ -42,30 +63,65 @@ export class LostInformPage {
   }
   addAnnounceLost() {
     if (this.uploadedImage == null) {
-      this.uploadedImage = 'assets/img/dog_test.jpeg';
+      this._DB.uploadImageDog(this.dogPicture) //อัพขึ้นไปบน storage ได้ downloadURL
+        .then((snapshot: any) => {
+          this.uploadedImage = snapshot.downloadURL;
+          this.photoName = this._DB.imageName;
+          this.db.database.ref('/announceMissing').push().set({
+            uid: this.uid,
+            dogName: this.annoucelost.value.dogName,
+            breed: this.annoucelost.value.breed,
+            gender: this.annoucelost.value.gender,
+            age: this.annoucelost.value.age,
+            contactMiss: this.annoucelost.value.contactMiss,
+            dogDetail: this.annoucelost.value.dogDetail,
+            reward: this.annoucelost.value.reward,
+            photo: this.uploadedImage,
+            photoName: this.photoName,
+            day: this.day,
+            month: this.month,
+            year: this.year,
+            millisec: this.milliTime
+          }).then(() => { this.navCtrl.pop() })
+        })
     }
-    this.db.database.ref('/announceMissing').push().set({
-      uid: this.uid,
-      dogName: this.annoucelost.value.dogName,
-      breed: this.annoucelost.value.breed,
-      gender: this.annoucelost.value.gender,
-      age: this.annoucelost.value.age,
-      contactMiss: this.annoucelost.value.contactMiss,
-      dogDetail: this.annoucelost.value.dogDetail,
-      reward: this.annoucelost.value.reward,
-      photo: this.uploadedImage,
-    }).then(() => { this.navCtrl.pop() })
+
+
+
   }
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'โปรดเลือกแหล่งที่มา',
+      buttons: [
+        {
+          text: 'คลังรูปภาพ',
+          handler: () => {
+            this.image.getDogPicture(this.camera.PictureSourceType.PHOTOLIBRARY).then((data) => {
+              this.dogPicture = data;
+            });
+
+          }
+        },
+        {
+          text: 'กล้องถ่ายภาพ',
+          handler: () => {
+            this.image.getDogPicture(this.camera.PictureSourceType.CAMERA).then((data) => {
+              this.dogPicture = data;
+            });
+          }
+        },
+        {
+          text: 'ยกเลิก',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
   getImage() {
-
-    // this.dog_image_dataurl = this.image.presentActionSheet(); //ได้ภาพ base64
-
-    this._DB.uploadImageDog(this.dog_image_dataurl) //อัพขึ้นไปบน storage ได้ downloadURL
-      .then((snapshot: any) => {
-        console.dir(snapshot)
-        this.uploadedImage = snapshot.downloadURL; //เอา downloadURL มาแสดง
-        console.log(this.uploadedImage)
-      })
+    this.presentActionSheet();
   }
   // infoLost = {
   //   dogName: '',
@@ -97,7 +153,7 @@ export class LostInformPage {
   //   let reader = new FileReader();
   //   reader.onload = (e:any) => { 
   //     this.infoLost.dogImage = e.target.result;
-      
+
   //   }
   //   reader.readAsDataURL(dogImage);
   // }

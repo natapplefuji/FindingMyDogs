@@ -30,6 +30,11 @@ export class AddMyDogPage {
   uploadedImage: string;
   photoName: string;
   breed;
+  date = new Date();
+  day;
+  month;
+  year;
+  milliTime;
   constructor(private _breed :BreedProvider,private loadingCtrl: LoadingController,private camera: Camera, public actionSheetCtrl: ActionSheetController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
     this.uid = userService.uid;
     this.breed = _breed.breeds;
@@ -40,6 +45,10 @@ export class AddMyDogPage {
       age: ['', Validators.required],
       detail: [''],
     });
+    this.milliTime = this.date.getTime();
+    this.day = this.date.getDate();
+    this.month = this.date.getMonth() + 1;
+    this.year = this.date.getFullYear();
   }
 
   ionViewDidLoad() {
@@ -61,7 +70,11 @@ export class AddMyDogPage {
           detail: this.dog.value.detail,
           photo: this.uploadedImage,
           photoName: this.photoName,
-          status: 'ปลอดภัย'
+          status: 'ปลอดภัย',
+          day: this.day,
+          month: this.month,
+          year: this.year,
+          millisec : this.milliTime
         }).then(() => { this.navCtrl.pop() })
         }) 
     }
