@@ -26,7 +26,7 @@
         </ion-item>
         <ion-item>
           <ion-label>อายุ(ปี)</ion-label>
-          <ion-input type="text" formControlName="age"></ion-input>
+          <ion-input type="number" formControlName="age"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>ข้อมูลติดต่อ</ion-label>
@@ -43,10 +43,9 @@
         <ion-item no-lines>
           <button ion-button type=button (click)="getImage()">อัพโหลดภาพ
           </button>
-          <div *ngIf="uploadedImage != null">
-            <img [src]="uploadedImage">
-            <p>{{uploadedImage}}</p>
-          </div>
+          <ion-item no-lines>
+            <img src={{dogPicture}}>
+          </ion-item>
         </ion-item>
     
         <button ion-button type="submit" [disabled]="!annoucelost.valid">Submit</button>

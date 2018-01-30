@@ -63,23 +63,27 @@ export class InformFoundPage {
     console.log('ionViewDidLoad InformFoundPage');
   }
   addAnnounce() {
-    this._DB.uploadImageDog(this.dogPicture).then((snapshot: any) => {
-      this.photoName = this._DB.imageName;
-      this.db.database.ref('/announceFound').push().set({
-        founder: this.uid,
-        breed: this.breed,
-        contactMiss: this.infoFound.value.contactMiss,
-        dogDetail: this.infoFound.value.dogDetail,
-        dogWithYou: this.infoFound.value.dogWithYou,
-        photoName: this.photoName,
-        day: this.day,
-        month: this.month,
-        year: this.year,
-        millisec : this.milliTime
+    if (this.uploadedImage == null) {
 
-      }).then(() => { this.navCtrl.push(LostInformThankPage, { photo: this.photoName }) })
-    })
+      this._DB.uploadImageDog(this.dogPicture).then((snapshot: any) => {
+        this.uploadedImage = snapshot.downloadURL;
+        this.photoName = this._DB.imageName;
+        this.db.database.ref('/announceFound').push().set({
+          founder: this.uid,
+          breed: this.breed,
+          contactMiss: this.infoFound.value.contactMiss,
+          dogDetail: this.infoFound.value.dogDetail,
+          dogWithYou: this.infoFound.value.dogWithYou,
+          photo: this.uploadedImage,
+          photoName: this.photoName,
+          day: this.day,
+          month: this.month,
+          year: this.year,
+          millisec: this.milliTime
 
+        }).then(() => { this.navCtrl.push(LostInformThankPage, { photo: this.photoName }) })
+      })
+    }
 
   }
   presentActionSheet() {
