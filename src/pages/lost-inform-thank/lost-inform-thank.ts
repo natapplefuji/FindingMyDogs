@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { PredictProvider } from '../../providers/predict/predict';
+import { LoadingCmp } from 'ionic-angular/components/loading/loading-component';
 /**
  * Generated class for the LostInformThankPage page.
  *
@@ -15,17 +16,24 @@ import { PredictProvider } from '../../providers/predict/predict';
   templateUrl: 'lost-inform-thank.html',
 })
 export class LostInformThankPage {
-  dogs : [{
-    dogName:string,
-    score:string
+  dogs: [{
+    dogName: string,
+    score: string
   }];
   photoDog
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider) {
-    if (navParams) { 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider, private loadingCtrl: LoadingController) {
+    let loading = this.loadingCtrl.create({
+      content: 'Loading Please Wait...'
+    });
+    if (navParams) {
       this.photoDog = this.navParams.get('photo')
-      this._predict.getJsonData(this.photoDog).subscribe((data) => {
-        this.dogs = data
-        console.log(this.dogs)
+      loading.present().then(() => {
+        this._predict.getJsonData(this.photoDog).subscribe((data) => {
+          this.dogs = data
+          loading.dismiss();
+          console.log(this.dogs)
+        });
+
       })
       console.log(this.photoDog)
     }
@@ -34,7 +42,7 @@ export class LostInformThankPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostInformThankPage');
   }
-  goToLost() { 
+  goToLost() {
     this.navCtrl.push(LostMainPage)
   }
 }

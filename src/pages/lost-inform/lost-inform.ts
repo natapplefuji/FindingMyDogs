@@ -8,6 +8,7 @@ import { DatabaseProvider } from '../../providers/database/database'
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
+import { BreedProvider} from '../../providers/breed/breed'
 /**
  * Generated class for the LostInformPage page.
  *
@@ -21,9 +22,9 @@ import { Camera } from '@ionic-native/camera';
   templateUrl: 'lost-inform.html',
 })
 export class LostInformPage {
-  private annoucelost: FormGroup;
-  uid: '';
-  dog_image_dataurl: string;
+  private announcelost: FormGroup;
+  uid;
+  breed;
   uploadedImage: any = null;
   date = new Date();
   day;
@@ -41,9 +42,11 @@ export class LostInformPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
-    private camera: Camera) {
+    private camera: Camera,
+    private _breed :BreedProvider) {
     this.uid = userService.uid;
-    this.annoucelost = this.formBuilder.group({
+    this.breed = _breed.breeds;
+    this.announcelost = this.formBuilder.group({
       dogName: ['', Validators.required],
       breed: ['', Validators.required],
       gender: ['', Validators.required],
@@ -69,13 +72,13 @@ export class LostInformPage {
           this.photoName = this._DB.imageName;
           this.db.database.ref('/announceMissing').push().set({
             uid: this.uid,
-            dogName: this.annoucelost.value.dogName,
-            breed: this.annoucelost.value.breed,
-            gender: this.annoucelost.value.gender,
-            age: this.annoucelost.value.age,
-            contactMiss: this.annoucelost.value.contactMiss,
-            dogDetail: this.annoucelost.value.dogDetail,
-            reward: this.annoucelost.value.reward,
+            dogName: this.announcelost.value.dogName,
+            breed: this.announcelost.value.breed,
+            gender: this.announcelost.value.gender,
+            age: this.announcelost.value.age,
+            contactMiss: this.announcelost.value.contactMiss,
+            dogDetail: this.announcelost.value.dogDetail,
+            reward: this.announcelost.value.reward,
             photo: this.uploadedImage,
             photoName: this.photoName,
             day: this.day,
@@ -85,9 +88,6 @@ export class LostInformPage {
           }).then(() => { this.navCtrl.pop() })
         })
     }
-
-
-
   }
 
   presentActionSheet() {
@@ -120,58 +120,5 @@ export class LostInformPage {
     actionSheet.present();
   }
 
-  getImage() {
-    this.presentActionSheet();
-  }
-  // infoLost = {
-  //   dogName: '',
-  //   dogAge: '',
-  //   breed:'',
-  //   contactMiss: '',
-  //   dogDetail: '',
-  //   dogImage: '',
-  //   reward: '',
-  //   status: 'lost'
-  // }
-  // announceMissing: FirebaseListObservable<any>;
 
-  // constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
-  //   this.announceMissing = af.list('/announceMissing');
-  // }
-  // infoForm() { 
-  //   console.dir(this.infoLost);
-  //   if (this.infoLost.dogImage) {
-  //     this.uploadImg(this.infoLost.dogImage);     
-  //   }
-  //   else { 
-  //     alert("please select image");
-  //   }
-  // }
-  // isSelected(e) { 
-  //   console.log(e);
-  //   let dogImage:any = e.target.files[0];
-  //   let reader = new FileReader();
-  //   reader.onload = (e:any) => { 
-  //     this.infoLost.dogImage = e.target.result;
-
-  //   }
-  //   reader.readAsDataURL(dogImage);
-  // }
-  // uploadImg(img64) { 
-  //   // this.announceMissing.push({
-  //   //   dogName: this.infoLost.dogName,
-  //   //   dogAge: this.infoLost.dogAge,
-  //   //   breed:'',
-  //   //   contactMiss: this.infoLost.contactMiss,
-  //   //   dogDetail: this.infoLost.dogDetail,
-  //   //   dogImage: img64,
-  //   //   reward: this.infoLost.reward,
-  //   //   status: 'lost'
-  //   // }).then((data) => { 
-  //   //   alert("upload success");
-  //   // })
-  // }
-  // cancelForm() { 
-  //   this.navCtrl.push(LostMainPage)
-  // }
 }

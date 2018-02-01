@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
+import { MyDogDetailPage } from '../my-dog-detail/my-dog-detail'
 /**
  * Generated class for the AdoptGetPage page.
  *
@@ -14,13 +16,26 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'adopt-get.html',
 })
 export class AdoptGetPage {
-  location:string
-  constructor(private alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
+  location: string
+  announcelistAll:FirebaseListObservable<any>;
+  constructor(private alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
     this.location = "nearby";
+    this.announcelistAll = this.db.list('announceAdopt/');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdoptGetPage');
+  }
+  goToDogDetail(dogName,breed,gender,age,dogDetail,photo,status) {
+    this.navCtrl.push(MyDogDetailPage, {
+      dogName: dogName,
+      breed: breed,
+      gender: gender,
+      age: age,
+      detail: dogDetail,
+      photo:photo,
+      status: status
+    })
   }
   presentConfirm() {
     let alert = this.alertCtrl.create({

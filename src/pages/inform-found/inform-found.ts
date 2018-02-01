@@ -26,7 +26,6 @@ export class InformFoundPage {
   announceFound: FirebaseListObservable<any>;
   uid;
   breed = 'default'
-  dog_image_dataurl;
   uploadedImage;
   photoName = 'default';
   dogPicture: string;

@@ -15,7 +15,7 @@
       <ion-segment-button value="nearby">
         ใกล้เคียง
       </ion-segment-button>
-      <ion-segment-button value="all" (tap)="getAnnouceAll()">
+      <ion-segment-button value="all">
         ทั้งหมด
       </ion-segment-button>
     </ion-segment>
@@ -55,24 +55,9 @@
                 </ion-thumbnail>
                 <h2>{{dog.dogName}} lost Today at 9.51 AM</h2>
                 <p>หากพบโปรดแจ้งเบาะแส</p>
-                <button ion-button clear item-end>View</button>
+                <button ion-button clear item-end (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.status)">View</button>
               </ion-item>
-              <!-- <ion-item>
-                  <ion-thumbnail item-start>
-                    <img src="assets/img/dog2.jpeg">
-                  </ion-thumbnail>
-                  <h2>Turkey lost Today at 9.51 AM</h2>
-                  <p>หากพบโปรดแจ้งเบาะแส</p>
-                  <button ion-button clear item-end>View</button>
-                </ion-item>
-                <ion-item>
-                    <ion-thumbnail item-start>
-                      <img src="assets/img/dog2.jpeg">
-                    </ion-thumbnail>
-                    <h2>Turkey lost Today at 9.51 AM</h2>
-                    <p>หากพบโปรดแจ้งเบาะแส</p>
-                    <button ion-button clear item-end>View</button>
-                  </ion-item> -->
+
         </ion-list>
       </div>
     </ion-content> 
