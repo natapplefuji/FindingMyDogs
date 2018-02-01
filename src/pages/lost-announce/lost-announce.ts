@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+<<<<<<< HEAD
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail'
+=======
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
+import { MyDogDetailPage } from '../my-dog-detail/my-dog-detail'
+>>>>>>> fe2b5235f57fe6d7628437f2963983030e5b863a
 /**
  * Generated class for the LostAnnouncePage page.
  *
@@ -19,6 +24,7 @@ export class LostAnnouncePage {
   announcelistAll:FirebaseListObservable<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
     this.location = "nearby";
+    this.announcelistAll = this.db.list('announceMissing/');
   }
 
   ionViewDidLoad() {

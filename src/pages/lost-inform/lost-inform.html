@@ -8,14 +8,16 @@
 
 
 <ion-content padding>
-    <form [formGroup]="annoucelost" (ngSubmit)="addAnnounceLost()">
+    <form [formGroup]="announcelost" (ngSubmit)="addAnnounceLost()">
         <ion-item>
           <ion-label>ชื่อสุนัข</ion-label>
           <ion-input type="text" formControlName="dogName"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>พันธุ์</ion-label>
-          <ion-input type="text" formControlName="breed"></ion-input>
+          <ion-select placeholder="กรุณาเลือกพันธุ์สุนัข"  formControlName="breed">
+              <ion-option *ngFor="let item of breed">{{item}}</ion-option>
+            </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>เพศ</ion-label>
@@ -41,14 +43,14 @@
             <ion-input type="text" formControlName="reward"></ion-input>
           </ion-item>
         <ion-item no-lines>
-          <button ion-button type=button (click)="getImage()">อัพโหลดภาพ
+          <button ion-button type=button (click)="presentActionSheet()">อัพโหลดภาพ
           </button>
           <ion-item no-lines>
             <img src={{dogPicture}}>
           </ion-item>
         </ion-item>
     
-        <button ion-button type="submit" [disabled]="!annoucelost.valid">Submit</button>
+        <button ion-button type="submit" [disabled]="!announcelost.valid">Submit</button>
       </form>
     <!-- <ion-list> -->
         

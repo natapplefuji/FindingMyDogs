@@ -9,79 +9,63 @@
   <ion-navbar>
     <ion-title>ประกาศอุปการะ</ion-title>
     <ion-buttons end>
-        <button ion-button (click)="presentConfirm()">
-          <ion-icon name="funnel"></ion-icon>
-        </button>
-      </ion-buttons>
+      <button ion-button (click)="presentConfirm()">
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
 
-    <div>
-        <ion-segment [(ngModel)]="location">
-          <ion-segment-button value="nearby">
-            ใกล้เคียง
-          </ion-segment-button>
-          <ion-segment-button value="all">
-            ทั้งหมด
-          </ion-segment-button>
-        </ion-segment>
-      </div>
-          <div [ngSwitch]="location">
-            <ion-list *ngSwitchCase="'nearby'">
-                <ion-item>
-                    <ion-thumbnail item-start>
-                      <img src="assets/img/scroll0015.jpg">
-                    </ion-thumbnail>
-                    <h2>หาคนอุปการะ Turkey1 </h2>
-                    <p>อายุ 6 เดือน</p>
-                    <button ion-button clear item-end>View</button>
-                </ion-item>
-                <ion-item >
-                    <ion-thumbnail item-start>
-                      <img src="assets/img/scroll0015.jpg">
-                    </ion-thumbnail>
-                    <h2>หาคนอุปการะ Turkey2 </h2>
-                    <p>อายุ 10 เดือน</p>
-                    <button ion-button clear item-end>View</button>
-                  </ion-item>
-                  <ion-item >
-                      <ion-thumbnail item-start>
-                        <img src="assets/img/scroll0015.jpg">
-                      </ion-thumbnail>
-                      <h2>หาคนอุปการะ Turkey3 </h2>
-                      <p>อายุ 8 เดือน</p>
-                      <button ion-button clear item-end>View</button>
-                    </ion-item>
-            </ion-list>
-          
-            <ion-list *ngSwitchCase="'all'">
-                <ion-item >
-                    <ion-thumbnail item-start>
-                      <img src="assets/img/dog2.jpeg">
-                    </ion-thumbnail>
-                    <h2>หาคนอุปการะ Turkey1 </h2>
-                    <p>อายุ 6 เดือน</p>
-                    <button ion-button clear item-end>View</button>
-                  </ion-item>
-                  <ion-item>
-                      <ion-thumbnail item-start>
-                        <img src="assets/img/dog2.jpeg">
-                      </ion-thumbnail>
-                      <h2>หาคนอุปการะ Turkey2 </h2>
-                      <p>อายุ 10 เดือน</p>
-                      <button ion-button clear item-end>View</button>
-                    </ion-item>
-                    <ion-item>
-                        <ion-thumbnail item-start>
-                          <img src="assets/img/dog2.jpeg">
-                        </ion-thumbnail>
-                        <h2>หาคนอุปการะ Turkey3 </h2>
-                        <p>อายุ 11 เดือน</p>
-                        <button ion-button clear item-end>View</button>
-                      </ion-item>
-            </ion-list>
-          </div>
+  <div>
+    <ion-segment [(ngModel)]="location">
+      <ion-segment-button value="nearby">
+        ใกล้เคียง
+      </ion-segment-button>
+      <ion-segment-button value="all">
+        ทั้งหมด
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="location">
+    <ion-list *ngSwitchCase="'nearby'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/scroll0015.jpg">
+        </ion-thumbnail>
+        <h2>หาคนอุปการะ Turkey1 </h2>
+        <p>อายุ 6 เดือน</p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/scroll0015.jpg">
+        </ion-thumbnail>
+        <h2>หาคนอุปการะ Turkey2 </h2>
+        <p>อายุ 10 เดือน</p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="assets/img/scroll0015.jpg">
+        </ion-thumbnail>
+        <h2>หาคนอุปการะ Turkey3 </h2>
+        <p>อายุ 8 เดือน</p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'all'">
+      <ion-item *ngFor="let dog of announcelistAll | async">
+        <ion-thumbnail item-start>
+          <img src="{{dog.photo}}">
+        </ion-thumbnail>
+        <h2>{{dog.dogName}} lost Today at 9.51 AM</h2>
+        <p>หากพบโปรดแจ้งเบาะแส</p>
+        <button ion-button clear item-end (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status)">View</button>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

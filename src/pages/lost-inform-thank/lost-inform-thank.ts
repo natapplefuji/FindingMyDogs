@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { PredictProvider } from '../../providers/predict/predict';
+import { LoadingCmp } from 'ionic-angular/components/loading/loading-component';
 /**
  * Generated class for the LostInformThankPage page.
  *
@@ -15,9 +16,9 @@ import { PredictProvider } from '../../providers/predict/predict';
   templateUrl: 'lost-inform-thank.html',
 })
 export class LostInformThankPage {
-  dogs : [{
-    dogName:string,
-    score:string
+  dogs: [{
+    dogName: string,
+    score: string
   }];
   photoDog
   constructor(public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider,public loadingCtrl:LoadingController) {
@@ -41,7 +42,7 @@ export class LostInformThankPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostInformThankPage');
   }
-  goToLost() { 
+  goToLost() {
     this.navCtrl.push(LostMainPage)
   }
 }
