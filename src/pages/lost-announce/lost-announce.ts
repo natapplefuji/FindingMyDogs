@@ -28,4 +28,15 @@ export class LostAnnouncePage {
     this.announcelistAll = this.db.list('announceMissing/');
     console.log(this.announcelistAll)
   }
+  goToDogDetail(dogName,breed,gender,age,detail,photo,status) {
+    this.navCtrl.push(MyDogDetailPage, {
+      dogName: dogName,
+      breed: breed,
+      gender: gender,
+      age: age,
+      detail: detail,
+      photo:photo,
+      status: status
+    })
+  }
 }

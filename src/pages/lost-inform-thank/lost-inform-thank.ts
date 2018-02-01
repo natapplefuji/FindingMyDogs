@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Loading } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { PredictProvider } from '../../providers/predict/predict';
 /**
@@ -36,8 +36,5 @@ export class LostInformThankPage {
   }
   goToLost() { 
     this.navCtrl.push(LostMainPage)
-  }
-  getPredict() {
-    
   }
 }
