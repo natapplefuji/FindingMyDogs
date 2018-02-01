@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase ,FirebaseListObservable} from 'angularfire2/database-deprecated'
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail'
 /**
  * Generated class for the LostAnnouncePage page.
  *
@@ -28,15 +29,17 @@ export class LostAnnouncePage {
     this.announcelistAll = this.db.list('announceMissing/');
     console.log(this.announcelistAll)
   }
-  goToDogDetail(dogName,breed,gender,age,detail,photo,status) {
-    this.navCtrl.push(MyDogDetailPage, {
+  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+    this.navCtrl.push(LostAnnounceDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
       age: age,
-      detail: detail,
+      dogDetail: dogDetail,
       photo:photo,
-      status: status
+      contactMiss: contactMiss,
+      reward: reward,
+      uid:uid
     })
   }
 }

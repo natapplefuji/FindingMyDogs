@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { PredictProvider } from '../../providers/predict/predict';
 /**
@@ -20,12 +20,19 @@ export class LostInformThankPage {
     score:string
   }];
   photoDog
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider) {
-    if (navParams) { 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider,public loadingCtrl:LoadingController) {
+    let loading = this.loadingCtrl.create({
+      content: 'Loading Please Wait...'
+    });
+    if (navParams) {
       this.photoDog = this.navParams.get('photo')
-      this._predict.getJsonData(this.photoDog).subscribe((data) => {
-        this.dogs = data
-        console.log(this.dogs)
+      loading.present().then(() => {
+        this._predict.getJsonData(this.photoDog).subscribe((data) => {
+          this.dogs = data
+          loading.dismiss();
+          console.log(this.dogs)
+        });
+
       })
       console.log(this.photoDog)
     }

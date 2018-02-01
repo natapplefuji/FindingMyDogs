@@ -51,6 +51,7 @@ import {MyNotiPage} from '../pages/my-noti/my-noti';
 import {MyNotiDetailPage} from '../pages/my-noti-detail/my-noti-detail';
 import { BreedProvider } from '../providers/breed/breed';
 import { PredictProvider } from '../providers/predict/predict';
+import { LostAnnounceDetailPage } from '../pages/lost-announce-detail/lost-announce-detail'
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
   authDomain: "findingmydogs-kmitl.firebaseapp.com",
@@ -76,6 +77,7 @@ firebase.initializeApp(config);
     MyAnnouncePage,
     UserProfilePage,
     LostAnnouncePage,
+    LostAnnounceDetailPage,
     LostFindFailPage,
     LostInformPage,
     LostInformThankPage,
@@ -115,6 +117,7 @@ firebase.initializeApp(config);
     MyAnnouncePage,
     UserProfilePage,
     LostAnnouncePage,
+    LostAnnounceDetailPage,
     LostFindFailPage,
     LostInformPage,
     LostInformThankPage,
