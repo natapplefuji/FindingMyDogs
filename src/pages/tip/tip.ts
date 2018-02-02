@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PredictProvider } from '../../providers/predict/predict';
-import {LoadingController} from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
+import {LostRelatedPage} from '../lost-related/lost-related';
 /**
  * Generated class for the TipPage page.
  *
@@ -33,6 +34,9 @@ export class TipPage {
   //     console.log(this.dogs)
   //   })
   // }
+  gotoPageRelate() { 
+    this.navCtrl.push(LostRelatedPage)
+  }
 
 
 
