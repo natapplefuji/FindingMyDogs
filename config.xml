@@ -103,4 +103,5 @@
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <allow-navigation href="http://192.168.48.1:8100" />
+    <allow-navigation href="http://172.20.160.1:8100" />
 </widget>
