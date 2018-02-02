@@ -22,42 +22,27 @@
   </div>
       <div [ngSwitch]="location">
         <ion-list *ngSwitchCase="'nearby'">
-            <ion-item>
-                <ion-thumbnail item-start>
-                  <img src="assets/img/scroll0015.jpg">
-                </ion-thumbnail>
-                <h2>Turkey lost Today at 9.51 AM</h2>
-                <p>หากพบโปรดแจ้งเบาะแส</p>
-                <button ion-button clear item-end>View</button>
-            </ion-item>
-            <ion-item >
-                <ion-thumbnail item-start>
-                  <img src="assets/img/scroll0015.jpg">
-                </ion-thumbnail>
-                <h2>Turkey lost Today at 9.51 AM</h2>
-                <p>หากพบโปรดแจ้งเบาะแส</p>
-                <button ion-button clear item-end>View</button>
-              </ion-item>
-              <ion-item >
-                  <ion-thumbnail item-start>
-                    <img src="assets/img/scroll0015.jpg">
-                  </ion-thumbnail>
-                  <h2>Turkey lost Today at 9.51 AM</h2>
-                  <p>หากพบโปรดแจ้งเบาะแส</p>
-                  <button ion-button clear item-end>View</button>
-                </ion-item>
+          <ion-item *ngFor="let dog of announcelistAll | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+            <ion-thumbnail item-start>
+              <img src="{{dog.photo}}">
+            </ion-thumbnail>
+            <h2>{{dog.dogName}} พันธุ็ {{dog.breed}} หายวันที่ {{dog.day}}/{{dog.month}}/{{dog.year}}</h2>
+            <p>หากพบโปรดแจ้งเบาะแส</p>
+            <button ion-button clear item-end (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)"><ion-icon name="arrow-dropright"></ion-icon>
+            </button>
+          </ion-item>
         </ion-list>
       
         <ion-list *ngSwitchCase="'all'" >
-            <ion-item *ngFor="let dog of announcelistAll | async">
+            <ion-item *ngFor="let dog of announcelistAll | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
                 <ion-thumbnail item-start>
                   <img src="{{dog.photo}}">
                 </ion-thumbnail>
-                <h2>{{dog.dogName}} lost Today at 9.51 AM</h2>
+                <h2>{{dog.dogName}} พันธุ็ {{dog.breed}} หายวันที่ {{dog.day}}/{{dog.month}}/{{dog.year}}</h2>
                 <p>หากพบโปรดแจ้งเบาะแส</p>
-                <button ion-button clear item-end (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.status)">View</button>
+                <button ion-button clear item-end (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)"><ion-icon name="arrow-dropright"></ion-icon>
+                </button>
               </ion-item>
-
         </ion-list>
       </div>
     </ion-content> 

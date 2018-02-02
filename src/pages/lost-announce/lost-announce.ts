@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
-import { MyDogDetailPage } from '../my-dog-detail/my-dog-detail'
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail'
 /**
  * Generated class for the LostAnnouncePage page.
  *
@@ -25,16 +25,21 @@ export class LostAnnouncePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostAnnouncePage');
   }
-  
-  goToDogDetail(dogName,breed,gender,age,dogDetail,photo,status) {
-    this.navCtrl.push(MyDogDetailPage, {
+  getAnnouceAll() { 
+    console.log("baba")
+    console.log(this.announcelistAll)
+  }
+  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+    this.navCtrl.push(LostAnnounceDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
       age: age,
-      detail: dogDetail,
+      dogDetail: dogDetail,
       photo:photo,
-      status: status
+      contactMiss: contactMiss,
+      reward: reward,
+      uid:uid
     })
   }
 }
