@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HomePage } from '../home/home'
+import {LostMainPage} from '../lost-main/lost-main'
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail'
@@ -17,8 +19,8 @@ import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-de
 export class LostRelatedPage {
   visible = false;
   announcelistRelate:FirebaseListObservable<any>;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
-    let dogPredictBreed = "beagle"
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase) {
+    let dogPredictBreed = this.navParams.get('breed')
     this.announcelistRelate = this.db.list('announceMissing/', {
       query: {
         orderByChild: 'breed',
@@ -42,6 +44,9 @@ export class LostRelatedPage {
       reward: reward,
       uid: uid
     })
+  }
+  goToHome() { 
+    this.navCtrl.push(LostMainPage);
   }
   toggle() {
     this.visible = true;

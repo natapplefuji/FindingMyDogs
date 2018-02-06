@@ -103,4 +103,8 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-plugin-googlemaps" spec="~2.2.2">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyB0eWRSFifzxcS2GtAg9wMh3BJxVqVUvH8" />
+        <variable name="PLAY_SERVICES_VERSION" value="11.8.+" />
+    </plugin>
 </widget>

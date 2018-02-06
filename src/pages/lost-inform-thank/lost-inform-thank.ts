@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-ang
 import { LostMainPage } from '../lost-main/lost-main';
 import { PredictProvider } from '../../providers/predict/predict';
 import { LoadingCmp } from 'ionic-angular/components/loading/loading-component';
+import {LostRelatedPage} from '../lost-related/lost-related';
 /**
  * Generated class for the LostInformThankPage page.
  *
@@ -43,6 +44,6 @@ export class LostInformThankPage {
     console.log('ionViewDidLoad LostInformThankPage');
   }
   goToLost() {
-    this.navCtrl.push(LostMainPage)
+    this.navCtrl.push(LostRelatedPage,{ breed: this.dogs[0].dogName })
   }
 }

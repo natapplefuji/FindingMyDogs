@@ -80,7 +80,10 @@ export class InformFoundPage {
           year: this.year,
           millisec: this.milliTime
 
-        }).then(() => { this.navCtrl.push(LostInformThankPage, { photo: this.photoName }) })
+        }).then((res) => {
+          let announceFoundId = res.getKey();
+          this.navCtrl.push(LostInformThankPage, { photo: this.photoName })
+        })
       })
     }
 
