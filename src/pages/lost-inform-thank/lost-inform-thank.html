@@ -7,19 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>lostInformThank</ion-title>
+    <ion-title>ขอบคุณที่แจ้งเบาะแส</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <!-- <img src="assets/img/happy.png" > -->
-  <h1>ขอบคุณที่แจ้งเบาะแส</h1>
-<ion-list inset>
-    <ion-item ion-item *ngFor="let dog of dogs">
-      {{ dog.dogName }} {{dog.score}}%
-    </ion-item> 
-</ion-list>
-  <button ion-button type="submit" color="secondary" (tap)= "goToLost()">กลับหน้าหลัก</button>
+  <h1>สุนัขที่ท่านพบใกล้เคียงกับพันธุ์</h1>
+    <ion-list inset>
+      <ion-item ion-item *ngFor="let dog of dogs">
+        {{ dog.dogName }} {{dog.score}}%
+      </ion-item>
+    </ion-list>
+    
+    <button ion-button type="submit" color="secondary" (tap)="goToLost()">ดำเนินการต่อ</button>
 </ion-content>
