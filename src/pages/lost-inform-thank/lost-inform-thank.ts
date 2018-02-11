@@ -22,6 +22,7 @@ export class LostInformThankPage {
     score: string
   }];
   photoDog
+  annouceFoundId
   constructor(public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider,public loadingCtrl:LoadingController) {
     let loading = this.loadingCtrl.create({
       content: 'Loading Please Wait...'

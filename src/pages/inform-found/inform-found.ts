@@ -26,7 +26,7 @@ export class InformFoundPage {
   announceFound: FirebaseListObservable<any>;
   uid;
   breed = 'default'
-  uploadedImage;
+  uploadedImage=null;
   photoName = 'default';
   dogPicture: string;
   date = new Date();
@@ -67,8 +67,11 @@ export class InformFoundPage {
       this._DB.uploadImageDog(this.dogPicture).then((snapshot: any) => {
         this.uploadedImage = snapshot.downloadURL;
         this.photoName = this._DB.imageName;
-        this.db.database.ref('/announceFound').push().set({
+        var myRef = this.db.database.ref('/announceFound').push()
+        var key = myRef.key
+        this.db.database.ref('/announceFound/'+key).set({
           founder: this.uid,
+          announcefoundid:key,
           breed: this.breed,
           contactMiss: this.infoFound.value.contactMiss,
           dogDetail: this.infoFound.value.dogDetail,
@@ -80,9 +83,8 @@ export class InformFoundPage {
           year: this.year,
           millisec: this.milliTime
 
-        }).then((res) => {
-          let announceFoundId = res.getKey();
-          this.navCtrl.push(LostInformThankPage, { photo: this.photoName })
+        }).then(() => {
+          this.navCtrl.push(LostInformThankPage, { photo: this.photoName,announceFoundId:key})
         })
       })
     }

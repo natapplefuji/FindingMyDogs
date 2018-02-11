@@ -107,4 +107,5 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyB0eWRSFifzxcS2GtAg9wMh3BJxVqVUvH8" />
         <variable name="PLAY_SERVICES_VERSION" value="11.8.+" />
     </plugin>
+    <allow-navigation href="http://172.20.61.177:8100" />
 </widget>
