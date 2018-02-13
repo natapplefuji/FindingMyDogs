@@ -33,20 +33,21 @@ export class MyApp {
   }
   
   initializeApp() {
-    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
-      if (!user) {
-        this.rootPage = LoginPage;
-        unsubscribe();
-      } else { 
-        this.userInfo = this.userService.getUserInfo(); //ไว้ตรงนี้เพราะถ้า initapp()แล้ว จะข้าม method ใน constructor เลย
-        console.log(this.userInfo);
-        this.rootPage = TabPage;
-        unsubscribe();
-      }
-    });
+    
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      const unsubscribe = firebase.auth().onAuthStateChanged( user => {
+        if (!user) {
+          this.rootPage = LoginPage;
+          unsubscribe();
+        } else { 
+          this.userInfo = this.userService.getUserInfo(); //ไว้ตรงนี้เพราะถ้า initapp()แล้ว จะข้าม method ใน constructor เลย
+          console.log(this.userInfo);
+          this.rootPage = TabPage;
+          unsubscribe();
+        }
+      });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation'
 
 /*
@@ -11,12 +12,18 @@ import { Geolocation } from '@ionic-native/geolocation'
 */
 @Injectable()
 export class LocationProvider {
-
-  constructor(public http: Http, public _geo: Geolocation) {
+  loc = { lat: 0, lng: 0 };
+  constructor(public http: Http, public _geo: Geolocation, public platform: Platform) {
     console.log('Hello LocationProvider Provider');
+    platform.ready().then(() => {
+      console.log("Platform is ready in Location Provider");
+      
+      
+    });
   }
   getLocation() {
-    return this._geo.getCurrentPosition();
+    let options = { timeout: 5000 };
+    return this._geo.getCurrentPosition(options)
   }
 
 }

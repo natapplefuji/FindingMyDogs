@@ -9,6 +9,7 @@ import { ImageProvider } from '../../providers/image/image'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
+import { LocationProvider} from '../../providers/location/location'
 
 /**
  * Generated class for the InformFoundPage page.
@@ -23,10 +24,9 @@ import { Camera } from '@ionic-native/camera';
 })
 export class InformFoundPage {
   private infoFound: FormGroup;
-  announceFound: FirebaseListObservable<any>;
   uid;
   breed = 'default'
-  uploadedImage;
+  uploadedImage = null;
   photoName = 'default';
   dogPicture: string;
   date = new Date();
@@ -34,6 +34,7 @@ export class InformFoundPage {
   month;
   year;
   milliTime;
+  loc = { lat: 0, lng: 0 };
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -43,9 +44,10 @@ export class InformFoundPage {
     private _DB: DatabaseProvider,
     private db: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController,
-    private camera: Camera
+    private camera: Camera,
+    public _loc : LocationProvider
   ) {
-    this.announceFound = af.list('/announceMissing');
+
     this.uid = userService.uid;
     this.infoFound = this.formBuilder.group({
       contactMiss: ['', Validators.required],
@@ -63,7 +65,8 @@ export class InformFoundPage {
   }
   addAnnounce() {
     if (this.uploadedImage == null) {
-
+      //this.loc = this._loc.getLocation();
+        
       this._DB.uploadImageDog(this.dogPicture).then((snapshot: any) => {
         this.uploadedImage = snapshot.downloadURL;
         this.photoName = this._DB.imageName;
@@ -78,10 +81,12 @@ export class InformFoundPage {
           day: this.day,
           month: this.month,
           year: this.year,
-          millisec: this.milliTime
+          millisec: this.milliTime,
+          lat: this.loc.lat,
+          long: this.loc.lng
 
-        }).then((res) => {
-          let announceFoundId = res.getKey();
+        }).then(() => {
+          //let announceFoundId = res.getKey();
           this.navCtrl.push(LostInformThankPage, { photo: this.photoName })
         })
       })

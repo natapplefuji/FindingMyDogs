@@ -25,10 +25,7 @@
         "@ionic-native/facebook": "^4.3.2",
         "@ionic-native/file": "^4.3.2",
         "@ionic-native/file-path": "^4.3.2",
-<<<<<<< HEAD
         "@ionic-native/geolocation": "^4.5.3",
-=======
->>>>>>> f54dde64c521c83a4c4f5a76a0a4da7832e0c771
         "@ionic-native/google-maps": "^4.5.3",
         "@ionic-native/splash-screen": "3.12.1",
         "@ionic-native/status-bar": "3.12.1",
@@ -52,10 +49,7 @@
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-filepath": "^1.1.0",
-<<<<<<< HEAD
         "cordova-plugin-geolocation": "^2.4.3",
-=======
->>>>>>> f54dde64c521c83a4c4f5a76a0a4da7832e0c771
         "cordova-plugin-googlemaps": "^2.2.2",
         "cordova-plugin-inappbrowser": "^1.7.2",
         "cordova-plugin-splashscreen": "^4.1.0",
