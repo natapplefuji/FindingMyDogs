@@ -18,19 +18,52 @@ import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-de
 })
 export class LostRelatedPage {
   visible = false;
-  announcelistRelate:FirebaseListObservable<any>;
+  announcelistRelate: FirebaseListObservable<any>;
+  announceBreedRelate: FirebaseListObservable<any>;
+  uidList = []
+  annouceFoundId
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase) {
     let dogPredictBreed = this.navParams.get('breed')
+    this.annouceFoundId = this.navParams.get('annouceFoundId')
     this.announcelistRelate = this.db.list('announceMissing/', {
       query: {
         orderByChild: 'breed',
         equalTo: dogPredictBreed
       }
     })
+    this.announceBreedRelate = this.db.list('announceMissing/', {
+      query: {
+        orderByChild: 'breed',
+        equalTo: dogPredictBreed
+      },preserveSnapshot:true
+    })
+    this.getList();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostRelatedPage');
+  }
+  getList() {
+    this.announceBreedRelate.subscribe(itemkeys => {
+      itemkeys.forEach(itemkey => {
+        let uid;
+        console.log(itemkey.key);
+        this.db.object('announceMissing/' + itemkey.key).subscribe(user => {
+          uid = user.uid;
+          this.createNoti(itemkey.key,uid)
+          this.uidList.push(uid);
+        });  
+      });
+    })
+  }
+  createNoti(missingKey,uid) {
+    let notiRef = this.db.database.ref('/notification')
+    notiRef.push().set({
+      announceFoundKey: this.annouceFoundId,
+      announceMissingKey: missingKey,
+      uid: uid,
+      status : 'lost'
+    })
   }
   goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid) {
     this.navCtrl.push(LostAnnounceDetailPage, {
@@ -46,7 +79,7 @@ export class LostRelatedPage {
     })
   }
   goToHome() { 
-    this.navCtrl.push(LostMainPage);
+    this.navCtrl.popToRoot();
   }
   toggle() {
     this.visible = true;

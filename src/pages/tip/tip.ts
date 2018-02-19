@@ -19,7 +19,7 @@ import { LocationProvider} from '../../providers/location/location'
   templateUrl: 'tip.html',
 })
 export class TipPage {
-  @ViewChild('map') element: ElementRef;
+  // @ViewChild('map') element: ElementRef;
 
   dogs: [{
     dogName: string,
@@ -64,18 +64,16 @@ export class TipPage {
         
       });
     })
-    
-    console.log("lat : "+this.loc.lat+" long : "+this.loc.lng)
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TipPage');
-    // this.dog = this._predict.getJsonData();
-    // console.log(this.dog)
-    this.platform.ready().then(() => {
-      this.initMap();
-    });
-  }
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad TipPage');
+  //   // this.dog = this._predict.getJsonData();
+  //   // console.log(this.dog)
+  //   this.platform.ready().then(() => {
+  //     this.initMap();
+  //   });
+  // }
   // getPredict() { 
   //   this._predict.getJsonData().subscribe((data) => { 
   //     this.dogs = data
@@ -83,47 +81,44 @@ export class TipPage {
   //   })
   // }
   
-  ngAfterViewInit() {
-    
-
-  }
-  initMap() {
-    this._loc.getLocation().then(data => {
-      this.loc.lat = data.coords.latitude;
-      this.loc.lng = data.coords.longitude;
-      console.log("p lat : " + this.loc.lat + " p long : " + this.loc.lng);
-      var mapOptions: GoogleMapOptions = {
-        camera: {
-          target: {
-          lat: this.loc.lat,
-          lng: this.loc.lng
-        },
-          zoom: 18,
-          tilt: 30
-        }
-      };
-      console.log("test"+mapOptions.camera.target.lat)
-      let map: GoogleMap = this.googleMaps.create(this.element.nativeElement,mapOptions);
   
-       map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
+  // initMap() {
+  //   this._loc.getLocation().then(data => {
+  //     this.loc.lat = data.coords.latitude;
+  //     this.loc.lng = data.coords.longitude;
+  //     console.log("p lat : " + this.loc.lat + " p long : " + this.loc.lng);
+  //     var mapOptions: GoogleMapOptions = {
+  //       camera: {
+  //         target: {
+  //         lat: this.loc.lat,
+  //         lng: this.loc.lng
+  //       },
+  //         zoom: 18,
+  //         tilt: 30
+  //       }
+  //     };
+  //     console.log("test"+mapOptions.camera.target.lat)
+  //     let map: GoogleMap = this.googleMaps.create(this.element.nativeElement,mapOptions);
   
-        // let markerOptions: MarkerOptions = {
-        //   position: this.loc,
-        //   icon: "assets/images/icons8-Marker-64.png",
-        //   title: 'Our first POI'
-        // };
+  //      map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
   
-        // const marker = map.addMarker(markerOptions)
-        //   .then((marker: Marker) => {
-        //     marker.showInfoWindow();
-        //   });
-      })
-    }).catch(err => {
-      console.log(err);
-    })
+  //       // let markerOptions: MarkerOptions = {
+  //       //   position: this.loc,
+  //       //   icon: "assets/images/icons8-Marker-64.png",
+  //       //   title: 'Our first POI'
+  //       // };
+  
+  //       // const marker = map.addMarker(markerOptions)
+  //       //   .then((marker: Marker) => {
+  //       //     marker.showInfoWindow();
+  //       //   });
+  //     })
+  //   }).catch(err => {
+  //     console.log(err);
+  //   })
 
     
-  }
+  // }
 
   gotoPageRelate() {
     this.navCtrl.push(LostRelatedPage)

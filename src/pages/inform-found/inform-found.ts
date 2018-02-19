@@ -70,8 +70,11 @@ export class InformFoundPage {
       this._DB.uploadImageDog(this.dogPicture).then((snapshot: any) => {
         this.uploadedImage = snapshot.downloadURL;
         this.photoName = this._DB.imageName;
-        this.db.database.ref('/announceFound').push().set({
+        var myRef = this.db.database.ref('/announceFound').push()
+        var key = myRef.key
+        this.db.database.ref('/announceFound/'+key).set({
           founder: this.uid,
+          announcefoundid:key,
           breed: this.breed,
           contactMiss: this.infoFound.value.contactMiss,
           dogDetail: this.infoFound.value.dogDetail,
@@ -86,8 +89,7 @@ export class InformFoundPage {
           long: this.loc.lng
 
         }).then(() => {
-          //let announceFoundId = res.getKey();
-          this.navCtrl.push(LostInformThankPage, { photo: this.photoName })
+          this.navCtrl.push(LostInformThankPage, { photo: this.photoName,announceFoundId:key})
         })
       })
     }

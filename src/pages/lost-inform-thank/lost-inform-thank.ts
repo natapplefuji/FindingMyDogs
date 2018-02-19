@@ -22,12 +22,14 @@ export class LostInformThankPage {
     score: string
   }];
   photoDog
+  annouceFoundId
   constructor(public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider,public loadingCtrl:LoadingController) {
     let loading = this.loadingCtrl.create({
       content: 'Loading Please Wait...'
     });
     if (navParams) {
       this.photoDog = this.navParams.get('photo')
+      this.annouceFoundId = this.navParams.get('announceFoundId');
       loading.present().then(() => {
         this._predict.getJsonData(this.photoDog).subscribe((data) => {
           this.dogs = data
@@ -44,6 +46,6 @@ export class LostInformThankPage {
     console.log('ionViewDidLoad LostInformThankPage');
   }
   goToLost() {
-    this.navCtrl.push(LostRelatedPage,{ breed: this.dogs[0].dogName })
+    this.navCtrl.push(LostRelatedPage,{ breed: this.dogs[0].dogName,annouceFoundId :this.annouceFoundId})
   }
 }

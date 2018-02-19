@@ -16,21 +16,27 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let dog of announcelistRelate | async">
-        <div item-start clear text-center (click)="toggle()">
-            <ion-icon name="megaphone" *ngIf="!visible"></ion-icon>
-            <ion-icon name="checkbox" *ngIf="visible"></ion-icon>
-        </div>  
+      <div item-start clear text-center (click)="toggle()">
+        <ion-icon name="megaphone" *ngIf="!visible"></ion-icon>
+        <ion-icon name="checkbox" *ngIf="visible"></ion-icon>
+      </div>
       <ion-thumbnail item-start>
-          <img src="{{dog.photo}}">
-        </ion-thumbnail>
-        <h2>{{dog.dogName}}</h2>
-        <p>หากพบโปรดแจ้งเบาะแส</p>
-        <button ion-button clear item-end (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)"><ion-icon name="arrow-dropright"></ion-icon></button>
-      </ion-item>
-</ion-list>
-<ion-fab bottom right>
-  <button ion-fab color="fabcolor" (click)="goToHome()">
-    ดำเนินการต่อ
-  </button>
-</ion-fab>
+        <img src="{{dog.photo}}">
+      </ion-thumbnail>
+      <h2>{{dog.dogName}}</h2>
+      <p>หากพบโปรดแจ้งเบาะแส</p>
+      <button ion-button clear item-end (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+  <div *ngFor="let uid of uidList">
+    <p>{{uid}}</p>
+  </div>
+  
+  <ion-fab bottom right>
+    <button ion-fab color="fabcolor" (click)="goToHome()">
+      ดำเนินการต่อ
+    </button>
+  </ion-fab>
 </ion-content>

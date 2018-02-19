@@ -70,8 +70,11 @@ export class LostInformPage {
         .then((snapshot: any) => {
           this.uploadedImage = snapshot.downloadURL;
           this.photoName = this._DB.imageName;
-          this.db.database.ref('/announceMissing').push().set({
+          var myRef = this.db.database.ref('/announceMissing').push()
+          var key = myRef.key
+          this.db.database.ref('/announceMissing/'+key).set({
             uid: this.uid,
+            announcelostid:key,
             dogName: this.announcelost.value.dogName,
             breed: this.announcelost.value.breed,
             gender: this.announcelost.value.gender,
