@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { ImageProvider } from '../../providers/image/image'
@@ -7,7 +7,8 @@ import { DatabaseProvider } from '../../providers/database/database'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
-import { BreedProvider} from '../../providers/breed/breed'
+import { BreedProvider } from '../../providers/breed/breed'
+import { LocationProvider} from '../../providers/location/location'
 /**
  * Generated class for the AdoptGivePage page.
  *
@@ -34,7 +35,7 @@ export class AdoptGivePage {
   month;
   year;
   milliTime;
-
+  loc = {lat :0,lng:0};
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -45,7 +46,9 @@ export class AdoptGivePage {
     private db: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private _breed :BreedProvider) {
+    private _breed: BreedProvider,
+    public platform: Platform,
+    public _loc: LocationProvider) {
     this.announceAdopt = af.list('/announceAdopt');
     this.uid = userService.uid;
     this.breed = _breed.breeds;
@@ -62,6 +65,13 @@ export class AdoptGivePage {
     this.day = this.date.getDate();
     this.month = this.date.getMonth() + 1;
     this.year = this.date.getFullYear();
+
+    this.platform.ready().then(() => {
+      _loc.getLocation().then(data => {
+        this.loc.lat = data.coords.latitude;
+        this.loc.lng = data.coords.longitude;
+      })
+    })
   }
   
   addAnnounceAdopt() {
@@ -83,7 +93,9 @@ export class AdoptGivePage {
             day: this.day,
             month: this.month,
             year: this.year,
-            millisec: this.milliTime
+            millisec: this.milliTime,
+            lat: this.loc.lat,
+            lng:this.loc.lng
           }).then(() => { this.navCtrl.pop() })
         })
     }

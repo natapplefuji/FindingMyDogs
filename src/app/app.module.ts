@@ -55,6 +55,7 @@ import { BreedProvider } from '../providers/breed/breed';
 import { PredictProvider } from '../providers/predict/predict';
 import { LostAnnounceDetailPage } from '../pages/lost-announce-detail/lost-announce-detail'
 import { LocationProvider } from '../providers/location/location';
+
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
   authDomain: "findingmydogs-kmitl.firebaseapp.com",
@@ -156,7 +157,7 @@ firebase.initializeApp(config);
     PredictProvider,
     GoogleMaps,
     Geolocation,
-    LocationProvider
+    LocationProvider,
   ]
 })
 export class AppModule {

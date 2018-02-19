@@ -30,15 +30,17 @@ export class MyDogPage {
   goToAddDog() {
     this.navCtrl.push(AddMyDogPage);
   }
-  goToDogDetail(dogName,breed,gender,age,detail,photo,status) {
+  goToDogDetail(dogName,breed,gender,age,detail,photo,status,lat,lng) {
     this.navCtrl.push(MyDogDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
       age: age,
       detail: detail,
-      photo:photo,
-      status: status
+      photo: photo,
+      status: status,
+      lat: lat,
+      lng:lng
     })
   }
 }

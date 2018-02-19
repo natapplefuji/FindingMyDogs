@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams , Platform} from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { LostInformThankPage } from '../lost-inform-thank/lost-inform-thank';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
@@ -36,6 +36,7 @@ export class InformFoundPage {
   milliTime;
   loc = { lat: 0, lng: 0 };
   constructor(public navCtrl: NavController,
+    public platform : Platform,
     public navParams: NavParams,
     public af: AngularFireDatabase,
     private formBuilder: FormBuilder,
@@ -58,7 +59,12 @@ export class InformFoundPage {
     this.day = this.date.getDate();
     this.month = this.date.getMonth() + 1;
     this.year = this.date.getFullYear();
-    console.log('date is '+this.day+'/'+this.month+'/'+this.year+' at millitime: '+this.milliTime);
+    this.platform.ready().then(() => {
+      _loc.getLocation().then(data => {
+        this.loc.lat = data.coords.latitude;
+        this.loc.lng = data.coords.longitude;
+      })
+    })
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad InformFoundPage');
@@ -86,7 +92,7 @@ export class InformFoundPage {
           year: this.year,
           millisec: this.milliTime,
           lat: this.loc.lat,
-          long: this.loc.lng
+          lng: this.loc.lng
 
         }).then(() => {
           this.navCtrl.push(LostInformThankPage, { photo: this.photoName,announceFoundId:key})

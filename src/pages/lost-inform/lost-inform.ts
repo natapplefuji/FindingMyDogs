@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Platform } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { UserServiceProvider } from '../../providers/user-service/user-service'
@@ -8,7 +8,8 @@ import { DatabaseProvider } from '../../providers/database/database'
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
-import { BreedProvider} from '../../providers/breed/breed'
+import { BreedProvider } from '../../providers/breed/breed'
+import { LocationProvider } from '../../providers/location/location'
 /**
  * Generated class for the LostInformPage page.
  *
@@ -33,7 +34,10 @@ export class LostInformPage {
   milliTime;
   dogPicture;
   photoName;
-  constructor(private loadingCtrl: LoadingController,
+  loc = { lat: 0, lng: 0 };
+  constructor(public platform: Platform,
+    public _loc: LocationProvider,
+    private loadingCtrl: LoadingController,
     private _DB: DatabaseProvider,
     private db: AngularFireDatabase,
     private userService: UserServiceProvider,
@@ -43,7 +47,7 @@ export class LostInformPage {
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private _breed :BreedProvider) {
+    private _breed: BreedProvider) {
     this.uid = userService.uid;
     this.breed = _breed.breeds;
     this.announcelost = this.formBuilder.group({
@@ -59,6 +63,12 @@ export class LostInformPage {
     this.day = this.date.getDate();
     this.month = this.date.getMonth() + 1;
     this.year = this.date.getFullYear();
+    this.platform.ready().then(() => {
+      _loc.getLocation().then(data => {
+        this.loc.lat = data.coords.latitude;
+        this.loc.lng = data.coords.longitude;
+      })
+    })
   }
 
   ionViewDidLoad() {
@@ -72,9 +82,9 @@ export class LostInformPage {
           this.photoName = this._DB.imageName;
           var myRef = this.db.database.ref('/announceMissing').push()
           var key = myRef.key
-          this.db.database.ref('/announceMissing/'+key).set({
+          this.db.database.ref('/announceMissing/' + key).set({
             uid: this.uid,
-            announcelostid:key,
+            announcelostid: key,
             dogName: this.announcelost.value.dogName,
             breed: this.announcelost.value.breed,
             gender: this.announcelost.value.gender,
@@ -87,7 +97,9 @@ export class LostInformPage {
             day: this.day,
             month: this.month,
             year: this.year,
-            millisec: this.milliTime
+            millisec: this.milliTime,
+            lat: this.loc.lat,
+            lng: this.loc.lng
           }).then(() => { this.navCtrl.pop() })
         })
     }

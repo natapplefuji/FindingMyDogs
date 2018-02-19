@@ -20,7 +20,7 @@
     </button>
   </ion-fab>
   
-  <ion-card *ngFor="let dog of dogList | async" (click)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status)">
+  <ion-card *ngFor="let dog of dogList | async" (click)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status,dog.lat,dog.lng)">
     <ion-grid>
     <ion-row>
     <ion-col col-5>

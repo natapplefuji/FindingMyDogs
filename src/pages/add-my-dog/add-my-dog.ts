@@ -1,5 +1,5 @@
 import { Component,ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Platform } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { ImageProvider } from '../../providers/image/image'
@@ -9,6 +9,7 @@ import { MyDogPage } from '../my-dog/my-dog'
 import { BreedProvider } from '../../providers/breed/breed';
 import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
+import { LocationProvider} from '../../providers/location/location'
 /**
  * Generated class for the AddMyDogPage page.
  *
@@ -29,13 +30,14 @@ export class AddMyDogPage {
   dog_image_dataurl: string = null;
   uploadedImage: string;
   photoName: string;
-  breed;
   date = new Date();
   day;
   month;
   year;
   milliTime;
-  constructor(private _breed :BreedProvider,private loadingCtrl: LoadingController,private camera: Camera, public actionSheetCtrl: ActionSheetController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
+  breed;
+  loc = {lat :0,lng:0};
+  constructor(public _breed:BreedProvider,public platform : Platform,public _loc : LocationProvider,private loadingCtrl: LoadingController,private camera: Camera, public actionSheetCtrl: ActionSheetController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
     this.uid = userService.uid;
     this.breed = _breed.breeds;
     this.dog = this.formBuilder.group({
@@ -49,7 +51,14 @@ export class AddMyDogPage {
     this.day = this.date.getDate();
     this.month = this.date.getMonth() + 1;
     this.year = this.date.getFullYear();
+    this.platform.ready().then(() => {
+      _loc.getLocation().then(data => {
+        this.loc.lat = data.coords.latitude;
+        this.loc.lng = data.coords.longitude;
+      })
+    })
   }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddMyDogPage');
@@ -74,7 +83,9 @@ export class AddMyDogPage {
           day: this.day,
           month: this.month,
           year: this.year,
-          millisec : this.milliTime
+          millisec: this.milliTime,
+          lat: this.loc.lat,
+          lng:this.loc.lng
         }).then(() => { this.navCtrl.pop() })
         }) 
     }
