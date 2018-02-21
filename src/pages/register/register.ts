@@ -29,7 +29,8 @@ export class RegisterPage {
     firstName: '',
     lastName: '',
     photo: null,
-    tel: ''
+    tel: '',
+    playerID:''
 
   };
   profile_image_dataurl: string;
@@ -46,6 +47,10 @@ export class RegisterPage {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams) {
+    window["plugins"].OneSignal.getIds((ids => {
+      this.user.playerID = ids.userId;
+      })   
+    )
   }
 
   ionViewDidLoad() {
@@ -56,7 +61,7 @@ export class RegisterPage {
     if (this.user.photo == null) {
       this.user.photo = 'assets/img/avatar.png'
     }
-    this.authProvider.signupUser(this.user.email, this.user.password, this.user.displayName, this.user.firstName, this.user.lastName, this.user.tel,this.user.photo)
+    this.authProvider.signupUser(this.user.email, this.user.password, this.user.displayName, this.user.firstName, this.user.lastName, this.user.tel,this.user.photo,this.user.playerID)
       .then(() => {
         this.loading.dismiss().then(() => {
           this.navCtrl.setRoot(LoginPage);

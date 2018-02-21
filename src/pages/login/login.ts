@@ -7,6 +7,8 @@ import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase/app'
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Facebook } from '@ionic-native/facebook';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -32,7 +34,7 @@ export class LoginPage {
     tel: ''
 
   };
-
+  playerID;
   loading: Loading;
   constructor(public authProvider: AuthProvider,
     private platform: Platform,
@@ -41,7 +43,8 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public userService: UserServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -52,8 +55,12 @@ export class LoginPage {
       this.password)
       .then(authData => {
         this.loading.dismiss().then(() => {
+          window["plugins"].OneSignal.getIds((ids => {
+            this.playerID = ids.userId;
+            firebase.database().ref('userProfile/').child(this.userService.uid).update({ playerID: this.playerID });
+          })
+          )
           this.navCtrl.setRoot(TabPage);
-          //this.navCtrl.push(HomePage);
         });
       }, error => {
         this.loading.dismiss().then(() => {
