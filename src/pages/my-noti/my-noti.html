@@ -14,18 +14,20 @@
 
 
 <ion-content padding>
-    <ion-card *ngFor="let dog of dogPhoto ; let i=index" (click)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status)">
+    <ion-card *ngFor="let noti of notiList|async; let i = index">
         <ion-grid>
-        <ion-row>
+        <ion-row>          
         <ion-col col-5>
-        <img src="{{dogPhoto[i]}}" />
-      </ion-col >
+            <!-- <p>{{notiTest[i].photo}}</p> -->
+          <img src="{{notiTest[i]?.photo}}" />
+        </ion-col >
+  
       <ion-col col-7>
           <h2>
-            พบเห็นสุนัขที่ลักษณะใกล้เคียง
+            พบเห็นสุนัขที่ลักษณะใกล้เคียง 
           </h2>
           <p class = "subhead">
-            ดูรายละเอียดว่าใช่หรือไม่?
+            ลักษณะคล้ายประกาศหมายเลข{{noti.announceFoundKey}}
           </p>
           <p class = "subhead">
               สถานะ : <span class = "safe">อยู่กับผู้พบ</span>
@@ -34,4 +36,6 @@
         </ion-row>
       </ion-grid>
       </ion-card>
+
+      
 </ion-content>
