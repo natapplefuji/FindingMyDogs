@@ -15,7 +15,8 @@ import { TabPage } from '../pages/tab/tab';
 import firebase from 'firebase';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { AuthProvider } from '../providers/auth/auth'
-import {MyNotiPage} from '../pages/my-noti/my-noti';
+import { MyNotiPage } from '../pages/my-noti/my-noti';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
   
   rootPage: any;
   userInfo: any;
-
+  
   constructor(public authProvider : AuthProvider,public userService:UserServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) { 
     this.initializeApp();
 
@@ -37,6 +38,15 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      var notificationOpenedCallback = function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      };
+  
+      window["plugins"].OneSignal
+        .startInit("7159d3c3-b530-443c-b10e-c45800022beb", "20173837686")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
+      
       const unsubscribe = firebase.auth().onAuthStateChanged( user => {
         if (!user) {
           this.rootPage = LoginPage;
@@ -52,6 +62,8 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
+  
+
   logoutUser() {
     this.authProvider.logoutUser();
     this.nav.setRoot(LoginPage);

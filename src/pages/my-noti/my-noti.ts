@@ -20,7 +20,7 @@ export class MyNotiPage {
   dogPhoto:string[]
   notiList
   notidetail
-  notiTest:any = []
+  annouceFound:any = []
   index=0
   constructor(private userService: UserServiceProvider, private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     let uid = userService.uid;
@@ -41,16 +41,28 @@ export class MyNotiPage {
   create(element,length) { 
     for (var index = 0; index < length; index++) {
       var element2 = element[index].announceFoundKey;
-      console.log(element2)
+      // console.log(element2)
       this.notidetail = this.db.object('announceFound/' + element2).subscribe(user => {
-        this.notiTest.push(user)
-        console.log(this.notiTest)
-        console.log(user)
+        this.annouceFound.push(user)
+        // console.log(this.annouceFound)
+        // console.log(user)
       });;
     }
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyNotiPage');
   }
-
+  goToNotiDetail(dogName,breed,gender,age,detail,photo,status,lat,lng) {
+    this.navCtrl.push(MyNotiDetailPage, {
+      dogName: dogName,
+      breed: breed,
+      gender: gender,
+      age: age,
+      detail: detail,
+      photo: photo,
+      status: status,
+      lat: lat,
+      lng:lng
+    })
+  }
 }

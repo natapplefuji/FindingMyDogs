@@ -19,19 +19,31 @@
         <ion-row>          
         <ion-col col-5>
             <!-- <p>{{notiTest[i].photo}}</p> -->
-          <img src="{{notiTest[i]?.photo}}" />
+          <img src="{{annouceFound[i]?.photo}}" />
         </ion-col >
   
-      <ion-col col-7>
-          <h2>
+      <ion-col col-7 >
+          <h1>
             พบเห็นสุนัขที่ลักษณะใกล้เคียง 
-          </h2>
+          </h1>
           <p class = "subhead">
-            ลักษณะคล้ายประกาศหมายเลข{{noti.announceFoundKey}}
+            ลักษณะคล้ายสุนัขของคุณ
           </p>
-          <p class = "subhead">
-              สถานะ : <span class = "safe">อยู่กับผู้พบ</span>
-          </p>
+          <p>
+              ดูรายละเอียด
+            </p>
+            <div *ngIf="annouceFound[i]?.dogWithYou=='yes'">
+                <p class = "subhead">
+              สถานะ : <span class = "safe">อยู่กับผู้พบ</span></p>
+            </div>
+            <div *ngIf="annouceFound[i]?.dogWithYou!='yes'">
+                <p class = "subhead">
+              สถานะ : <span class = "danger">ไม่อยู่กับผู้พบ</span></p>
+            </div>
+            <!-- <div *ngIf="{{annouceFound[i].dogWithYou}}!='yes'">
+               <p> class = "subhead" สถานะ : <span class = "safe">ไม่อยู่กับผู้พบ</span></p>
+            </div> -->
+         
       </ion-col>
         </ion-row>
       </ion-grid>
