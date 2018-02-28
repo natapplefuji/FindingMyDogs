@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HomePage } from '../home/home'
-import {LostMainPage} from '../lost-main/lost-main'
+import { LostMainPage } from '../lost-main/lost-main'
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail'
@@ -20,7 +20,7 @@ export class LostRelatedPage {
   visible = false;
   announcelistRelate: FirebaseListObservable<any>;
   announceBreedRelate: FirebaseListObservable<any>;
-  uidList = []
+  playerIDList = []
   annouceFoundId
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase) {
     let dogPredictBreed = this.navParams.get('breed')
@@ -35,9 +35,10 @@ export class LostRelatedPage {
       query: {
         orderByChild: 'breed',
         equalTo: dogPredictBreed
-      },preserveSnapshot:true
+      }, preserveSnapshot: true
     })
     this.getList();
+    
   }
 
   ionViewDidLoad() {
@@ -46,24 +47,49 @@ export class LostRelatedPage {
   getList() {
     this.announceBreedRelate.subscribe(itemkeys => {
       itemkeys.forEach(itemkey => {
-        let uid;
+        var uid;
+        var playerID : string;
         console.log(itemkey.key);
         this.db.object('announceMissing/' + itemkey.key).subscribe(user => {
           uid = user.uid;
-          this.createNoti(itemkey.key,uid)
-          this.uidList.push(uid);
-        });  
+          this.db.object('userProfile/' + uid).subscribe(user => {
+            playerID = user.playerID;
+            alert(playerID);
+            this.playerIDList.push(playerID);
+          })
+          this.createNoti(itemkey.key, uid)        
+        });
       });
     })
+    
   }
-  createNoti(missingKey,uid) {
+  createNoti(missingKey, uid) {
     let notiRef = this.db.database.ref('/notification')
     notiRef.push().set({
       announceFoundKey: this.annouceFoundId,
       announceMissingKey: missingKey,
       uid: uid,
-      status : 'lost'
+      status: 'lost'
     })
+  }
+  pushNoti() {
+    var notificationObj = {
+      contents: {
+        en: "Similar Dog was found! Please check..",
+        th: "พบสุนัขลักษณะใกล้เคียง โปรดตรวจสอบ.."
+      },
+      include_player_ids: this.playerIDList
+    };
+
+    window["plugins"].OneSignal.postNotification(notificationObj,
+      (successResponse) => {
+        alert("Notification Post Success:" + JSON.stringify(this.playerIDList));
+      },
+      (failedResponse) => {
+        alert("Notification Post Failed playerID ->: " +JSON.stringify(this.playerIDList));
+        alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+      }
+    );
   }
   goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid) {
     this.navCtrl.push(LostAnnounceDetailPage, {
@@ -78,10 +104,11 @@ export class LostRelatedPage {
       uid: uid
     })
   }
-  goToHome() { 
+  goToHome() {
+    this.pushNoti();
     this.navCtrl.popToRoot();
   }
   toggle() {
     this.visible = true;
-   }
+  }
 }
