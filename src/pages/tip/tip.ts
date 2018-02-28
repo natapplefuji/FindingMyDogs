@@ -81,14 +81,14 @@ export class TipPage {
     );
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TipPage');
-    // this.dog = this._predict.getJsonData();
-    // console.log(this.dog)
-    this.platform.ready().then(() => {
-      this.initMap();
-    });
-  }
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad TipPage');
+  //   // this.dog = this._predict.getJsonData();
+  //   // console.log(this.dog)
+  //   this.platform.ready().then(() => {
+  //     this.initMap();
+  //   });
+  // }
   // getPredict() { 
   //   this._predict.getJsonData().subscribe((data) => { 
   //     this.dogs = data

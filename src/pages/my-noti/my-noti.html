@@ -14,24 +14,40 @@
 
 
 <ion-content padding>
-    <ion-card *ngFor="let dog of dogPhoto ; let i=index" (click)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status)">
+    <ion-card *ngFor="let noti of notiList|async; let i = index">
         <ion-grid>
-        <ion-row>
+        <ion-row>          
         <ion-col col-5>
-        <img src="{{dogPhoto[i]}}" />
-      </ion-col >
-      <ion-col col-7>
-          <h2>
-            พบเห็นสุนัขที่ลักษณะใกล้เคียง
-          </h2>
+            <!-- <p>{{notiTest[i].photo}}</p> -->
+          <img src="{{annouceFound[i]?.photo}}" />
+        </ion-col >
+  
+      <ion-col col-7 >
+          <h1>
+            พบเห็นสุนัขที่ลักษณะใกล้เคียง 
+          </h1>
           <p class = "subhead">
-            ดูรายละเอียดว่าใช่หรือไม่?
+            ลักษณะคล้ายสุนัขของคุณ
           </p>
-          <p class = "subhead">
-              สถานะ : <span class = "safe">อยู่กับผู้พบ</span>
-          </p>
+          <p>
+              ดูรายละเอียด
+            </p>
+            <div *ngIf="annouceFound[i]?.dogWithYou=='yes'">
+                <p class = "subhead">
+              สถานะ : <span class = "safe">อยู่กับผู้พบ</span></p>
+            </div>
+            <div *ngIf="annouceFound[i]?.dogWithYou!='yes'">
+                <p class = "subhead">
+              สถานะ : <span class = "danger">ไม่อยู่กับผู้พบ</span></p>
+            </div>
+            <!-- <div *ngIf="{{annouceFound[i].dogWithYou}}!='yes'">
+               <p> class = "subhead" สถานะ : <span class = "safe">ไม่อยู่กับผู้พบ</span></p>
+            </div> -->
+         
       </ion-col>
         </ion-row>
       </ion-grid>
       </ion-card>
+
+      
 </ion-content>
