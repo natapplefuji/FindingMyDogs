@@ -17,7 +17,7 @@ import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-de
   templateUrl: 'lost-related.html',
 })
 export class LostRelatedPage {
-  visible = false;
+  visible = false; //หน้านี้ไม่ได้ใช้แล้วววววววววววววววววววววววววววววววววววววววววววววววววววว
   announcelistRelate: FirebaseListObservable<any>;
   announceBreedRelate: FirebaseListObservable<any>;
   playerIDList = []
@@ -54,7 +54,6 @@ export class LostRelatedPage {
           uid = user.uid;
           this.db.object('userProfile/' + uid).subscribe(user => {
             playerID = user.playerID;
-            alert(playerID);
             this.playerIDList.push(playerID);
           })
           this.createNoti(itemkey.key, uid)        

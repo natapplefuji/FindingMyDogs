@@ -15,6 +15,7 @@
 
 <ion-content>
   <!-- <img src="assets/img/happy.png" > -->
+  
   <h1>สุนัขที่ท่านพบใกล้เคียงกับพันธุ์</h1>
     <ion-list inset>
       <ion-item ion-item *ngFor="let dog of dogs">
@@ -22,5 +23,5 @@
       </ion-item>
     </ion-list>
     
-    <button ion-button type="submit" color="secondary" (tap)="goToLost()">ดำเนินการต่อ</button>
+    <button ion-button type="submit" color="secondary" (tap)="goToHome()">กลับหน้าหลัก</button>
 </ion-content>
