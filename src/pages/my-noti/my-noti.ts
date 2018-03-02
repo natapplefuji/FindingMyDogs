@@ -46,23 +46,15 @@ export class MyNotiPage {
         this.annouceFound.push(user)
         // console.log(this.annouceFound)
         // console.log(user)
-      });;
+      })
     }
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyNotiPage');
   }
-  goToNotiDetail(dogName,breed,gender,age,detail,photo,status,lat,lng) {
+  goToNotiDetail(key) {
     this.navCtrl.push(MyNotiDetailPage, {
-      dogName: dogName,
-      breed: breed,
-      gender: gender,
-      age: age,
-      detail: detail,
-      photo: photo,
-      status: status,
-      lat: lat,
-      lng:lng
+      announceFoundKey:key
     })
   }
 }
