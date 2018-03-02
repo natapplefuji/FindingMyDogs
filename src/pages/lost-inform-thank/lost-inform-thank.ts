@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { PredictProvider } from '../../providers/predict/predict';
 import { LoadingCmp } from 'ionic-angular/components/loading/loading-component';
@@ -27,7 +27,7 @@ export class LostInformThankPage {
   announcelistRelate: FirebaseListObservable<any>;
   announceBreedRelate: FirebaseListObservable<any>;
   playerIDList = []
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider,public loadingCtrl:LoadingController, private db: AngularFireDatabase) {
+  constructor(private toastCtrl: ToastController,public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider,public loadingCtrl:LoadingController, private db: AngularFireDatabase) {
    
   }
 
@@ -68,6 +68,7 @@ export class LostInformThankPage {
         equalTo: dogPredictBreed
       }, preserveSnapshot: true
     })
+    this.db.database.ref('/announceFound/'+this.annouceFoundId).update({breed : dogPredictBreed})
     this.getList()
   }
   getList() { //2. นำแต่ละ child ใน list มาเอา uid ของผู้ประกาศหาย + รับ playerID เพื่อเตรียมสร้างประกาศ
@@ -82,7 +83,6 @@ export class LostInformThankPage {
             
             playerID = user.playerID;
             console.log('player id is ' + playerID);
-            alert(playerID);
             this.playerIDList.push(playerID); //เก็บ list playerID ที่จะต้องทำการ pushNoti
           }) 
           this.createNoti(itemkey.key, uid)  //สร้างประกาศ noti ไปก่อน /ก่อน push แจ้ง      
@@ -113,11 +113,17 @@ export class LostInformThankPage {
 
     window["plugins"].OneSignal.postNotification(notificationObj,
       (successResponse) => {
-        alert("Notification Post Success:" + JSON.stringify(playerIDList));
+        //alert("Notification Post Success:" + JSON.stringify(playerIDList));
+        let toast = this.toastCtrl.create({
+          message: 'ขอบคุณสำหรับการแจ้งเบาะแสค่ะ',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
       },
       (failedResponse) => {
-        alert("Notification Post Failed playerID ->: " +JSON.stringify(playerIDList));
-        alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+        //alert("Notification Post Failed playerID ->: " +JSON.stringify(playerIDList));
+        //alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
       }
     );
   }
