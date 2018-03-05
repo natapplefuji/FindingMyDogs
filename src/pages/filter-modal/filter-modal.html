@@ -1,0 +1,82 @@
+<!--
+  Generated template for the FilterModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ค้นหาตามคุณสมบัติ</ion-title>
+    <ion-buttons end>
+      <button ion-button ion-icon="close" (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="closeModalWithFilter()" >
+    <ion-item>
+      <ion-label>ขนาดตัว</ion-label>
+      <ion-select [(ngModel)]="filterList.size" name="size" (ionChange)="enableButton()" >
+        <ion-option value="1">เล็ก</ion-option>
+        <ion-option value="2">กลาง</ion-option>
+        <ion-option value="3">ใหญ่</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>พื้นที่ในการเลี้ยง</ion-label>
+      <ion-select [(ngModel)]="filterList.areaRequire" name="areaRequire" (ionChange)="enableButton()">
+        <ion-option value="1">น้อย</ion-option>
+        <ion-option value="2">ปานกลาง</ion-option>
+        <ion-option value="3">มาก</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>เป็นมิตรกับเด็ก</ion-label>
+      <ion-select [(ngModel)]="filterList.kidFriendly" name="kidFriendly" (ionChange)="enableButton()">
+        <!-- แก้ชื่อใน object db ด้วย -->
+        <ion-option value="1">น้อย</ion-option>
+        <ion-option value="2">ปานกลาง</ion-option>
+        <ion-option value="3">มาก</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>ความยาวขน</ion-label>
+      <ion-select [(ngModel)]="filterList.hairLength" name="hairLength" (ionChange)="enableButton()">
+        <ion-option value="1">สั้น</ion-option>
+        <ion-option value="2">ปานกลาง</ion-option>
+        <ion-option value="3">ยาว</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>ทนต่ออากาศร้อน</ion-label>
+      <ion-select [(ngModel)]="filterList.heatResist" name="heatResist" (ionChange)="enableButton()">
+        <ion-option value="1">น้อย</ion-option>
+        <ion-option value="2">ปานกลาง</ion-option>
+        <ion-option value="3">มาก</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>ทนต่ออากาศหนาว</ion-label>
+      <ion-select [(ngModel)]="filterList.coldResist" name="coldResist" (ionChange)="enableButton()">
+        <ion-option value="1">น้อย</ion-option>
+        <ion-option value="2">ปานกลาง</ion-option>
+        <ion-option value="3">มาก</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>ออกกำลังกาย</ion-label>
+      <ion-select [(ngModel)]="filterList.exercise" name="exercise" (ionChange)="enableButton()">
+        <ion-option value="1">1 ครั้ง/สัปดาห์</ion-option>
+        <ion-option value="2">2-3 ครั้ง/สัปดาห์</ion-option>
+        <ion-option value="3">ทุกวัน</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-button type="submit" [disabled]="!isenabled">ค้นหา</button>
+  </form>
+</ion-content>
