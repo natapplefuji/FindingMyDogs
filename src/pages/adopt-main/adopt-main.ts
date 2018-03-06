@@ -18,8 +18,8 @@ import { FilterResultPage } from '../filter-result/filter-result'
 export class AdoptMainPage {
   RawCondition;
   filterCondition = [];
-  breed = {
-    "Golden Retriever": {
+  breed = { //test var
+    "golden retriever": {
       "areaRequire": "3",
       "coldResist": "3",
       "exercise": "3",
@@ -28,7 +28,16 @@ export class AdoptMainPage {
       "kidFriendly": "3",
       "size": "3"
     },
-    "Poodle": {
+    "basenji": {
+      "areaRequire": "1",
+      "coldResist": "2",
+      "exercise": "1",
+      "hairLength": "2",
+      "heatResist": "2",
+      "kidFriendly": "2",
+      "size": "1"
+    },
+    "beagle": {
       "areaRequire": "1",
       "coldResist": "2",
       "exercise": "1",

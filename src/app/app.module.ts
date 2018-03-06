@@ -56,6 +56,7 @@ import { PredictProvider } from '../providers/predict/predict';
 import { LostAnnounceDetailPage } from '../pages/lost-announce-detail/lost-announce-detail'
 import { LocationProvider } from '../providers/location/location';
 import { FilterResultPage } from '../pages/filter-result/filter-result'
+import { BreedListPage } from '../pages/breed-list/breed-list'
  
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
@@ -99,6 +100,7 @@ firebase.initializeApp(config);
     MyNotiPage,
     MyNotiDetailPage,
     FilterResultPage,
+    BreedListPage
 
   ],
   imports: [
@@ -141,6 +143,7 @@ firebase.initializeApp(config);
     MyNotiPage,
     MyNotiDetailPage,
     FilterResultPage,
+    BreedListPage
   ],
   providers: [
     StatusBar,
