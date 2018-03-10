@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController,ToastController } from 'ionic-angular';
+import { NavController, NavParams,LoadingController, ModalController, ToastController } from 'ionic-angular';
 import { AdoptGetPage } from '../adopt-get/adopt-get';
 import { AdoptGivePage } from '../adopt-give/adopt-give';
 import { FilterModalPage } from '../filter-modal/filter-modal'
 import { FilterResultPage } from '../filter-result/filter-result'
+import { ActionSheetController } from 'ionic-angular'
+import { Camera } from '@ionic-native/camera';
+import { ImageProvider } from '../../providers/image/image'
+import { DatabaseProvider } from '../../providers/database/database'
+import { PredictProvider } from '../../providers/predict/predict';
 /**
  * Generated class for the AdoptMainPage page.
  *
@@ -16,8 +21,16 @@ import { FilterResultPage } from '../filter-result/filter-result'
   templateUrl: 'adopt-main.html',
 })
 export class AdoptMainPage {
+  //for filtering
   RawCondition;
+  dogPicture: string;
   filterCondition = [];
+  breedResult = [];
+
+  //for prediction
+  photoName = "";
+  dogBreedfromPredict = [];
+
   breed = { //test var
     "golden retriever": {
       "areaRequire": "3",
@@ -47,15 +60,90 @@ export class AdoptMainPage {
       "size": "1"
     }
   }
-  breedResult = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,private toastCtrl :ToastController) {
-    
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    private toastCtrl: ToastController,
+    public actionSheetCtrl: ActionSheetController,
+    private camera: Camera,
+    private image: ImageProvider,
+    private _DB: DatabaseProvider,
+    public _predict: PredictProvider,
+    public loadingCtrl: LoadingController
+  ) {
+
   }
   //ฟังก์ชันเรียกหาชื่อพันธุ์ this.a = this.filterBreed(this.breed, "areaRequire", "high", "coldResist", "high", "hairLength", "medium", "heatResist", "medium", "size", "big")
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdoptMainPage');
   }
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'โปรดเลือกแหล่งที่มา',
+      buttons: [
+        {
+          text: 'คลังรูปภาพ',
+          handler: () => {
+            this.image.getDogPicture(this.camera.PictureSourceType.PHOTOLIBRARY).then((data) => {
+              this.dogPicture = data;
+              this.imagePrep();
+            });
 
+          }
+        },
+        {
+          text: 'กล้องถ่ายภาพ',
+          handler: () => {
+            this.image.getDogPicture(this.camera.PictureSourceType.CAMERA).then((data) => {
+              this.dogPicture = data;
+              this.imagePrep();
+            });
+          }
+        },
+        {
+          text: 'ยกเลิก',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+  getImage() {
+
+    this.presentActionSheet();
+  }
+  imagePrep() {
+    let loading = this.loadingCtrl.create({
+      content: 'Loading Please Wait...'
+    });
+    this._DB.uploadImageDog(this.dogPicture).then(() => {
+      this.photoName = this._DB.imageName;
+      loading.present().then(() => {
+        this._predict.getJsonData(this.photoName).subscribe((data) => {
+          if (data[0].score > 50) {
+            this.dogBreedfromPredict = [];
+            this.dogBreedfromPredict.push(data[0].dogName);
+            this.dogBreedfromPredict.push(data[1].dogName);
+            this.dogBreedfromPredict.push(data[2].dogName);
+            this.dogBreedfromPredict.push(data[3].dogName);
+          }  
+          loading.dismiss();
+
+          if (this.dogBreedfromPredict.length > 0) {
+            this.navCtrl.push(FilterResultPage, { result: this.dogBreedfromPredict })
+          } else {
+            let toast = this.toastCtrl.create({
+              message: 'ขออภัย ไม่สามารถตรวจสอบพันธุ์ได้ กรุณาลองรูปภาพอื่น',
+              duration: 3000,
+              position: 'bottom'
+            });
+            toast.present();
+          }  
+        })
+      })
+    })
+  }
   openModal() {
 
     let filterModal = this.modalCtrl.create('FilterModalPage')
@@ -89,7 +177,7 @@ export class AdoptMainPage {
           });
           toast.present();
         } else {
-          this.navCtrl.push(FilterResultPage,{result:this.breedResult})
+          this.navCtrl.push(FilterResultPage, { result: this.breedResult })
         }
         console.log(this.filterCondition);
         console.log(this.breedResult);

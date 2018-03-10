@@ -24,6 +24,11 @@
                         <ion-icon name="add"></ion-icon>  เพิ่มประกาศหาคนอุปการะสุนัข
                     </ion-item>
                   </ion-card>
+                  <ion-card (tap)="getImage()">
+                      <ion-item>
+                          <ion-icon name="camera"></ion-icon>  ค้นหาด้วยรูปภาพ
+                      </ion-item>
+                    </ion-card>
                   <ion-card (tap)="openModal()">
                     <ion-item>
                         <ion-icon name="search"></ion-icon>  ค้นหาสุนัขตามคุณสมบัติ
