@@ -19,9 +19,19 @@
     <ion-content>
         <ion-grid>
             <ion-row>    
-                <ion-card (tap)="addAdopt($event)">
+                <ion-card (tap)="addAdopt()">
                     <ion-item>
                         <ion-icon name="add"></ion-icon>  เพิ่มประกาศหาคนอุปการะสุนัข
+                    </ion-item>
+                  </ion-card>
+                  <ion-card (tap)="getImage()">
+                      <ion-item>
+                          <ion-icon name="camera"></ion-icon>  ค้นหาด้วยรูปภาพ
+                      </ion-item>
+                    </ion-card>
+                  <ion-card (tap)="openModal()">
+                    <ion-item>
+                        <ion-icon name="search"></ion-icon>  ค้นหาสุนัขตามคุณสมบัติ
                     </ion-item>
                   </ion-card>
         
