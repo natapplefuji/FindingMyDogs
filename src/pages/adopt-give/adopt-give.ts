@@ -8,7 +8,8 @@ import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
 import { BreedProvider } from '../../providers/breed/breed'
-import { LocationProvider} from '../../providers/location/location'
+import { LocationProvider } from '../../providers/location/location'
+import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
 /**
  * Generated class for the AdoptGivePage page.
  *
@@ -35,6 +36,9 @@ export class AdoptGivePage {
   month;
   year;
   milliTime;
+  district
+  province
+  country
   loc = {lat :0,lng:0};
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -70,6 +74,7 @@ export class AdoptGivePage {
       _loc.getLocation().then(data => {
         this.loc.lat = data.coords.latitude;
         this.loc.lng = data.coords.longitude;
+        this.getGeoRequest()
       })
     })
   }
@@ -133,6 +138,21 @@ export class AdoptGivePage {
 
   cancelForm() { 
     this.navCtrl.pop();
+  }
+
+  getGeoRequest() { 
+    let req = {
+      position: {
+        lat: this.loc.lat,
+        lng: this.loc.lng
+      }
+    }
+    Geocoder.geocode(req).then(
+      (res) => {
+        this.district = res[0]['subLocality']
+        this.province = res[0]['locality']
+        this.country = res[0]['country']
+      });
   }
 
 }
