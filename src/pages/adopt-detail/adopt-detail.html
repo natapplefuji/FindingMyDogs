@@ -14,5 +14,35 @@
 
 
 <ion-content padding>
-
+  <img class = "photo" src="{{announceDetail.photo}}" />
+  <ion-list>
+    <ion-item>
+      <h2>ชื่อสุนัข</h2>
+      <p>{{announceDetail.dogName}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>พันธุ์</h2>
+      <p>{{announceDetail.breed}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>เพศ</h2>
+      <p>{{announceDetail.gender}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>อายุ</h2>
+      <p>{{announceDetail.age}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>ข้อมูลสุนัขเพิ่มเติม</h2>
+      <p>{{announceDetail.dogDetail}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>ข้อมูลติดต่อเพิ่มเติม</h2>
+      <p>{{announceDetail.contactMiss}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>ผู้ประกาศ</h2>
+      <p>{{userDetail.displayName}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -22,7 +22,7 @@
   </div>
       <div [ngSwitch]="location">
         <ion-list *ngSwitchCase="'nearby'">
-          <ion-item *ngFor="let dog of announcelistAll | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+          <ion-item *ngFor="let dog of announcelistNear | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
             <ion-thumbnail item-start>
               <img src="{{dog.photo}}">
             </ion-thumbnail>

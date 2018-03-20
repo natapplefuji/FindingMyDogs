@@ -9,6 +9,7 @@ import { Camera } from '@ionic-native/camera';
 import { ImageProvider } from '../../providers/image/image'
 import { DatabaseProvider } from '../../providers/database/database'
 import { PredictProvider } from '../../providers/predict/predict';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 /**
  * Generated class for the AdoptMainPage page.
  *
@@ -30,7 +31,7 @@ export class AdoptMainPage {
   //for prediction
   photoName = "";
   dogBreedfromPredict = [];
-
+  announcelist: FirebaseListObservable<any>;
   breed = { //test var
     "golden retriever": {
       "areaRequire": "3",
@@ -70,9 +71,15 @@ export class AdoptMainPage {
     private image: ImageProvider,
     private _DB: DatabaseProvider,
     public _predict: PredictProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private db: AngularFireDatabase
   ) {
-
+    this.announcelist = this.db.list('announceAdopt/', {
+      query: {
+        limitToLast:6
+      }
+    }
+    ).map((arr) => { return arr.reverse(); }) as FirebaseListObservable<any[]>;
   }
   //ฟังก์ชันเรียกหาชื่อพันธุ์ this.a = this.filterBreed(this.breed, "areaRequire", "high", "coldResist", "high", "hairLength", "medium", "heatResist", "medium", "size", "big")
   ionViewDidLoad() {

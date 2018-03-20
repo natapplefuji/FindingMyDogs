@@ -31,15 +31,17 @@
   </div>
   <div [ngSwitch]="location">
     <ion-list *ngSwitchCase="'nearby'">
-      <ion-item>
+      <ion-item *ngFor="let dog of announcelistNear | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
         <ion-thumbnail item-start>
-          <img src="assets/img/scroll0015.jpg">
+          <img src="{{dog.photo}}">
         </ion-thumbnail>
-        <h2>หาคนอุปการะ Turkey1 </h2>
-        <p>อายุ 6 เดือน</p>
-        <button ion-button clear item-end>View</button>
+        <h2>หาคนอุปการะ{{dog.dogName}} พันธุ็ {{dog.breed}} </h2>
+        <p>ประกาศวันที่ {{dog.day}}/{{dog.month}}/{{dog.year}}</p>
+        <p>อายุ{{dog.age}}</p>
+        <button ion-button clear item-end (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)"><ion-icon name="arrow-dropright"></ion-icon>
+        </button>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-thumbnail item-start>
           <img src="assets/img/scroll0015.jpg">
         </ion-thumbnail>
@@ -54,7 +56,7 @@
         <h2>หาคนอุปการะ Turkey3 </h2>
         <p>อายุ 8 เดือน</p>
         <button ion-button clear item-end>View</button>
-      </ion-item>
+      </ion-item> -->
     </ion-list>
 
     <ion-list *ngSwitchCase="'all'">
@@ -62,9 +64,10 @@
         <ion-thumbnail item-start>
           <img src="{{dog.photo}}">
         </ion-thumbnail>
-        <h2>{{dog.dogName}} lost Today at 9.51 AM</h2>
-        <p>หากพบโปรดแจ้งเบาะแส</p>
-        <button ion-button clear item-end (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status)">View</button>
+        <h2>หาคนอุปการะ{{dog.dogName}} พันธุ็ {{dog.breed}} </h2>
+        <p>ประกาศวันที่ {{dog.day}}/{{dog.month}}/{{dog.year}}</p>
+        <p>อายุ{{dog.age}}</p>
+        <button ion-button clear item-end (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)"><ion-icon name="arrow-dropright"></ion-icon></button>
       </ion-item>
     </ion-list>
   </div>

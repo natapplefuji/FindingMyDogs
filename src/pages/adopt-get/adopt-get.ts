@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
-import { MyDogDetailPage } from '../my-dog-detail/my-dog-detail'
+import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
+import { LocationProvider } from '../../providers/location/location';
+import {AdoptDetailPage} from '../adopt-detail/adopt-detail';
 /**
  * Generated class for the AdoptGetPage page.
  *
@@ -17,24 +19,39 @@ import { MyDogDetailPage } from '../my-dog-detail/my-dog-detail'
 })
 export class AdoptGetPage {
   location: string
-  announcelistAll:FirebaseListObservable<any>;
-  constructor(private alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
+  announcelistAll: FirebaseListObservable<any>;
+  announcelistNear: FirebaseListObservable<any>;
+  loc = { lat: 0, lng: 0 };
+  district
+  province
+  country
+  constructor(private alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,public platform: Platform,public _loc: LocationProvider) {
     this.location = "nearby";
-    this.announcelistAll = this.db.list('announceAdopt/');
+    //this.announcelistAll = this.db.list('announceAdopt/');
+    this.platform.ready().then(() => {
+      _loc.getLocation().then(data => {
+        this.loc.lat = data.coords.latitude;
+        this.loc.lng = data.coords.longitude;
+        this.getGeoRequest()
+      })
+    })
+    this.announcelistAll = this.db.list('announceAdopt/').map((arr) => { return arr.reverse(); }) as FirebaseListObservable<any[]>;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdoptGetPage');
   }
-  goToDogDetail(dogName,breed,gender,age,dogDetail,photo,status) {
-    this.navCtrl.push(MyDogDetailPage, {
+  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+    this.navCtrl.push(AdoptDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
       age: age,
-      detail: dogDetail,
+      dogDetail: dogDetail,
       photo:photo,
-      status: status
+      contactMiss: contactMiss,
+      reward: reward,
+      uid:uid
     })
   }
   presentConfirm() {
@@ -81,5 +98,31 @@ export class AdoptGetPage {
       ]
     });
     alert.present();
+  }
+  getGeoRequest() { 
+    let req = {
+      position: {
+        lat: this.loc.lat,
+        lng: this.loc.lng
+      }
+    }
+    Geocoder.geocode(req).then(
+      (res) => {
+        this.district = res[0]['subLocality']
+        //alert(this.district)
+        if (this.district != undefined) { 
+          this.announcelistNear = this.db.list('announceAdopt/', {
+            query: {
+              orderByChild: 'district',
+              equalTo: this.district
+            }
+          }).map((arr) => {
+            return arr.reverse();
+            }) as FirebaseListObservable<any[]>;
+            
+        }
+        this.province = res[0]['locality']
+        this.country = res[0]['country']
+      });
   }
 }

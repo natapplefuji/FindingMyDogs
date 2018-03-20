@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
-import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail'
+import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail';
+import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
+import { LocationProvider } from '../../providers/location/location'
 /**
  * Generated class for the LostAnnouncePage page.
  *
@@ -16,10 +18,24 @@ import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-de
 })
 export class LostAnnouncePage {
   location: string;
-  announcelistAll:FirebaseListObservable<any>;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
+  announcelistAll: FirebaseListObservable<any>;
+  announcelistNear: FirebaseListObservable<any>;
+  loc = { lat: 0, lng: 0 };
+  district
+  province
+  country
+  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,public platform: Platform,public _loc: LocationProvider) {
     this.location = "nearby";
-    this.announcelistAll = this.db.list('announceMissing/');
+    this.platform.ready().then(() => {
+      _loc.getLocation().then(data => {
+        this.loc.lat = data.coords.latitude;
+        this.loc.lng = data.coords.longitude;
+        this.getGeoRequest()
+      })
+    })
+    this.announcelistAll = this.db.list('announceMissing/').map((arr) => { return arr.reverse(); }) as FirebaseListObservable<any[]>;
+    
+    
   }
 
   ionViewDidLoad() {
@@ -41,5 +57,31 @@ export class LostAnnouncePage {
       reward: reward,
       uid:uid
     })
+  }
+  getGeoRequest() { 
+    let req = {
+      position: {
+        lat: this.loc.lat,
+        lng: this.loc.lng
+      }
+    }
+    Geocoder.geocode(req).then(
+      (res) => {
+        this.district = res[0]['subLocality']
+        //alert(this.district)
+        if (this.district != undefined) { 
+          this.announcelistNear = this.db.list('announceMissing/', {
+            query: {
+              orderByChild: 'district',
+              equalTo: this.district
+            }
+          }).map((arr) => {
+            return arr.reverse();
+            }) as FirebaseListObservable<any[]>;
+            
+        }
+        this.province = res[0]['locality']
+        this.country = res[0]['country']
+      });
   }
 }

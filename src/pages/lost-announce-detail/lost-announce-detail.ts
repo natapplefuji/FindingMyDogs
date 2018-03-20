@@ -52,7 +52,7 @@ export class LostAnnounceDetailPage {
           this.userDetail.photo = snapshot.child("photo").val(),
           this.userDetail.tel = snapshot.child("tel").val()
       });
-    ;
+    
   }
 
   ionViewDidLoad() {
