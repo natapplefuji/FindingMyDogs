@@ -57,6 +57,8 @@ import { LostAnnounceDetailPage } from '../pages/lost-announce-detail/lost-annou
 import { LocationProvider } from '../providers/location/location';
 import { FilterResultPage } from '../pages/filter-result/filter-result'
 import { BreedListPage } from '../pages/breed-list/breed-list'
+import { VaccineProvider } from '../providers/vaccine/vaccine';
+import { VaccineDetailPage } from '../pages/vaccine-detail/vaccine-detail'
  
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
@@ -100,7 +102,8 @@ firebase.initializeApp(config);
     MyNotiPage,
     MyNotiDetailPage,
     FilterResultPage,
-    BreedListPage
+    BreedListPage,
+    VaccineDetailPage
 
   ],
   imports: [
@@ -143,7 +146,8 @@ firebase.initializeApp(config);
     MyNotiPage,
     MyNotiDetailPage,
     FilterResultPage,
-    BreedListPage
+    BreedListPage,
+    VaccineDetailPage
   ],
   providers: [
     StatusBar,
@@ -165,6 +169,7 @@ firebase.initializeApp(config);
     GoogleMaps,
     Geolocation,
     LocationProvider,
+    VaccineProvider,
   ]
 })
 export class AppModule {

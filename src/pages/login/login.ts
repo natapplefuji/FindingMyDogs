@@ -55,11 +55,11 @@ export class LoginPage {
       this.password)
       .then(authData => {
         this.loading.dismiss().then(() => {
-          window["plugins"].OneSignal.getIds((ids => {
-            this.playerID = ids.userId;
-            firebase.database().ref('userProfile/').child(this.userService.uid).update({ playerID: this.playerID });
-          })
-          )
+          // window["plugins"].OneSignal.getIds((ids => {
+          //   this.playerID = ids.userId;
+          //   firebase.database().ref('userProfile/').child(this.userService.uid).update({ playerID: this.playerID });
+          // })
+          // )
           this.navCtrl.setRoot(TabPage);
         });
       }, error => {

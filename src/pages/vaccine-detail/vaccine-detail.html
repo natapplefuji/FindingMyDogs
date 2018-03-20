@@ -1,0 +1,33 @@
+<!--
+  Generated template for the VaccineDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>รายละเอียดการฉีดวัคซีน</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <img class="photo" src="{{dogObject.photo}}" />
+  <ion-list>
+
+    <ion-item>
+      <h2>ชื่อสุนัข</h2>
+      <p>{{dogObject.dogName}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>วัคซีนที่ควรได้รับ</h2>
+      <p>{{vaccineName}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>ควรรับตั้งแต่วันที่ {{day}} {{month}} {{year}} เป็นต้นไป</h2>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
