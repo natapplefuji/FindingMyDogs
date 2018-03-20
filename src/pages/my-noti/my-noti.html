@@ -14,9 +14,9 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let noti of notiList|async; let i = index">
-    <ion-grid>
-      <ion-row>
+    <ion-card *ngFor="let noti of notiList|async; let i = index" (click)="goToNotiDetail(noti.announceFoundKey)">
+        <ion-grid>
+        <ion-row>          
         <ion-col col-5>
           <!-- <p>{{notiTest[i].photo}}</p> -->
           <img src="{{annouceFound[i]?.photo}}" />

@@ -13,6 +13,45 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-card *ngFor="let announceMissing of announceMissingList|async; let i = index" (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+    <ion-grid>
+    <ion-row>          
+    <ion-col col-5>
+        <!-- <p>{{notiTest[i].photo}}</p> -->
+      <img src="{{announceMissing?.photo}}" />
+    </ion-col >
 
+  <ion-col col-7>
+      <h1>
+        ประกาศสุนัขหาย:{{announceMissing?.dogName}} 
+      </h1>
+      <p class = "subhead">
+        พันธุ์ {{announceMissing?.breed}}
+      </p>
+     
+  </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-card>
+  <ion-card *ngFor="let announceAdopt of announceAdoptList|async; let i = index" (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+    <ion-grid>
+    <ion-row>          
+    <ion-col col-5>
+        <!-- <p>{{notiTest[i].photo}}</p> -->
+      <img src="{{announceAdopt?.photo}}" />
+    </ion-col >
+
+  <ion-col col-7>
+      <h1>
+        ประกาศหาคนอุปการะ:{{announceAdopt?.dogName}} 
+      </h1>
+      <p class = "subhead">
+        พันธุ์ {{announceAdopt?.breed}}
+      </p>
+     
+  </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-card>
 </ion-content>

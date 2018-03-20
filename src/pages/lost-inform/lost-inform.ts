@@ -10,6 +10,7 @@ import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
 import { BreedProvider } from '../../providers/breed/breed'
 import { LocationProvider } from '../../providers/location/location'
+import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
 /**
  * Generated class for the LostInformPage page.
  *
@@ -34,6 +35,9 @@ export class LostInformPage {
   milliTime;
   dogPicture;
   photoName;
+  district
+  province
+  country
   loc = { lat: 0, lng: 0 };
   constructor(public platform: Platform,
     public _loc: LocationProvider,
@@ -67,6 +71,7 @@ export class LostInformPage {
       _loc.getLocation().then(data => {
         this.loc.lat = data.coords.latitude;
         this.loc.lng = data.coords.longitude;
+        this.getGeoRequest()
       })
     })
   }
@@ -99,7 +104,10 @@ export class LostInformPage {
             year: this.year,
             millisec: this.milliTime,
             lat: this.loc.lat,
-            lng: this.loc.lng
+            lng: this.loc.lng,
+            district: this.district,
+            province:this.province,
+            country:this.country
           }).then(() => { this.navCtrl.pop() })
         })
     }
@@ -134,6 +142,19 @@ export class LostInformPage {
     });
     actionSheet.present();
   }
-
+  getGeoRequest() { 
+    let req = {
+      position: {
+        lat: this.loc.lat,
+        lng: this.loc.lng
+      }
+    }
+    Geocoder.geocode(req).then(
+      (res) => {
+        this.district = res[0]['subLocality']
+        this.province = res[0]['locality']
+        this.country = res[0]['country']
+      });
+  }
 
 }

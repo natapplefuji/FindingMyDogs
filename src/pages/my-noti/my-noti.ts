@@ -57,7 +57,7 @@ export class MyNotiPage {
         this.annouceFound.push(user)
         // console.log(this.annouceFound)
         // console.log(user)
-      });;
+      })
     }
   }
   getFirebaseProperty2(element, length) {
