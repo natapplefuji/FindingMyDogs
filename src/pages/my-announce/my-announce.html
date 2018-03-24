@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let announceMissing of announceMissingList|async; let i = index" (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+  <ion-card *ngFor="let announceMissing of announceMissingList|async; let i = index" (tap)="goToAnnouceDetail(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid)">
     <ion-grid>
     <ion-row>          
     <ion-col col-5>
@@ -34,7 +34,7 @@
     </ion-row>
   </ion-grid>
   </ion-card>
-  <ion-card *ngFor="let announceAdopt of announceAdoptList|async; let i = index" (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+  <ion-card *ngFor="let announceAdopt of announceAdoptList|async; let i = index" (tap)="goToAnnouceDetail(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.reward,announceAdopt.uid)">
     <ion-grid>
     <ion-row>          
     <ion-col col-5>
