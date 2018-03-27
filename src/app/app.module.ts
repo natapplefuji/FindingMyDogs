@@ -61,6 +61,7 @@ import { VaccineProvider } from '../providers/vaccine/vaccine';
 import { VaccineDetailPage } from '../pages/vaccine-detail/vaccine-detail';
 import { UpdateAnnouceLostPage } from '../pages/update-annouce-lost/update-annouce-lost';
 import { UpdateAnnouceAdoptPage } from '../pages/update-annouce-adopt/update-annouce-adopt';
+import {InformFoundManualPage} from '../pages/inform-found-manual/inform-found-manual';
  
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
@@ -107,7 +108,8 @@ firebase.initializeApp(config);
     BreedListPage,
     VaccineDetailPage,
     UpdateAnnouceLostPage,
-    UpdateAnnouceAdoptPage
+    UpdateAnnouceAdoptPage,
+    InformFoundManualPage
 
   ],
   imports: [
@@ -153,7 +155,8 @@ firebase.initializeApp(config);
     BreedListPage,
     VaccineDetailPage,
     UpdateAnnouceLostPage,
-    UpdateAnnouceAdoptPage
+    UpdateAnnouceAdoptPage,
+    InformFoundManualPage
   ],
   providers: [
     StatusBar,

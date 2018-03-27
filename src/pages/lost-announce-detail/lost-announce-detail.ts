@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseObjectObservable,FirebaseListObservable} from 'angularfire2/database-deprecated'
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database-deprecated'
+import { UserServiceProvider } from '../../providers/user-service/user-service'
 /**
  * Generated class for the LostAnnounceDetailPage page.
  *
@@ -34,7 +35,7 @@ export class LostAnnounceDetailPage {
     photo: '',
     tel: ''
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,private userService: UserServiceProvider,) {
     this.announceDetail.dogName = navParams.get("dogName");
     this.announceDetail.breed = navParams.get("breed");
     this.announceDetail.gender = navParams.get("gender");
@@ -58,5 +59,14 @@ export class LostAnnounceDetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostAnnounceDetailPage');
   }
-
+  notiAnnounceLost(missingKey) { 
+    // let notiRef = this.db.database.ref('/notification')
+    // let uid = this.userService.uid;
+    // notiRef.push().set({
+    //   announceFoundKey: "same",
+    //   announceMissingKey: missingKey,
+    //   uid: uid,
+    //   status: 'lostM'
+    // })
+  }
 }
