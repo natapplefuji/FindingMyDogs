@@ -24,7 +24,7 @@ export class LostAnnouncePage {
   district
   province
   country
-  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,public platform: Platform,public _loc: LocationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, public platform: Platform, public _loc: LocationProvider) {
     this.location = "nearby";
     this.platform.ready().then(() => {
       _loc.getLocation().then(data => {
@@ -33,32 +33,36 @@ export class LostAnnouncePage {
         this.getGeoRequest()
       })
     })
-    this.announcelistAll = this.db.list('announceMissing/').map((arr) => { return arr.reverse(); }) as FirebaseListObservable<any[]>;
-    
-    
+    this.announcelistAll = this.db.list('announceMissing/').map((arr) => {
+      var array = <any>{};
+      array = arr;
+      return array.reverse();
+    }) as FirebaseListObservable<any[]>;
+
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostAnnouncePage');
   }
-  getAnnouceAll() { 
+  getAnnouceAll() {
     console.log("baba")
     console.log(this.announcelistAll)
   }
-  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+  goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid) {
     this.navCtrl.push(LostAnnounceDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
       age: age,
       dogDetail: dogDetail,
-      photo:photo,
+      photo: photo,
       contactMiss: contactMiss,
       reward: reward,
-      uid:uid
+      uid: uid
     })
   }
-  getGeoRequest() { 
+  getGeoRequest() {
     let req = {
       position: {
         lat: this.loc.lat,
@@ -69,16 +73,18 @@ export class LostAnnouncePage {
       (res) => {
         this.district = res[0]['subLocality']
         //alert(this.district)
-        if (this.district != undefined) { 
+        if (this.district != undefined) {
           this.announcelistNear = this.db.list('announceMissing/', {
             query: {
               orderByChild: 'district',
               equalTo: this.district
             }
           }).map((arr) => {
-            return arr.reverse();
-            }) as FirebaseListObservable<any[]>;
-            
+            var array = <any>{};
+            array = arr;
+            return array.reverse();
+          }) as FirebaseListObservable<any[]>;
+
         }
         this.province = res[0]['locality']
         this.country = res[0]['country']

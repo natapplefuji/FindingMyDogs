@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,NavController } from 'ionic-angular';
+import { Nav, Platform,NavController,Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
@@ -28,8 +28,11 @@ export class MyApp {
   rootPage: any;
   userInfo: any;
   
-  constructor(public authProvider : AuthProvider,public userService:UserServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) { 
+  constructor(public events: Events,public authProvider : AuthProvider,public userService:UserServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) { 
     this.initializeApp();
+    events.subscribe('user:login', () => {
+      this.updateUserInfo();
+    })
 
   }
   
@@ -53,7 +56,7 @@ export class MyApp {
           unsubscribe();
         } else { 
           this.userInfo = this.userService.getUserInfo(); //ไว้ตรงนี้เพราะถ้า initapp()แล้ว จะข้าม method ใน constructor เลย
-          console.log(this.userInfo);
+          console.log("userinfo appcomponent: "+this.userInfo);
           this.rootPage = TabPage;
           unsubscribe();
         }
@@ -63,6 +66,9 @@ export class MyApp {
     });
   }
   
+  updateUserInfo() {
+    this.userInfo = this.userService.getUserInfo();
+  }
 
   logoutUser() {
     this.authProvider.logoutUser();

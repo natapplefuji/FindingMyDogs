@@ -14,12 +14,12 @@ export class UserServiceProvider {
   uid: any;
   constructor(private db : AngularFireDatabase) {
     console.log('Hello UserServiceProvider Provider');
-    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
+    firebase.auth().onAuthStateChanged( user => {
       if (user) {
         this.uid = firebase.auth().currentUser.uid;
         console.log(this.uid);
         this.userInfo = db.object('userProfile/'+this.uid);
-        unsubscribe();
+        
       }
     });
   }

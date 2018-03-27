@@ -79,7 +79,9 @@ export class AdoptMainPage {
         limitToLast:6
       }
     }
-    ).map((arr) => { return arr.reverse(); }) as FirebaseListObservable<any[]>;
+    ).map((arr) => { var array = <any>{};
+    array = arr;
+    return array.reverse(); }) as FirebaseListObservable<any[]>;
   }
   //ฟังก์ชันเรียกหาชื่อพันธุ์ this.a = this.filterBreed(this.breed, "areaRequire", "high", "coldResist", "high", "hairLength", "medium", "heatResist", "medium", "size", "big")
   ionViewDidLoad() {

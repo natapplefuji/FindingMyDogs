@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, Platform,Events } from 'ionic-angular';
 import { HomePage } from '../home/home'
 import { RegisterPage } from '../register/register'
 import { TabPage } from '../tab/tab'
@@ -44,7 +44,8 @@ export class LoginPage {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public userService: UserServiceProvider) {
+    public userService: UserServiceProvider,
+    public events: Events) {
   }
 
   ionViewDidLoad() {
@@ -60,6 +61,7 @@ export class LoginPage {
           //   firebase.database().ref('userProfile/').child(this.userService.uid).update({ playerID: this.playerID });
           // })
           // )
+          this.events.publish('user:login'); //ไปเรียก f() ใน app.components.ts ให้อัพเดต userInfo
           this.navCtrl.setRoot(TabPage);
         });
       }, error => {
@@ -105,8 +107,10 @@ export class LoginPage {
                 tel: this.user.tel,
                 photo: this.user.photo,
                 provider: 'facebook'
-              });
+                });
+                this.events.publish('user:login');
             })
+
             this.navCtrl.setRoot(TabPage);
           })
 
@@ -139,7 +143,8 @@ export class LoginPage {
             tel: this.user.tel,
             photo: this.user.photo,
             provider: 'facebook'
-          });
+            });
+            this.events.publish('user:login');
           this.navCtrl.setRoot(TabPage);
         });
     }

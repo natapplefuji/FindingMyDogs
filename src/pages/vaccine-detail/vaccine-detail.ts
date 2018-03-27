@@ -33,8 +33,15 @@ export class VaccineDetailPage {
 
   getVaccineNameAndMonth(vaccine, monthRaw) {
     switch (vaccine) {
-      case 'week3': this.vaccineName = 'วัคซีนป้องกันโรคหวัด และหลอดลมอักเสบติดต่อ'; break;
-      case 'week4': this.vaccineName = 'ตรวจสุขภาพและถ่ายพยาธิ'; break;
+      case 'weekunder3': this.vaccineName = 'วัคซีนป้องกันโรคหวัด และหลอดลมอักเสบติดต่อ'; break;
+      case 'week3': this.vaccineName = 'ตรวจสุขภาพและถ่ายพยาธิ'; break;
+      case 'week4': this.vaccineName = 'วัคซีนป้องกันโรคไข้หัดสุนัข ลำไส้อักเสบ ตับอักเสบ เสปโตสไปโรซิส และโรคหวัดและหลอดลมอักเสบ ติดต่อ ครั้งที่ 1'; break;
+      case 'week6': this.vaccineName = 'วัคซีนป้องกันโรคไข้หัดสุนัข ลำไส้อักเสบ ตับอักเสบ เสปโตสไปโรซิส และโรคหวัดและหลอดลมอักเสบ ติดต่อ ครั้งที่ 2'; break;
+      case 'week8': this.vaccineName = 'วัคซีนป้องกันโรคไข้หัดสุนัข ลำไส้อักเสบ ตับอักเสบ เสปโตสไปโรซิส และโรคหวัดและหลอดลมอักเสบ ติดต่อ ครั้งที่ 3 วัคซีนป้องกันโรคพิษสุนัขบ้า ครั้งที่ 1'; break;
+      case 'week12': this.vaccineName = 'วัคซีนป้องกันโรคไข้หัดสุนัข และลำไส้อักเสบ'; break;
+      case 'week16': this.vaccineName = 'วัคซีนป้องกันโรคพิษสุนัขบ้า ครั้งที่ 2'; break; //6เดือน
+      case 'week26': this.vaccineName = 'วัคซีนป้องกันโรคไข้หัดสุนัข ลำไส้อักเสบ ตับอักเสบ เสปโตสไปโรซิส โรคหวัดและหลอดลมอักเสบ พิษสุนัขบ้า(ทุกๆ 1 ปี)'; break; // 1ปี
+      case 'week52': this.vaccineName = 'วัคซีนป้องกันโรคไข้หัดสุนัข ลำไส้อักเสบ ตับอักเสบ เสปโตสไปโรซิส โรคหวัดและหลอดลมอักเสบ พิษสุนัขบ้า(ทุกๆ 1 ปี)'; break; //เกิน 1ปี ฉีดเหมือน 1 ปี
       default: 'default';
     }
     switch (monthRaw) {
