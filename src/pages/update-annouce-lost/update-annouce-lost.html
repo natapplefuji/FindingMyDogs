@@ -1,0 +1,62 @@
+<!--
+  Generated template for the UpdateAnnouceLostPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>update-annouce-lost</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="announcelost">
+    <ion-item>
+      <ion-label>ชื่อสุนัข</ion-label>
+      <ion-input type="text" formControlName="dogName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>พันธุ์</ion-label>
+      <ion-select placeholder="กรุณาเลือกพันธุ์สุนัข"  formControlName="breed">
+          <ion-option *ngFor="let item of breed">{{item}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>เพศ</ion-label>
+      <ion-select formControlName="gender">
+        <ion-option value="male">เพศผู้</ion-option>
+        <ion-option value="female">เพศเมีย</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>อายุ(ปี)</ion-label>
+      <ion-input type="number" formControlName="age"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>ข้อมูลติดต่อ</ion-label>
+        <ion-input type="text" formControlName="contactMiss"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>ข้อมูลสุนัขเพิ่มเติม</ion-label>
+      <ion-textarea formControlName="dogDetail"></ion-textarea>
+    </ion-item>
+    <ion-item>
+        <ion-label>สินน้ำใจ</ion-label>
+        <ion-input type="text" formControlName="reward"></ion-input>
+      </ion-item>
+    <ion-item no-lines>
+      <!-- <button ion-button type=button (click)="presentActionSheet()">อัพโหลดภาพ
+      </button> -->
+      <!-- <ion-item no-lines>
+        <img src={{dogPicture}}>
+      </ion-item> -->
+    </ion-item>
+
+    <button ion-button type="submit" (click)="editAnnounceLost()" [disabled]="!announcelost.valid">แก้ไขข้อมูล</button>
+    <button ion-button color="danger" (click)="closeModal()">ยกเลิก</button>
+  </form>
+</ion-content>
