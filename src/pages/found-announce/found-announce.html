@@ -1,0 +1,28 @@
+<!--
+  Generated template for the FoundAnnouncePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>FoundAnnounce</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-list>
+  <ion-item *ngFor="let dog of foundAnnounce | async" (tap)="goToFoundAnnounceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+      <ion-thumbnail item-start>
+        <img src="{{dog.photo}}">
+      </ion-thumbnail>
+      <h2>{{dog.dogName}}</h2>
+      <p>พบเจ้าของแล้วโดยคุณ {{dog.founder}}</p>
+      <h2>เมื่อวันที่ {{dog.foundday}}/{{dog.foundmonth}}/{{dog.foundyear}}</h2>
+      <p>หากพบโปรดแจ้งเบาะแส</p>
+    </ion-item>
+</ion-list>
+
+<ion-content padding>
+
+</ion-content>

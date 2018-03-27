@@ -44,8 +44,10 @@ export class VaccineProvider {
     else if (sumWeek >= 4 && sumWeek < 6) {
       this.week4(sumWeek);
     }
-    else { //if (sumWeek >= 3 && sumWeek < 4)
+    else if (sumWeek >= 3 && sumWeek < 4){
       this.week3(sumWeek);
+    } else {
+      this.weekunder3(sumWeek);
     }
   }
   week52(sumWeek) { //>52weeks
@@ -292,6 +294,35 @@ export class VaccineProvider {
     );
     console.log('w3' + "will notify on " + date.toString());
     this.week4(sumWeek);
+  }
+  weekunder3(sumWeek) { //>3weeks
+    var moreWeek = 3 - sumWeek;
+    var date = new Date();
+    date.setDate(date.getDate() + moreWeek * 7)
+    var notificationObj = {
+      contents: {
+        en: "Please check detail in application.",
+        th: "โปรดตรวจสอบรายละเอียด"
+      },
+      headings: {
+        en: "Your dog now need to be vaccinated.",
+        th: "สุนัขของท่านถึงกำหนดฉีดวัคซีน"
+      },
+      include_player_ids: [this.playerID],
+      send_after: date.toString()
+    };
+    window["plugins"].OneSignal.postNotification(notificationObj,
+      (successResponse) => {
+        var time = date.getTime();
+        this.db.database.ref("/userProfile/" + this.uid+"/notiTime/"+this.dogID+"/").update({ weekunder3: time });
+        
+      },
+      (failedResponse) => {
+        //alert("Notification Post Failed playerID ->: " +JSON.stringify(playerIDList));
+        alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+      }
+    );
+    this.week3(sumWeek);
   }
 
 }

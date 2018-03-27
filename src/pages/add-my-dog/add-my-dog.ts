@@ -46,9 +46,9 @@ export class AddMyDogPage {
       dogName: ['', Validators.required],
       breed: ['', Validators.required],
       gender: ['', Validators.required],
-      age_year: ['0',],
-      age_month: ['0',],
-      age_week: ['0',],
+      age_year: ['0'],
+      age_month: ['0'],
+      age_week: ['0'],
       detail: [''],
       vaccineNoti : ['false']
     });
@@ -93,7 +93,11 @@ export class AddMyDogPage {
             year: this.year,
             millisec: this.milliTime,
             lat: this.loc.lat,
-            lng: this.loc.lng
+            lng: this.loc.lng,
+            age_year: this.dog.value.age_year,
+            age_month: this.dog.value.age_month,
+            age_week: this.dog.value.age_week,
+            getVaccine:this.dog.value.vaccineNoti
           }).then(() => {
             if (this.dog.value.vaccineNoti == true) {
               this.callVaccine();

@@ -58,10 +58,12 @@ export class LostInformPage {
       dogName: ['', Validators.required],
       breed: ['', Validators.required],
       gender: ['', Validators.required],
-      age: ['', Validators.required],
       contactMiss: [''],
       dogDetail: [''],
       reward: [''],
+      age_year: ['0'],
+      age_month: ['0'],
+      age_week: ['0'],
     });
     this.milliTime = this.date.getTime();
     this.day = this.date.getDate();
@@ -93,7 +95,6 @@ export class LostInformPage {
             dogName: this.announcelost.value.dogName,
             breed: this.announcelost.value.breed,
             gender: this.announcelost.value.gender,
-            age: this.announcelost.value.age,
             contactMiss: this.announcelost.value.contactMiss,
             dogDetail: this.announcelost.value.dogDetail,
             reward: this.announcelost.value.reward,
@@ -107,7 +108,11 @@ export class LostInformPage {
             lng: this.loc.lng,
             district: this.district,
             province:this.province,
-            country:this.country
+            country: this.country,
+            age_year: this.announcelost.value.age_year,
+            age_month: this.announcelost.value.age_month,
+            age_week: this.announcelost.value.age_week,
+            status:'lost'//lost เป็น default/update เป็น found เมื่อพบเจ้าของแล้ว
           }).then(() => { this.navCtrl.pop() })
         })
     }

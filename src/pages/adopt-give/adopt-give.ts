@@ -58,12 +58,14 @@ export class AdoptGivePage {
     this.breed = _breed.breeds;
     this.infoAdopt = this.formBuilder.group({
       dogName: ['', Validators.required],
-      age: ['', Validators.required],
       breed: ['', Validators.required],
       gender: ['', Validators.required],
       contactMiss:['', Validators.required],
       dogDetail: ['', Validators.required],
       reason: ['', Validators.required],
+      age_year: ['0'],
+      age_month: ['0'],
+      age_week: ['0'],
     })
     this.milliTime = this.date.getTime();
     this.day = this.date.getDate();
@@ -90,7 +92,6 @@ export class AdoptGivePage {
             dogName: this.infoAdopt.value.dogName,
             breed: this.infoAdopt.value.breed,
             gender: this.infoAdopt.value.gender,
-            age: this.infoAdopt.value.age,
             contactMiss: this.infoAdopt.value.contactMiss,
             dogDetail: this.infoAdopt.value.dogDetail,
             photo: this.uploadedImage,
@@ -103,7 +104,10 @@ export class AdoptGivePage {
             lng: this.loc.lng,
             district: this.district,
             province:this.province,
-            country:this.country
+            country: this.country,
+            age_year: this.infoAdopt.value.age_year,
+            age_month: this.infoAdopt.value.age_month,
+            age_week: this.infoAdopt.value.age_week,
           }).then(() => { this.navCtrl.pop() })
         })
     }

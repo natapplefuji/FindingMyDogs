@@ -32,15 +32,58 @@
             <ion-option value="female">เพศเมีย</ion-option>
           </ion-select>
         </ion-item>
-      <ion-item>
-        <ion-label floating>อายุ</ion-label>
-        <ion-select formControlName="age">
-          <ion-option value="l3" checked>0-6 เดือน</ion-option>
-          <ion-option value="l6">6-12 เดือน</ion-option>
-          <ion-option value="y1">1-3 ปี</ion-option>
-          <ion-option value="y3">มากกว่า 3 ปี</ion-option>
-        </ion-select>
-      </ion-item>
+        <ion-item no-lines>
+          <ion-label>อายุ</ion-label>
+        </ion-item>
+        <ion-row>
+          <ion-col ion-item col-4>
+            <ion-label>ปี</ion-label>
+            <ion-select interface="popover" formControlName="age_year">
+              <ion-option value="0">0</ion-option>
+              <ion-option value="1">1</ion-option>
+              <ion-option value="2">2</ion-option>
+              <ion-option value="3">3</ion-option>
+              <ion-option value="4">4</ion-option>
+              <ion-option value="5">5</ion-option>
+              <ion-option value="6">6</ion-option>
+              <ion-option value="7">7</ion-option>
+              <ion-option value="8">8</ion-option>
+              <ion-option value="9">9</ion-option>
+              <ion-option value="10">10</ion-option>
+              <ion-option value="11">11</ion-option>
+              <ion-option value="12">12</ion-option>
+              <ion-option value="13">13</ion-option>
+              <ion-option value="14">14</ion-option>
+              <ion-option value="15">15</ion-option>
+            </ion-select>
+          </ion-col>
+          <ion-col ion-item col-4>
+            <ion-label>เดือน</ion-label>
+            <ion-select interface="popover" formControlName="age_month">
+              <ion-option value="0">0</ion-option>
+              <ion-option value="1">1</ion-option>
+              <ion-option value="2">2</ion-option>
+              <ion-option value="3">3</ion-option>
+              <ion-option value="4">4</ion-option>
+              <ion-option value="5">5</ion-option>
+              <ion-option value="6">6</ion-option>
+              <ion-option value="7">7</ion-option>
+              <ion-option value="8">8</ion-option>
+              <ion-option value="9">9</ion-option>
+              <ion-option value="10">10</ion-option>
+              <ion-option value="11">11</ion-option>
+            </ion-select>
+          </ion-col>
+          <ion-col ion-item col-4>
+            <ion-label>สัปดาห์</ion-label>
+            <ion-select interface="popover" formControlName="age_week">
+              <ion-option value="0">0</ion-option>
+              <ion-option value="1">1</ion-option>
+              <ion-option value="2">2</ion-option>
+              <ion-option value="3">3</ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
       <ion-item>
         <ion-label floating>พันธุ์</ion-label>
         <ion-select   formControlName="breed">
