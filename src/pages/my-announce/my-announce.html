@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let announceMissing of announceMissingList|async; let i = index" (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+  <ion-card *ngFor="let announceMissing of announceMissingList|async; let i = index" >
     <ion-grid>
     <ion-row>          
     <ion-col col-5>
@@ -32,9 +32,14 @@
      
   </ion-col>
     </ion-row>
+    <ion-row>
+      <button ion-button (click)="goToAnnouceDetail(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid)">ดูรายละเอียด</button>
+      <button ion-button (click)="openUpdateAnnouceLost(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid,announceMissing.$key)">แก้ไข</button>
+      <button ion-button (click)="deleteAnnounceMissing(announceMissing.$key)">ลบประกาศ</button>
+    </ion-row>
   </ion-grid>
   </ion-card>
-  <ion-card *ngFor="let announceAdopt of announceAdoptList|async; let i = index" (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+  <ion-card *ngFor="let announceAdopt of announceAdoptList|async; let i = index">
     <ion-grid>
     <ion-row>          
     <ion-col col-5>
@@ -52,6 +57,12 @@
      
   </ion-col>
     </ion-row>
+    <ion-row>
+      <button ion-button (click)="goToAnnouceDetail(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid)">ดูรายละเอียด</button>
+      <button ion-button (click)="openUpdateAnnouceAdopt(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid,announceAdopt.$key)">แก้ไข</button>
+      <button ion-button (click)="deleteAnnounceAdopt(announceAdopt.$key)">ลบประกาศ</button>
+    </ion-row>
+
   </ion-grid>
   </ion-card>
 </ion-content>
