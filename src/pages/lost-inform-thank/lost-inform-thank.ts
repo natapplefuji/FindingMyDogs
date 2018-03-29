@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { PredictProvider } from '../../providers/predict/predict';
-import { LostRelatedPage } from '../lost-related/lost-related';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 /**
  * Generated class for the LostInformThankPage page.
