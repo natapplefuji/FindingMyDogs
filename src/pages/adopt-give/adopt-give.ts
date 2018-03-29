@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
-import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ImageProvider } from '../../providers/image/image'
 import { DatabaseProvider } from '../../providers/database/database'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
@@ -36,10 +36,10 @@ export class AdoptGivePage {
   month;
   year;
   milliTime;
-  district
-  province
-  country
-  loc = {lat :0,lng:0};
+  district =''
+  province =''
+  country =''
+  loc = { lat: 0, lng: 0 };
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -53,6 +53,13 @@ export class AdoptGivePage {
     private _breed: BreedProvider,
     public platform: Platform,
     public _loc: LocationProvider) {
+    this.platform.ready().then(() => {
+      _loc.getLocation().then(data => {
+        this.loc.lat = data.coords.latitude;
+        this.loc.lng = data.coords.longitude;
+        this.getGeoRequest()
+      })
+    })
     this.announceAdopt = af.list('/announceAdopt');
     this.uid = userService.uid;
     this.breed = _breed.breeds;
@@ -60,7 +67,7 @@ export class AdoptGivePage {
       dogName: ['', Validators.required],
       breed: ['', Validators.required],
       gender: ['', Validators.required],
-      contactMiss:['', Validators.required],
+      contactMiss: ['', Validators.required],
       dogDetail: ['', Validators.required],
       reason: ['', Validators.required],
       age_year: ['0'],
@@ -72,15 +79,8 @@ export class AdoptGivePage {
     this.month = this.date.getMonth() + 1;
     this.year = this.date.getFullYear();
 
-    this.platform.ready().then(() => {
-      _loc.getLocation().then(data => {
-        this.loc.lat = data.coords.latitude;
-        this.loc.lng = data.coords.longitude;
-        this.getGeoRequest()
-      })
-    })
   }
-  
+
   addAnnounceAdopt() {
     if (this.uploadedImage == null) {
       this._DB.uploadImageDog(this.dogPicture) //อัพขึ้นไปบน storage ได้ downloadURL
@@ -103,11 +103,12 @@ export class AdoptGivePage {
             lat: this.loc.lat,
             lng: this.loc.lng,
             district: this.district,
-            province:this.province,
+            province: this.province,
             country: this.country,
             age_year: this.infoAdopt.value.age_year,
             age_month: this.infoAdopt.value.age_month,
             age_week: this.infoAdopt.value.age_week,
+            status: 'wait'
           }).then(() => { this.navCtrl.pop() })
         })
     }
@@ -143,11 +144,11 @@ export class AdoptGivePage {
     actionSheet.present();
   }
 
-  cancelForm() { 
+  cancelForm() {
     this.navCtrl.pop();
   }
 
-  getGeoRequest() { 
+  getGeoRequest() {
     let req = {
       position: {
         lat: this.loc.lat,

@@ -15,87 +15,87 @@
 
 <ion-content padding>
   <form [formGroup]="dog" (ngSubmit)="addDog()">
-      <ion-item>
-        <ion-label>ชื่อสุนัข</ion-label>
-        <ion-input type="text" formControlName="dogName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>พันธุ์</ion-label>
-        <ion-select interface="popover" placeholder="กรุณาเลือกพันธุ์สุนัข" formControlName="breed">
-          <ion-option *ngFor="let item of breed" value="{{item}}">{{item}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>เพศ</ion-label>
-        <ion-select formControlName="gender">
-          <ion-option value="male">เพศผู้</ion-option>
-          <ion-option value="female">เพศเมีย</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item no-lines>
-        <ion-label>อายุ</ion-label>
-      </ion-item>
-      <ion-row>
-        <ion-col ion-item col-4>
-          <ion-label>ปี</ion-label>
-          <ion-select interface="popover" formControlName="age_year">
-            <ion-option value="0">0</ion-option>
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">2</ion-option>
-            <ion-option value="3">3</ion-option>
-            <ion-option value="4">4</ion-option>
-            <ion-option value="5">5</ion-option>
-            <ion-option value="6">6</ion-option>
-            <ion-option value="7">7</ion-option>
-            <ion-option value="8">8</ion-option>
-            <ion-option value="9">9</ion-option>
-            <ion-option value="10">10</ion-option>
-            <ion-option value="11">11</ion-option>
-            <ion-option value="12">12</ion-option>
-            <ion-option value="13">13</ion-option>
-            <ion-option value="14">14</ion-option>
-            <ion-option value="15">15</ion-option>
-          </ion-select>
-        </ion-col>
-        <ion-col ion-item col-4>
-          <ion-label>เดือน</ion-label>
-          <ion-select interface="popover" formControlName="age_month">
-            <ion-option value="0">0</ion-option>
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">2</ion-option>
-            <ion-option value="3">3</ion-option>
-            <ion-option value="4">4</ion-option>
-            <ion-option value="5">5</ion-option>
-            <ion-option value="6">6</ion-option>
-            <ion-option value="7">7</ion-option>
-            <ion-option value="8">8</ion-option>
-            <ion-option value="9">9</ion-option>
-            <ion-option value="10">10</ion-option>
-            <ion-option value="11">11</ion-option>
-          </ion-select>
-        </ion-col>
-        <ion-col ion-item col-4>
-          <ion-label>สัปดาห์</ion-label>
-          <ion-select interface="popover" formControlName="age_week">
-            <ion-option value="0">0</ion-option>
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">2</ion-option>
-            <ion-option value="3">3</ion-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
-
-
-      <ion-item>
-        <ion-label>รายละเอียดเพิ่มเติม</ion-label>
-        <ion-textarea formControlName="detail"></ion-textarea>
-      </ion-item>
-    <button ion-button type=button (click)="getImage()">อัพโหลดภาพ</button>
+    <ion-item>
+      <ion-label>ชื่อสุนัข</ion-label>
+      <ion-input type="text" formControlName="dogName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>พันธุ์</ion-label>
+      <ion-select interface="popover" placeholder="กรุณาเลือกพันธุ์สุนัข" formControlName="breed">
+        <ion-option *ngFor="let item of breed" value="{{item}}">{{item}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>เพศ</ion-label>
+      <ion-select formControlName="gender">
+        <ion-option value="male">เพศผู้</ion-option>
+        <ion-option value="female">เพศเมีย</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item no-lines>
-      <!-- <div *ngIf="dog_image_dataurl != null"> -->
-      <img src={{dogPicture}}>
-      <p>{{uploadedImage}}</p>
-      <!-- </div> -->
+      <ion-label>อายุ</ion-label>
+    </ion-item>
+    <ion-row>
+      <ion-col ion-item col-4>
+        <ion-label>ปี</ion-label>
+        <ion-select interface="popover" formControlName="age_year">
+          <ion-option value="0">0</ion-option>
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option>
+          <ion-option value="5">5</ion-option>
+          <ion-option value="6">6</ion-option>
+          <ion-option value="7">7</ion-option>
+          <ion-option value="8">8</ion-option>
+          <ion-option value="9">9</ion-option>
+          <ion-option value="10">10</ion-option>
+          <ion-option value="11">11</ion-option>
+          <ion-option value="12">12</ion-option>
+          <ion-option value="13">13</ion-option>
+          <ion-option value="14">14</ion-option>
+          <ion-option value="15">15</ion-option>
+        </ion-select>
+      </ion-col>
+      <ion-col ion-item col-4>
+        <ion-label>เดือน</ion-label>
+        <ion-select interface="popover" formControlName="age_month">
+          <ion-option value="0">0</ion-option>
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option>
+          <ion-option value="5">5</ion-option>
+          <ion-option value="6">6</ion-option>
+          <ion-option value="7">7</ion-option>
+          <ion-option value="8">8</ion-option>
+          <ion-option value="9">9</ion-option>
+          <ion-option value="10">10</ion-option>
+          <ion-option value="11">11</ion-option>
+        </ion-select>
+      </ion-col>
+      <ion-col ion-item col-4>
+        <ion-label>สัปดาห์</ion-label>
+        <ion-select interface="popover" formControlName="age_week">
+          <ion-option value="0">0</ion-option>
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-item>
+      <ion-label>รายละเอียดเพิ่มเติม</ion-label>
+      <ion-textarea formControlName="detail"></ion-textarea>
+    </ion-item>
+    
+    <ion-item no-lines>
+        <button ion-button type=button (click)="getImage()">อัพโหลดภาพ</button>
+      <div *ngIf="dogPicture !== undefined">
+        <img src={{dogPicture}}>
+      </div>
     </ion-item>
     <ion-item>
       <ion-label>รับการแจ้งเตือนการฉีดวัคซีนสำหรับสุนัข</ion-label>

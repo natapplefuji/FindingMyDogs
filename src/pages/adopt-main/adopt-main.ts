@@ -10,6 +10,7 @@ import { ImageProvider } from '../../providers/image/image'
 import { DatabaseProvider } from '../../providers/database/database'
 import { PredictProvider } from '../../providers/predict/predict';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { AdoptDetailPage} from '../adopt-detail/adopt-detail'
 /**
  * Generated class for the AdoptMainPage page.
  *
@@ -76,6 +77,8 @@ export class AdoptMainPage {
   ) {
     this.announcelist = this.db.list('announceAdopt/', {
       query: {
+        orderByChild: 'status',
+        equalTo: 'wait',
         limitToLast:6
       }
     }
@@ -199,6 +202,19 @@ export class AdoptMainPage {
   }
   addAdopt() {
     this.navCtrl.push(AdoptGivePage);
+  }
+  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+    this.navCtrl.push(AdoptDetailPage, {
+      dogName: dogName,
+      breed: breed,
+      gender: gender,
+      age: age,
+      dogDetail: dogDetail,
+      photo:photo,
+      contactMiss: contactMiss,
+      reward: reward,
+      uid:uid
+    })
   }
 
   filterBreed(obj, key1, val1, //เงื่อนไขอย่างน้อย 1 อย่าง

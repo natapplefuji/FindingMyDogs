@@ -93,9 +93,11 @@
         <ion-item no-lines>
           <button ion-button type=button (click)="presentActionSheet()">อัพโหลดภาพ
           </button>
+          <div *ngIf="dogPicture !== undefined">
           <ion-item no-lines>
             <img src={{dogPicture}}>
           </ion-item>
+        </div>
         </ion-item>
     
         <button ion-button type="submit" [disabled]="!announcelost.valid">Submit</button>
