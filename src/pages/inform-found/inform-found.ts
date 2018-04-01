@@ -42,7 +42,6 @@ export class InformFoundPage {
   constructor(public navCtrl: NavController,
     public platform : Platform,
     public navParams: NavParams,
-    public af: AngularFireDatabase,
     private formBuilder: FormBuilder,
     private image: ImageProvider,
     private userService: UserServiceProvider,
