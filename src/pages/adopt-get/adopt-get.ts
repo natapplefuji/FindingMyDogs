@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
 import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
 import { LocationProvider } from '../../providers/location/location';
-import {AdoptDetailPage} from '../adopt-detail/adopt-detail';
+import { AdoptDetailPage } from '../adopt-detail/adopt-detail';
 /**
  * Generated class for the AdoptGetPage page.
  *
@@ -25,7 +25,7 @@ export class AdoptGetPage {
   district
   province
   country
-  constructor(private alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,public platform: Platform,public _loc: LocationProvider) {
+  constructor(private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase, public platform: Platform, public _loc: LocationProvider) {
     this.location = "nearby";
     //this.announcelistAll = this.db.list('announceAdopt/');
     this.platform.ready().then(() => {
@@ -35,23 +35,33 @@ export class AdoptGetPage {
         this.getGeoRequest()
       })
     })
-    this.announcelistAll = this.db.list('announceAdopt/').map((arr) => { return arr.reverse(); }) as FirebaseListObservable<any[]>;
+    this.announcelistAll = this.db.list('announceAdopt/', {
+      query: {
+        orderByChild: 'status',
+        equalTo: 'wait' //เอาเฉพาะประกาศที่มี status ยัง wait อยู่
+      }
+    }).map((arr) => {
+      var array = <any>{};
+      array = arr;
+      return array.reverse();
+    }) as FirebaseListObservable<any[]>;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdoptGetPage');
   }
-  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+  goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid, adoptKey) {
     this.navCtrl.push(AdoptDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
       age: age,
       dogDetail: dogDetail,
-      photo:photo,
+      photo: photo,
       contactMiss: contactMiss,
       reward: reward,
-      uid:uid
+      uid: uid,
+      adoptKey: adoptKey
     })
   }
   presentConfirm() {
@@ -62,7 +72,7 @@ export class AdoptGetPage {
           label: 'ทั้งหมด',
           value: 'all',
           type: 'radio',
-          checked:true
+          checked: true
         },
         {
           label: 'ขนาดตัว',
@@ -84,7 +94,7 @@ export class AdoptGetPage {
           value: 'coldResist',
           type: 'radio'
         },
-      
+
       ],
       buttons: [
         {
@@ -94,12 +104,12 @@ export class AdoptGetPage {
             console.log('Cancel clicked');
           }
         }
-       
+
       ]
     });
     alert.present();
   }
-  getGeoRequest() { 
+  getGeoRequest() {
     let req = {
       position: {
         lat: this.loc.lat,
@@ -110,16 +120,18 @@ export class AdoptGetPage {
       (res) => {
         this.district = res[0]['subLocality']
         //alert(this.district)
-        if (this.district != undefined) { 
+        if (this.district != undefined) {
           this.announcelistNear = this.db.list('announceAdopt/', {
             query: {
               orderByChild: 'district',
               equalTo: this.district
             }
           }).map((arr) => {
-            return arr.reverse();
-            }) as FirebaseListObservable<any[]>;
-            
+            var array = <any>{};
+            array = arr;
+            return array.reverse();
+          }) as FirebaseListObservable<any[]>;
+
         }
         this.province = res[0]['locality']
         this.country = res[0]['country']

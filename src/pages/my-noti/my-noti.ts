@@ -4,6 +4,7 @@ import { MyNotiDetailPage } from '../my-noti-detail/my-noti-detail';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { VaccineDetailPage } from '../vaccine-detail/vaccine-detail'
+import { MyNotiDetailAdoptPage } from '../my-noti-detail-adopt/my-noti-detail-adopt';
 /**
  * Generated class for the MyNotiPage page.
  *
@@ -20,25 +21,31 @@ export class MyNotiPage {
 
   dogPhoto: string[]
   notiList
-  notidetail
+
   notiVaccine
-  notidetail2
+
+  notiAdopt
 
   annouceFound: any = []
-  dogObject:any = []
+  dogObject: any = []
+  announceAdopter: any = []
+  announceAdoptDetail = []
   index = 0
   index2 = 0;
   constructor(private userService: UserServiceProvider, private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     let uid = userService.uid;
-    this.notiList = db.list('notification/', { query: { orderByChild: 'uid', equalTo: uid } }); //noti missing/adopt
+    this.notiList = db.list('notification/', { query: { orderByChild: 'uid', equalTo: uid } }); //noti missing
     this.notiVaccine = db.list('notiVaccine/', { query: { orderByChild: 'uid', equalTo: uid } });
+    this.notiAdopt = db.list('notificationAdopt/', { query: { orderByChild: 'uid', equalTo: uid } });//noti adopt
     this.notiList.forEach(element => {
       this.getFirebaseProperty(element, element.length)
     });
     this.notiVaccine.forEach(element => {
       this.getFirebaseProperty2(element, element.length)
     });
-
+    this.notiAdopt.forEach(element => {
+      this.getFirebaseProperty3(element, element.length)
+    });
     // this.dogPhoto= ["assets/img/scroll0015.jpg","assets/img/labrado2.jpg","assets/img/dog_test.jpeg"]
   }
 
@@ -49,28 +56,37 @@ export class MyNotiPage {
   //     status: ["อยู่กับผู้พบ","อยู่กับผู้พบ","อยู่กับผู้พบ"]
   //   })
   // }
-  getFirebaseProperty(element, length) {
+  getFirebaseProperty(element, length) { //ของ lost announcement
     for (var index = 0; index < length; index++) {
       var key = element[index].announceFoundKey;
       // console.log(element2)
-      this.notidetail = this.db.object('announceFound/' + key).subscribe(user => {
+      this.db.object('announceFound/' + key).subscribe(user => {
         this.annouceFound.push(user)
         // console.log(this.annouceFound)
         // console.log(user)
       })
     }
   }
-  getFirebaseProperty2(element, length) {
-    console.log(length);
+  getFirebaseProperty2(element, length) { //ของ วัคซีน
     for (var index = 0; index < length; index++) {
       var key = element[index].dogID;
-      this.notidetail2 = this.db.object('dogs/' + key).subscribe(dog => {
+       this.db.object('dogs/' + key).subscribe(dog => {
         this.dogObject.push(dog)
       });
     }
-    console.log(this.dogObject)
   }
-
+  getFirebaseProperty3(element, length) { //ของ adopt announcement
+    for (var index = 0; index < length; index++) {
+      var key = element[index].adopter;
+      var keyAnnounce = element[index].adoptAnnounceKey
+      this.db.object('userProfile/' + key).subscribe(user => {
+        this.announceAdopter.push(user);
+      });
+      this.db.object('announceAdopt/' + keyAnnounce).subscribe(data => {
+        this.announceAdoptDetail.push(data);
+      });
+    }
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyNotiPage');
   }
@@ -81,7 +97,7 @@ export class MyNotiPage {
       dogObject:this.dogObject[index]
     })
   }
-  goToNotiDetail(dogName, breed, gender, age, detail, photo, status, lat, lng) {
+  goToNotiDetailLost(dogName, breed, gender, age, detail, photo, status, lat, lng) {
     this.navCtrl.push(MyNotiDetailPage, {
       dogName: dogName,
       breed: breed,
@@ -92,6 +108,19 @@ export class MyNotiPage {
       status: status,
       lat: lat,
       lng: lng
+    })
+  }
+  goToNotiDetailAdopt(photo, dogName, breed, adopterFirstName, adopterLastName, adopterEmail, adopterTel,key,adoptAnnounceKey) {
+    this.navCtrl.push(MyNotiDetailAdoptPage, {
+      photo: photo,
+      dogName: dogName,
+      breed: breed,
+      adopterFirstName: adopterFirstName,
+      adopterLastName:adopterLastName,
+      adopterEmail: adopterEmail,
+      adopterTel: adopterTel,
+      key: key,
+      adoptAnnounceKey:adoptAnnounceKey
     })
   }
 }

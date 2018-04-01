@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-    <ion-card *ngFor="let noti of notiList|async; let i = index" (click)="goToNotiDetail(noti.announceFoundKey)">
+    <ion-card *ngFor="let noti of notiList|async; let i = index" (click)="goToNotiDetailLost(noti.announceFoundKey)">
         <ion-grid>
         <ion-row>          
         <ion-col col-5>
@@ -52,7 +52,44 @@
       </ion-row>
     </ion-grid>
   </ion-card>
+  <ion-card *ngFor="let noti of notiAdopt|async; let i = index" (click)="goToNotiDetailAdopt(announceAdoptDetail[i].photo,announceAdoptDetail[i].dogName,announceAdoptDetail[i].breed,announceAdopter[i].firstName,announceAdopter[i].lastName,announceAdopter[i].email,announceAdopter[i].tel,noti.$key,noti.adoptAnnounceKey)">
+    <ion-grid>
+    <ion-row>          
+    <ion-col col-5>
+      <!-- <p>{{notiTest[i].photo}}</p> -->
+      <img src="{{announceAdoptDetail[i]?.photo}}" />
+    </ion-col>
 
+    <ion-col col-7>
+      <h1>
+          {{announceAdoptDetail[i].dogName}} มีผู้สนใจรับอุปการะแล้ว
+      </h1>
+      <p class="subhead">
+        test test
+      </p>
+      <p>
+        ดูรายละเอียด
+      </p>
+      <!-- <div *ngIf="annouceFound[i]?.dogWithYou=='yes'">
+        <p class="subhead">
+          สถานะ :
+          <span class="safe">อยู่กับผู้พบ</span>
+        </p>
+      </div>
+      <div *ngIf="annouceFound[i]?.dogWithYou!='yes'">
+        <p class="subhead">
+          สถานะ :
+          <span class="danger">ไม่อยู่กับผู้พบ</span>
+        </p>
+      </div> -->
+      <!-- <div *ngIf="{{annouceFound[i].dogWithYou}}!='yes'">
+           <p> class = "subhead" สถานะ : <span class = "safe">ไม่อยู่กับผู้พบ</span></p>
+        </div> -->
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-card>
   <ion-card *ngFor="let noti of notiVaccine|async; let i = index" (tap)= "goToVaccineDetail(noti.vaccine,noti.time,i)"> <!--สำหรับ notiVaccine -->   
     <ion-grid>
       <ion-row>
@@ -63,34 +100,19 @@
 
         <ion-col col-7>
           <h1>
-            vaccine พบเห็นสุนัขที่ลักษณะใกล้เคียง
+              {{dogObject[i]?.dogName}} ถึงกำหนดได้รับวัคซีน
           </h1>
           <p class="subhead">
-            ลักษณะคล้ายสุนัขของคุณ
+            test test test
           </p>
           <p>
             ดูรายละเอียด
           </p>
-          <!-- <div *ngIf="annouceFound[i]?.dogWithYou=='yes'">
-            <p class="subhead">
-              สถานะ :
-              <span class="safe">อยู่กับผู้พบ</span>
-            </p>
-          </div>
-          <div *ngIf="annouceFound[i]?.dogWithYou!='yes'">
-            <p class="subhead">
-              สถานะ :
-              <span class="danger">ไม่อยู่กับผู้พบ</span>
-            </p>
-          </div> -->
-          <!-- <div *ngIf="{{annouceFound[i].dogWithYou}}!='yes'">
-               <p> class = "subhead" สถานะ : <span class = "safe">ไม่อยู่กับผู้พบ</span></p>
-            </div> -->
-
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
 
+  
 
 </ion-content>

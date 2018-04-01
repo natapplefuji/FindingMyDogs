@@ -7,12 +7,31 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>FoundAnnounceDetail</ion-title>
+    <ion-title>รายละเอียดสุนัข</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <img src="{{photo}}" />
+  <ion-list>
+    <ion-item>
+      <h2>พันธุ์</h2>
+      <p>{{breed}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>พบบริเวณ</h2>
+      <p>{{district}} จังหวัด{{province}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>รายละเอียดสุนัข</h2>
+      <p>{{dogDetail}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>ข้อมูลติดต่อผู้พบ</h2>
+      <p>{{contact}}</p>
+      <p>สถานะสุนัข : {{dogWithYou}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

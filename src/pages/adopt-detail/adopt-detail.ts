@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,ToastController} from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable,FirebaseListObservable} from 'angularfire2/database-deprecated'
+import { UserServiceProvider} from '../../providers/user-service/user-service'
 /**
  * Generated class for the AdoptDetailPage page.
  *
@@ -24,7 +25,8 @@ export class AdoptDetailPage {
     contactMiss: '',
     reward: '',
     uid:'',
-    announcer:''
+    announcer: '',
+    key:''
   }
   user: Object = {} 
   userDetail = {
@@ -35,7 +37,7 @@ export class AdoptDetailPage {
     photo: '',
     tel: ''
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
+  constructor(private toastCtrl: ToastController,public userService:UserServiceProvider,public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
     this.announceDetail.dogName = navParams.get("dogName");
     this.announceDetail.breed = navParams.get("breed");
     this.announceDetail.gender = navParams.get("gender");
@@ -44,6 +46,7 @@ export class AdoptDetailPage {
     this.announceDetail.photo = navParams.get("photo");
     this.announceDetail.contactMiss = navParams.get("contactMiss");
     this.announceDetail.uid = navParams.get("uid");
+    this.announceDetail.key = navParams.get("adoptKey");
     this.user = this.db.object('/userProfile/' + navParams.get("uid"),{ preserveSnapshot: true})
     .subscribe(snapshot=>{
           this.userDetail.displayName = snapshot.child("displayName").val(),
@@ -54,7 +57,49 @@ export class AdoptDetailPage {
           this.userDetail.tel = snapshot.child("tel").val()
       });
   }
-
+  askForAdoption() {
+    let uid;
+    let playerID;// playerID เจ้าของประกาศ
+    let playerIDList = [];
+    this.db.database.ref('announceAdopt/' + this.announceDetail.key).on("value", (snapshot) => {
+      uid = snapshot.val().uid;
+      this.db.database.ref('userProfile/' + uid).once('value', (snapshot) => {
+        playerID = snapshot.val().playerID;
+        playerIDList = [];
+        playerIDList.push(playerID);
+      })
+    })
+    this.db.database.ref('notificationAdopt/').push().set({
+      uid: uid,//เจ้าของหมา
+      adoptAnnounceKey: this.announceDetail.key,//key ของประกาศนี้
+      adopter: this.userService.uid, //ผู้ขอรับเลี้ยง
+      isResponded:'false'
+    }).then(() => {
+      var notificationObj = {
+        contents: {
+          en: "There's someone wants to adopt your dog.",
+          th: "มีผู้ต้องการรับอุปการะสุนัขของคุณ"
+        },
+        include_player_ids: playerIDList
+      };
+      
+      window["plugins"].OneSignal.postNotification(notificationObj,
+        (successResponse) => {
+          //alert("Notification Post Success:" + JSON.stringify(playerIDList));
+          let toast = this.toastCtrl.create({
+            message: 'แจ้งไปยังเจ้าของสุนัขเรียบร้อยแล้วค่ะ',
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
+        },
+        (failedResponse) => {
+          alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+        }
+      );
+      
+    })
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdoptDetailPage');
   }

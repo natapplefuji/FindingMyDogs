@@ -16,9 +16,11 @@
           <ion-item>
             <button ion-button (tap)="getImage()">upload</button>            
         </ion-item>
+        <div *ngIf="dogPicture !== undefined">
         <ion-item no-lines>
           <img src={{dogPicture}}>
         </ion-item>
+        </div>
           <ion-item>
             <ion-label floating>ข้อมูลติดต่อ</ion-label>
             <ion-textarea  formControlName="contactMiss" required></ion-textarea>

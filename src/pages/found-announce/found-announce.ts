@@ -18,15 +18,19 @@ export class FoundAnnouncePage {
   
   foundAnnounce : FirebaseListObservable<any>;
   constructor(private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
-    this.foundAnnounce = this.db.list('announceMissing/', {
-      query: {
-        orderByChild: 'status',
-        equalTo: 'found'
-      }
-    })
+    this.foundAnnounce = db.list('announceFound/')
   }
-  goToFoundAnnounceDetail() {
-    this.navCtrl.push(FoundAnnounceDetailPage);
+  goToFoundAnnounceDetail(founder,breed,contact,dogDetail,dogWithYou,photo,lat,lng) {
+    this.navCtrl.push(FoundAnnounceDetailPage, {
+      founder: founder,
+      breed: breed,
+      contact: contact,
+      dogDetail: dogDetail,
+      dogWithYou: dogWithYou,
+      photo: photo,
+      lat: lat,
+      lng: lng,
+    });
   }
 
   ionViewDidLoad() {
