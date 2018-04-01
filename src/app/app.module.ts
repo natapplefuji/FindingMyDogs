@@ -112,8 +112,7 @@ firebase.initializeApp(config);
     VaccineDetailPage,
     UpdateAnnouceLostPage,
     UpdateAnnouceAdoptPage,
-    InformFoundManualPage
-
+    InformFoundManualPage,
     MyNotiDetailAdoptPage,
     FoundAnnouncePage,
     FoundAnnounceDetailPage
@@ -162,7 +161,7 @@ firebase.initializeApp(config);
     VaccineDetailPage,
     UpdateAnnouceLostPage,
     UpdateAnnouceAdoptPage,
-    InformFoundManualPage
+    InformFoundManualPage,
     MyNotiDetailAdoptPage,
     FoundAnnouncePage,
     FoundAnnounceDetailPage
