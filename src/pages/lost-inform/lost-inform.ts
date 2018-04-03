@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Platform,ToastController } from 'ionic-angular';
 import { LostMainPage } from '../lost-main/lost-main';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { UserServiceProvider } from '../../providers/user-service/user-service'
@@ -35,11 +35,13 @@ export class LostInformPage {
   milliTime;
   dogPicture;
   photoName;
-  district
-  province
-  country
+  district = ''
+  province =''
+  country =''
   loc = { lat: 0, lng: 0 };
-  constructor(public platform: Platform,
+  constructor(
+    private toastCtrl: ToastController,
+    public platform: Platform,
     public _loc: LocationProvider,
     private loadingCtrl: LoadingController,
     private _DB: DatabaseProvider,
@@ -74,6 +76,8 @@ export class LostInformPage {
         this.loc.lat = data.coords.latitude;
         this.loc.lng = data.coords.longitude;
         this.getGeoRequest()
+      }).catch((err) => {
+        console.log(err.code +" "+ err.message)
       })
     })
   }
@@ -113,7 +117,15 @@ export class LostInformPage {
             age_month: this.announcelost.value.age_month,
             age_week: this.announcelost.value.age_week,
             status:'lost'//lost เป็น default/update เป็น found เมื่อพบเจ้าของแล้ว
-          }).then(() => { this.navCtrl.pop() })
+          }).then(() => {
+            let toast = this.toastCtrl.create({
+              message: 'เพิ่มประกาศในระบบเรียบร้อยแล้ว',
+              duration: 3000,
+              position: 'top'
+            });
+            toast.present();
+            this.navCtrl.pop()
+          })
         })
     }
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController, ModalController, ToastController } from 'ionic-angular';
+import { NavController, NavParams,LoadingController, ModalController, ToastController,AlertController } from 'ionic-angular';
 import { AdoptGetPage } from '../adopt-get/adopt-get';
 import { AdoptGivePage } from '../adopt-give/adopt-give';
 import { FilterModalPage } from '../filter-modal/filter-modal'
@@ -10,7 +10,11 @@ import { ImageProvider } from '../../providers/image/image'
 import { DatabaseProvider } from '../../providers/database/database'
 import { PredictProvider } from '../../providers/predict/predict';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
-import { AdoptDetailPage} from '../adopt-detail/adopt-detail'
+import { AdoptDetailPage } from '../adopt-detail/adopt-detail'
+import firebase from 'firebase/app'
+import { UserServiceProvider } from '../../providers/user-service/user-service'
+import { MyDogPage } from '../my-dog/my-dog';
+
 /**
  * Generated class for the AdoptMainPage page.
  *
@@ -33,6 +37,8 @@ export class AdoptMainPage {
   photoName = "";
   dogBreedfromPredict = [];
   announcelist: FirebaseListObservable<any>;
+
+  uid;
   breed = { //test var
     "golden retriever": {
       "areaRequire": "3",
@@ -63,7 +69,10 @@ export class AdoptMainPage {
     }
   }
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    private alertCtrl: AlertController,
+    private userService: UserServiceProvider,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private toastCtrl: ToastController,
@@ -201,7 +210,35 @@ export class AdoptMainPage {
     this.navCtrl.push(AdoptGetPage);
   }
   addAdopt() {
-    this.navCtrl.push(AdoptGivePage);
+    var numChild;
+    var ref = firebase.database().ref('dogs/')
+    ref.orderByChild('uid').equalTo(this.uid).on('value', ((data) => {
+      numChild = data.numChildren();
+      if (numChild == 0) {
+        this.navCtrl.push(AdoptGivePage);
+      } else {
+        let alert = this.alertCtrl.create({
+          title: 'คุณมีสุนัขเพิ่มไว้ในระบบ',
+          message: 'ต้องการสร้างประกาศจากข้อมูลสุนัขที่มีหรือไม่?',
+          buttons: [
+            {
+              text: 'ไม่',
+              role: 'cancel',
+              handler: () => {
+                this.navCtrl.push(AdoptGivePage);
+              }
+            },
+            {
+              text: 'ใช่',
+              handler: () => {
+                this.navCtrl.push(MyDogPage);
+              }
+            }
+          ]
+        });
+        alert.present();
+      }
+    }))
   }
   goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
     this.navCtrl.push(AdoptDetailPage, {
