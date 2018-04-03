@@ -35,9 +35,9 @@ export class InformFoundPage {
   month;
   year;
   milliTime;
-  district
-  province
-  country
+  district =''
+  province =''
+  country =''
   loc = { lat: 0, lng: 0 };
   constructor(public navCtrl: NavController,
     public platform : Platform,
@@ -68,6 +68,8 @@ export class InformFoundPage {
         this.loc.lat = data.coords.latitude;
         this.loc.lng = data.coords.longitude;
         this.getGeoRequest()
+      }).catch((err) => {
+        console.log("location error -> "+err.code +" "+ err.message)
       })
     })
   }
