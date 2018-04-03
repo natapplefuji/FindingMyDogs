@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams , Platform} from 'ionic-angular';
-import { LostMainPage } from '../lost-main/lost-main';
-import { LostInformThankPage } from '../lost-inform-thank/lost-inform-thank';
+import { IonicPage, NavController, NavParams, ViewController, Platform, ToastController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DatabaseProvider } from '../../providers/database/database'
@@ -11,22 +9,23 @@ import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
 import { LocationProvider } from '../../providers/location/location'
 import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
-
 /**
- * Generated class for the InformFoundPage page.
+ * Generated class for the InformFoundManualPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
-  selector: 'page-inform-found',
-  templateUrl: 'inform-found.html',
+  selector: 'page-inform-found-manual',
+  templateUrl: 'inform-found-manual.html',
 })
-export class InformFoundPage {
+export class InformFoundManualPage {
   private infoFound: FormGroup;
-  uid;
-  breed = 'default'
+  uid = this.navParams.get("uid");
+  breed = this.navParams.get("announceMissingBreed");
+  announceMissingKey = this.navParams.get("announceMissingKey");
   uploadedImage = null;
   photoName = 'default';
   dogPicture: string;
@@ -35,24 +34,23 @@ export class InformFoundPage {
   month;
   year;
   milliTime;
-  district =''
-  province =''
-  country =''
+  district
+  province
+  country
   loc = { lat: 0, lng: 0 };
   constructor(public navCtrl: NavController,
-    public platform : Platform,
     public navParams: NavParams,
+    public viewCtrl: ViewController,
+    public platform: Platform,
     private formBuilder: FormBuilder,
     private image: ImageProvider,
-    private userService: UserServiceProvider,
     private _DB: DatabaseProvider,
     private db: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    public _loc : LocationProvider
+    public _loc: LocationProvider,
+    private toastCtrl: ToastController
   ) {
-
-    this.uid = userService.uid;
     this.infoFound = this.formBuilder.group({
       contactMiss: ['', Validators.required],
       dogDetail: ['', Validators.required],
@@ -67,26 +65,28 @@ export class InformFoundPage {
         this.loc.lat = data.coords.latitude;
         this.loc.lng = data.coords.longitude;
         this.getGeoRequest()
-      }).catch((err) => {
-        console.log("location error -> "+err.code +" "+ err.message)
       })
     })
   }
   ionViewDidLoad() {
+    console.log(this.uid)
+    console.log(this.breed)
+    console.log(this.announceMissingKey)
     console.log('ionViewDidLoad InformFoundPage');
   }
   addAnnounce() {
     if (this.uploadedImage == null) {
       //this.loc = this._loc.getLocation();
-        
+
       this._DB.uploadImageDog(this.dogPicture).then((snapshot: any) => {
         this.uploadedImage = snapshot.downloadURL;
         this.photoName = this._DB.imageName;
+        console.log(this.photoName)
         var myRef = this.db.database.ref('/announceFound').push()
         var key = myRef.key
-        this.db.database.ref('/announceFound/'+key).set({
+        this.db.database.ref('/announceFound/' + key).set({
           founder: this.uid,
-          announcefoundid:key,
+          announcefoundid: key,
           breed: this.breed,
           contactMiss: this.infoFound.value.contactMiss,
           dogDetail: this.infoFound.value.dogDetail,
@@ -101,7 +101,14 @@ export class InformFoundPage {
           lng: this.loc.lng
 
         }).then(() => {
-          this.navCtrl.push(LostInformThankPage, { photo: this.photoName,announceFoundId:key})
+          let notiRef = this.db.database.ref('/notification')
+          notiRef.push().set({
+            announceFoundKey: key,
+            announceMissingKey: this.announceMissingKey,
+            uid: this.uid,
+            status: 'lostM'
+          })
+          this.viewCtrl.dismiss()
         })
       })
     }
@@ -142,9 +149,9 @@ export class InformFoundPage {
   }
 
   cancelForm() {
-    this.navCtrl.pop();
+    this.viewCtrl.dismiss()
   }
-  getGeoRequest() { 
+  getGeoRequest() {
     let req = {
       position: {
         lat: this.loc.lat,
@@ -158,6 +165,5 @@ export class InformFoundPage {
         this.country = res[0]['country']
       });
   }
-
 
 }

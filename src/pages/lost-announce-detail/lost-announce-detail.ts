@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseObjectObservable,FirebaseListObservable} from 'angularfire2/database-deprecated'
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database-deprecated'
+import { UserServiceProvider } from '../../providers/user-service/user-service'
+import { ModalController } from 'ionic-angular';
+import {InformFoundManualPage} from '../inform-found-manual/inform-found-manual';
 /**
  * Generated class for the LostAnnounceDetailPage page.
  *
@@ -23,7 +26,8 @@ export class LostAnnounceDetailPage {
     contactMiss: '',
     reward: '',
     uid:'',
-    announcer:''
+    announcer: '',
+    key:''
   }
   user: Object = {} 
   userDetail = {
@@ -34,7 +38,7 @@ export class LostAnnounceDetailPage {
     photo: '',
     tel: ''
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,private userService: UserServiceProvider,public modalCtrl: ModalController) {
     this.announceDetail.dogName = navParams.get("dogName");
     this.announceDetail.breed = navParams.get("breed");
     this.announceDetail.gender = navParams.get("gender");
@@ -43,6 +47,7 @@ export class LostAnnounceDetailPage {
     this.announceDetail.photo = navParams.get("photo");
     this.announceDetail.contactMiss = navParams.get("contactMiss");
     this.announceDetail.uid = navParams.get("uid");
+    this.announceDetail.key = navParams.get("key");
     this.user = this.db.object('/userProfile/' + navParams.get("uid"),{ preserveSnapshot: true})
     .subscribe(snapshot=>{
           this.userDetail.displayName = snapshot.child("displayName").val(),
@@ -58,5 +63,24 @@ export class LostAnnounceDetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostAnnounceDetailPage');
   }
-
+  notiAnnounceLost() { 
+    let uid = this.userService.uid;
+    let obj = {
+      announceMissingKey: this.navParams.get("key"),
+      announceMissingBreed : this.navParams.get("breed"), 
+      uid: uid
+    };
+    
+    console.log(obj.announceMissingKey)
+    let myModal = this.modalCtrl.create(InformFoundManualPage,obj);
+    myModal.present();
+    // let notiRef = this.db.database.ref('/notification')
+    // let uid = this.userService.uid;
+    // notiRef.push().set({
+    //   announceFoundKey: "same",
+    //   announceMissingKey: missingKey,
+    //   uid: uid,
+    //   status: 'lostM'
+    // })
+  }
 }

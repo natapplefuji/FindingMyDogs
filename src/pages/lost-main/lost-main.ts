@@ -41,7 +41,7 @@ export class LostMainPage {
   goToFoundAnnouncePage() {
     this.navCtrl.push(FoundAnnouncePage);
   }
-  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid,key) {
     this.navCtrl.push(LostAnnounceDetailPage, {
       dogName: dogName,
       breed: breed,
@@ -51,7 +51,8 @@ export class LostMainPage {
       photo:photo,
       contactMiss: contactMiss,
       reward: reward,
-      uid:uid
+      uid: uid,
+      key:key
     })
   }
 }

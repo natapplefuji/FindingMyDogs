@@ -61,6 +61,7 @@ import { VaccineProvider } from '../providers/vaccine/vaccine';
 import { VaccineDetailPage } from '../pages/vaccine-detail/vaccine-detail';
 import { UpdateAnnouceLostPage } from '../pages/update-annouce-lost/update-annouce-lost';
 import { UpdateAnnouceAdoptPage } from '../pages/update-annouce-adopt/update-annouce-adopt';
+import {InformFoundManualPage} from '../pages/inform-found-manual/inform-found-manual';
 import { MyNotiDetailAdoptPage } from '../pages/my-noti-detail-adopt/my-noti-detail-adopt'
 import { FoundAnnouncePage } from '../pages/found-announce/found-announce'
 import { FoundAnnounceDetailPage} from '../pages/found-announce-detail/found-announce-detail'
@@ -111,6 +112,7 @@ firebase.initializeApp(config);
     VaccineDetailPage,
     UpdateAnnouceLostPage,
     UpdateAnnouceAdoptPage,
+    InformFoundManualPage,
     MyNotiDetailAdoptPage,
     FoundAnnouncePage,
     FoundAnnounceDetailPage
@@ -159,6 +161,7 @@ firebase.initializeApp(config);
     VaccineDetailPage,
     UpdateAnnouceLostPage,
     UpdateAnnouceAdoptPage,
+    InformFoundManualPage,
     MyNotiDetailAdoptPage,
     FoundAnnouncePage,
     FoundAnnounceDetailPage

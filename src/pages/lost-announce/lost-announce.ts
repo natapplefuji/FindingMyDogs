@@ -49,7 +49,8 @@ export class LostAnnouncePage {
     console.log("baba")
     console.log(this.announcelistAll)
   }
-  goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid) {
+  goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid, key) {
+    console.log(key)
     this.navCtrl.push(LostAnnounceDetailPage, {
       dogName: dogName,
       breed: breed,
@@ -59,7 +60,8 @@ export class LostAnnouncePage {
       photo: photo,
       contactMiss: contactMiss,
       reward: reward,
-      uid: uid
+      uid: uid,
+      key:key
     })
   }
   getGeoRequest() {
