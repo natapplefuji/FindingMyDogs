@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController, ModalController, ToastController,AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController, ToastController, AlertController } from 'ionic-angular';
 import { AdoptGetPage } from '../adopt-get/adopt-get';
 import { AdoptGivePage } from '../adopt-give/adopt-give';
 import { FilterModalPage } from '../filter-modal/filter-modal'
@@ -40,6 +40,87 @@ export class AdoptMainPage {
 
   uid;
   breed = { //test var
+    "chihuahua": {
+      "areaRequire": "1",
+      "coldResist": "1",
+      "exercise": "2",
+      "hairLength": "1",
+      "heatResist": "2",
+      "kidFriendly": "2",
+      "size": "1"
+    },
+    "pomeranian": {
+      "areaRequire": "1",
+      "coldResist": "2",
+      "exercise": "1",
+      "hairLength": "3",
+      "heatResist": "1",
+      "kidFriendly": "2",
+      "size": "1"
+    },
+    "shih tzu": {
+      "areaRequire": "2",
+      "coldResist": "2",
+      "exercise": "1",
+      "hairLength": "3",
+      "heatResist": "1",
+      "kidFriendly": "1",
+      "size": "1"
+    },
+    "yorkshire terrier": {
+      "areaRequire": "1",
+      "coldResist": "2",
+      "exercise": "1",
+      "hairLength": "3",
+      "heatResist": "1",
+      "kidFriendly": "2",
+      "size": "1"
+    },
+    "beagle": {
+      "areaRequire": "3",
+      "coldResist": "1",
+      "exercise": "2",
+      "hairLength": "1",
+      "heatResist": "2",
+      "kidFriendly": "3",
+      "size": "1"
+    },
+    "pug": {
+      "areaRequire": "1",
+      "coldResist": "2",
+      "exercise": "1",
+      "hairLength": "1",
+      "heatResist": "1",
+      "kidFriendly": "2",
+      "size": "1"
+    },
+    "english bulldog": {
+      "areaRequire": "1",
+      "coldResist": "1",
+      "exercise": "3",
+      "hairLength": "1",
+      "heatResist": "1",
+      "kidFriendly": "3",
+      "size": "2"
+    },
+    "french bulldog": {
+      "areaRequire": "2",
+      "coldResist": "2",
+      "exercise": "2",
+      "hairLength": "1",
+      "heatResist": "1",
+      "kidFriendly": "2",
+      "size": "1"
+    },
+    "siberian husky": {
+      "areaRequire": "3",
+      "coldResist": "3",
+      "exercise": "2",
+      "hairLength": "2",
+      "heatResist": "2",
+      "kidFriendly": "2",
+      "size": "2"
+    },
     "golden retriever": {
       "areaRequire": "3",
       "coldResist": "3",
@@ -49,24 +130,16 @@ export class AdoptMainPage {
       "kidFriendly": "3",
       "size": "3"
     },
-    "basenji": {
-      "areaRequire": "1",
-      "coldResist": "2",
-      "exercise": "1",
-      "hairLength": "2",
+    "labrador retriever": {
+      "areaRequire": "3",
+      "coldResist": "3",
+      "exercise": "2",
+      "hairLength": "1",
       "heatResist": "2",
-      "kidFriendly": "2",
-      "size": "1"
+      "kidFriendly": "3",
+      "size": "3"
     },
-    "beagle": {
-      "areaRequire": "1",
-      "coldResist": "2",
-      "exercise": "1",
-      "hairLength": "2",
-      "heatResist": "2",
-      "kidFriendly": "2",
-      "size": "1"
-    }
+
   }
 
   constructor(
@@ -88,12 +161,14 @@ export class AdoptMainPage {
       query: {
         orderByChild: 'status',
         equalTo: 'wait',
-        limitToLast:6
+        limitToLast: 6
       }
     }
-    ).map((arr) => { var array = <any>{};
-    array = arr;
-    return array.reverse(); }) as FirebaseListObservable<any[]>;
+    ).map((arr) => {
+      var array = <any>{};
+      array = arr;
+      return array.reverse();
+    }) as FirebaseListObservable<any[]>;
   }
   //ฟังก์ชันเรียกหาชื่อพันธุ์ this.a = this.filterBreed(this.breed, "areaRequire", "high", "coldResist", "high", "hairLength", "medium", "heatResist", "medium", "size", "big")
   ionViewDidLoad() {
@@ -148,7 +223,7 @@ export class AdoptMainPage {
             this.dogBreedfromPredict.push(data[1].dogName);
             this.dogBreedfromPredict.push(data[2].dogName);
             this.dogBreedfromPredict.push(data[3].dogName);
-          }  
+          }
           loading.dismiss();
 
           if (this.dogBreedfromPredict.length > 0) {
@@ -160,7 +235,7 @@ export class AdoptMainPage {
               position: 'bottom'
             });
             toast.present();
-          }  
+          }
         })
       })
     })
@@ -240,17 +315,17 @@ export class AdoptMainPage {
       }
     }))
   }
-  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+  goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid) {
     this.navCtrl.push(AdoptDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
       age: age,
       dogDetail: dogDetail,
-      photo:photo,
+      photo: photo,
       contactMiss: contactMiss,
       reward: reward,
-      uid:uid
+      uid: uid
     })
   }
 

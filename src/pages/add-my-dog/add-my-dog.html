@@ -90,9 +90,9 @@
       <ion-label>รายละเอียดเพิ่มเติม</ion-label>
       <ion-textarea formControlName="detail"></ion-textarea>
     </ion-item>
-    
+
     <ion-item no-lines>
-        <button ion-button type=button (click)="getImage()">อัพโหลดภาพ</button>
+      <button ion-button type=button (click)="getImage()">อัพโหลดภาพ</button>
       <div *ngIf="dogPicture !== undefined">
         <img src={{dogPicture}}>
       </div>
@@ -100,6 +100,12 @@
     <ion-item>
       <ion-label>รับการแจ้งเตือนการฉีดวัคซีนสำหรับสุนัข</ion-label>
       <ion-checkbox formControlName="vaccineNoti" checked="false"></ion-checkbox>
+
+    </ion-item>
+    <ion-item>
+      <button ion-button clear (tap)="openVaccineDetail()">
+        <span class="vaccine">รายละเอียดการฉีดวัคซีน</span>
+      </button>
     </ion-item>
     <button ion-button type="submit" [disabled]="!dog.valid">Submit</button>
   </form>
