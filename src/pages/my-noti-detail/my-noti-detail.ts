@@ -1,5 +1,5 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform,ModalController,,AlertController,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform,ModalController,AlertController,ToastController } from 'ionic-angular';
 import { GoogleMaps, GoogleMap, GoogleMapOptions,GoogleMapsEvent, LatLng, MarkerOptions, Marker, CameraPosition } from '@ionic-native/google-maps';
 import { AngularFireDatabase, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2/database-deprecated'
 import { ModalPage } from '../modal/modal';
