@@ -93,6 +93,7 @@ export class RegisterPage {
           handler: () => {
             this.image.getDogPicture(this.camera.PictureSourceType.PHOTOLIBRARY).then((data) => {
               this.profileImage = data;
+              this.getImage();
             });
             
           }
@@ -102,6 +103,7 @@ export class RegisterPage {
           handler: () => {
             this.image.getDogPicture(this.camera.PictureSourceType.CAMERA).then((data) => {
               this.profileImage = data;
+              this.getImage();
             });
           }
         },

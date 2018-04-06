@@ -22,8 +22,7 @@ export class LocationProvider {
     });
   }
   getLocation() {
-    let options = { timeout: 5000 };
-    return this._geo.getCurrentPosition(options)
+    return this._geo.getCurrentPosition()
   }
   
 

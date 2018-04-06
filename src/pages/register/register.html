@@ -46,12 +46,9 @@
       <ion-icon name='image'></ion-icon>
         เลือกรูปโปรไฟล์
       </button>
-      <button ion-button icon-start (click)= "getImage()">
-        อัพโหลดรูปโปรไฟล์
-      </button>
-      <!-- <div *ngIf="this.user.photo != null"> -->
-          <img src="{{profileImage}}">
-        <!-- </div> -->
+      <div *ngIf="profileImage !== undefined">
+        <img src={{profileImage}}>
+      </div>
     </ion-item>
       <ion-item no-lines>
           <ion-label>ยอมรับเงื่อนไขการใช้บริการ</ion-label>

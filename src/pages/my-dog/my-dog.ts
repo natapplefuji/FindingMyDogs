@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
 import { AddMyDogPage } from '../add-my-dog/add-my-dog';
 import { AngularFireDatabase ,FirebaseListObservable} from 'angularfire2/database-deprecated'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
-import { MyDogDetailPage} from '../my-dog-detail/my-dog-detail'
+import { MyDogDetailPage } from '../my-dog-detail/my-dog-detail'
+import { LostModalPage } from '../lost-modal/lost-modal'
+import { AdoptModalPage } from '../adopt-modal/adopt-modal'
 /**
  * Generated class for the MyDogPage page.
  *
@@ -19,7 +21,7 @@ import { MyDogDetailPage} from '../my-dog-detail/my-dog-detail'
 export class MyDogPage {
   dogList: FirebaseListObservable<any[]>;
 
-  constructor(private userService: UserServiceProvider,private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public modalCtrl: ModalController,private userService: UserServiceProvider,private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     let uid = userService.uid;
     this.dogList = db.list('dogs/', { query: { orderByChild: 'uid', equalTo: uid } });
   }
@@ -29,6 +31,40 @@ export class MyDogPage {
   }
   goToAddDog() {
     this.navCtrl.push(AddMyDogPage);
+  }
+  createLost(dogName,breed,detail,gender,photo,age_week,age_month,age_year,lat,lng,photoName,dogKey) {
+    let lostModal = this.modalCtrl.create('LostModalPage', {
+      dogName:dogName,
+      breed :breed,
+      detail:detail,
+      gender:gender,
+      photo:photo,
+      age_week:age_week,
+      age_month:age_month,
+      age_year:age_year,
+      lat:lat,
+      lng: lng,
+      photoName: photoName,
+      dogKey: dogKey
+    })
+    lostModal.present();
+  }
+  createAdopt(dogName,breed,detail,gender,photo,age_week,age_month,age_year,lat,lng,photoName,dogKey) {
+    let adoptModal = this.modalCtrl.create('AdoptModalPage', {
+      dogName:dogName,
+      breed :breed,
+      detail:detail,
+      gender:gender,
+      photo:photo,
+      age_week:age_week,
+      age_month:age_month,
+      age_year:age_year,
+      lat:lat,
+      lng: lng,
+      photoName: photoName,
+      dogKey: dogKey
+    })
+    adoptModal.present();
   }
   goToDogDetail(dogName,breed,gender,age,detail,photo,status,lat,lng) {
     this.navCtrl.push(MyDogDetailPage, {

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Platform,ToastController,ModalController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { ImageProvider } from '../../providers/image/image'
@@ -11,6 +11,7 @@ import { ActionSheetController } from 'ionic-angular'
 import { Camera } from '@ionic-native/camera';
 import { LocationProvider } from '../../providers/location/location'
 import { VaccineProvider } from '../../providers/vaccine/vaccine'
+import { VaccineModalPage } from '../vaccine-modal/vaccine-modal'
 /**
  * Generated class for the AddMyDogPage page.
  *
@@ -39,7 +40,7 @@ export class AddMyDogPage {
   breed;
   dogKey;
   loc = { lat: 0, lng: 0 };
-  constructor(public vaccine: VaccineProvider,public _breed: BreedProvider, public platform: Platform, public _loc: LocationProvider, private loadingCtrl: LoadingController, private camera: Camera, public actionSheetCtrl: ActionSheetController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private modalCtrl:ModalController,private toastCtrl: ToastController,public vaccine: VaccineProvider,public _breed: BreedProvider, public platform: Platform, public _loc: LocationProvider, private loadingCtrl: LoadingController, private camera: Camera, public actionSheetCtrl: ActionSheetController, private _DB: DatabaseProvider, private db: AngularFireDatabase, private userService: UserServiceProvider, private image: ImageProvider, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
     this.uid = userService.uid;
     this.breed = _breed.breeds;
     this.dog = this.formBuilder.group({
@@ -87,7 +88,7 @@ export class AddMyDogPage {
             detail: this.dog.value.detail,
             photo: this.uploadedImage,
             photoName: this.photoName,
-            status: 'ปลอดภัย',
+            status: 'safe',
             day: this.day,
             month: this.month,
             year: this.year,
@@ -102,6 +103,12 @@ export class AddMyDogPage {
             if (this.dog.value.vaccineNoti == true) {
               this.callVaccine();
             }
+            let toast = this.toastCtrl.create({
+              message: 'เพิ่ม '+this.dog.value.dogName+' ในระบบเรียบร้อยแล้ว',
+              duration: 3000,
+              position: 'top'
+            });
+            toast.present();
             this.navCtrl.pop()
           })
         })
@@ -110,7 +117,10 @@ export class AddMyDogPage {
       this.uploadedImage = 'assets/img/dog_test.jpeg';
     }
   }
-  
+  openVaccineDetail() {
+    let vaccineModal = this.modalCtrl.create('VaccineModalPage')
+    vaccineModal.present();
+  }
   callVaccine() {
     var year = parseInt(this.dog.value.age_year);
     var month = parseInt(this.dog.value.age_month);

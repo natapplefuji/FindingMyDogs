@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform,ToastController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ImageProvider } from '../../providers/image/image'
@@ -40,7 +40,9 @@ export class AdoptGivePage {
   province =''
   country =''
   loc = { lat: 0, lng: 0 };
-  constructor(public navCtrl: NavController,
+  constructor(
+    private toastCtrl: ToastController,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
     private formBuilder: FormBuilder,
@@ -109,7 +111,14 @@ export class AdoptGivePage {
             age_month: this.infoAdopt.value.age_month,
             age_week: this.infoAdopt.value.age_week,
             status: 'wait'
-          }).then(() => { this.navCtrl.pop() })
+          }).then(() => {
+            let toast = this.toastCtrl.create({
+              message: 'เพิ่มประกาศในระบบเรียบร้อยแล้ว',
+              duration: 3000,
+              position: 'top'
+            });
+            this.navCtrl.pop()
+          })
         })
     }
   }

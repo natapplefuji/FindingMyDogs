@@ -20,7 +20,7 @@
     </button>
   </ion-fab>
   
-  <ion-card *ngFor="let dog of dogList | async" (click)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status,dog.lat,dog.lng)">
+  <ion-card *ngFor="let dog of dogList | async" >
     <ion-grid>
     <ion-row>
     <ion-col col-5>
@@ -37,6 +37,11 @@
         สถานะ : <span class = "safe">{{dog.status}}</span>
       </p>
   </ion-col>
+    </ion-row>
+    <ion-row>
+      <button ion-button (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status,dog.lat,dog.lng)">ดูประกาศ</button>
+      <button ion-button [disabled]="!(dog.status == 'safe')" (tap)="createLost(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">สุนัขสูญหาย</button>
+      <button ion-button [disabled]="!(dog.status == 'safe')" (tap)="createAdopt(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">ให้อุปการะสุนัข</button>
     </ion-row>
   </ion-grid>
   </ion-card>

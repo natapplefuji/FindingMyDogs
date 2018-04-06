@@ -1,5 +1,5 @@
 <!--
-  Generated template for the AddMyDogPage page.
+  Generated template for the LostModalPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,23 +7,31 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>addMyDog</ion-title>
+    <ion-title>เพิ่มประกาศสุนัขสูญหาย</ion-title>
+    <ion-buttons end>
+        <button (tap)= "closeModal()"ion-button icon-only>
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <form [formGroup]="dog" (ngSubmit)="addDog()">
+  <form [formGroup]="announcelost" (ngSubmit)="addAnnounceLost()">
+    <ion-item no-lines>
+      <img src={{photo}}/>
+    </ion-item>
     <ion-item>
       <ion-label>ชื่อสุนัข</ion-label>
       <ion-input type="text" formControlName="dogName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>พันธุ์</ion-label>
-      <ion-select interface="popover" placeholder="กรุณาเลือกพันธุ์สุนัข" formControlName="breed">
-        <ion-option *ngFor="let item of breed" value="{{item}}">{{item}}</ion-option>
-      </ion-select>
+      <ion-select placeholder="กรุณาเลือกพันธุ์สุนัข"  formControlName="breed">
+          <ion-option *ngFor="let item of breed">{{item}}</ion-option>
+        </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>เพศ</ion-label>
@@ -84,29 +92,23 @@
         </ion-select>
       </ion-col>
     </ion-row>
-
-
     <ion-item>
-      <ion-label>รายละเอียดเพิ่มเติม</ion-label>
-      <ion-textarea formControlName="detail"></ion-textarea>
-    </ion-item>
-
-    <ion-item no-lines>
-      <button ion-button type=button (click)="getImage()">อัพโหลดภาพ</button>
-      <div *ngIf="dogPicture !== undefined">
-        <img src={{dogPicture}}>
-      </div>
+        <ion-label>ข้อมูลสุนัขเพิ่มเติม</ion-label>
+        <ion-textarea formControlName="dogDetail"></ion-textarea>
+      </ion-item>
+    <ion-item>
+        <ion-label>เบอร์โทรศัพท์</ion-label>
+        <ion-input type="number" formControlName="tel"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>รับการแจ้งเตือนการฉีดวัคซีนสำหรับสุนัข</ion-label>
-      <ion-checkbox formControlName="vaccineNoti" checked="false"></ion-checkbox>
-
+        <ion-label>ข้อมูลติดต่อ</ion-label>
+        <ion-input type="text" formControlName="contactMiss"></ion-input>
     </ion-item>
     <ion-item>
-      <button ion-button clear (tap)="openVaccineDetail()">
-        <span class="vaccine">รายละเอียดการฉีดวัคซีน</span>
-      </button>
-    </ion-item>
-    <button ion-button type="submit" [disabled]="!dog.valid">Submit</button>
+        <ion-label>สินน้ำใจ(ไม่บังคับ)</ion-label>
+        <ion-input type="text" formControlName="reward"></ion-input>
+      </ion-item>
+
+    <button ion-button type="submit" [disabled]="!announcelost.valid">สร้างประกาศ</button>
   </form>
 </ion-content>
