@@ -19,8 +19,14 @@
             สุนัขrพันธุ์ใกล้เคียง
         </ion-item>
       </ion-card>-->
-      <!-- <p>lat is {{this.lat}} long is {{thislong}}</p> -->
+      <p>lat is {{this.loc.lat}} long is {{this.loc.lng}}</p>
+      <p>country is {{this.province}}</p>
       
-      <button ion-button (tap)="getList()">getList</button>
-      <!-- <div  #map id="map" style= "height:100%;"></div> -->
+      <!-- <button ion-button (tap)="getList()">getList</button> -->
+      <button ion-button (tap)="getGeoRequest()">getGeo</button>
+      
+      <div  #map id="map" style= "height:50%;"></div>
+
+        
+         
 </ion-content>

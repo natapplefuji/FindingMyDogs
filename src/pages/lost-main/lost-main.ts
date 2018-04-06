@@ -41,12 +41,14 @@ export class LostMainPage {
   goToFoundAnnouncePage() {
     this.navCtrl.push(FoundAnnouncePage);
   }
-  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid,key) {
+  goToAnnouceDetail(dogName,breed,gender,age_year,age_month,age_week,dogDetail,photo,contactMiss,reward,uid,key) {
     this.navCtrl.push(LostAnnounceDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
-      age: age,
+      age_year: age_year,
+      age_month: age_month,
+      age_week:age_week,
       dogDetail: dogDetail,
       photo:photo,
       contactMiss: contactMiss,
@@ -54,5 +56,8 @@ export class LostMainPage {
       uid: uid,
       key:key
     })
+    console.log(age_year)
+    console.log(age_month)
+    console.log(age_week)
   }
 }

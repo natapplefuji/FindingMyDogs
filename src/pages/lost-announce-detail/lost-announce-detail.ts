@@ -20,7 +20,9 @@ export class LostAnnounceDetailPage {
     dogName: '',
     breed: '',
     gender: '',
-    age: '',
+    age_year: '',
+    age_month: '',
+    age_week: '',
     dogDetail: '',
     photo:'',
     contactMiss: '',
@@ -42,7 +44,9 @@ export class LostAnnounceDetailPage {
     this.announceDetail.dogName = navParams.get("dogName");
     this.announceDetail.breed = navParams.get("breed");
     this.announceDetail.gender = navParams.get("gender");
-    this.announceDetail.age = navParams.get("age");
+    this.announceDetail.age_year = navParams.get("age_year");
+    this.announceDetail.age_month = navParams.get("age_month");
+    this.announceDetail.age_week = navParams.get("age_week");
     this.announceDetail.dogDetail = navParams.get("dogDetail");
     this.announceDetail.photo = navParams.get("photo");
     this.announceDetail.contactMiss = navParams.get("contactMiss");
@@ -62,6 +66,9 @@ export class LostAnnounceDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostAnnounceDetailPage');
+    console.log(this.announceDetail.age_year)
+    console.log(this.announceDetail.age_month)
+    console.log(this.announceDetail.age_week)
   }
   notiAnnounceLost() { 
     let uid = this.userService.uid;

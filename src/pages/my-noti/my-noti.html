@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-    <ion-card *ngFor="let noti of notiList|async; let i = index" (click)="goToNotiDetailLost(noti.announceFoundKey)">
+    <ion-card *ngFor="let noti of notiList|async; let i = index" (click)="goToNotiDetailLost(annouceFound[i].$key,noti.$key,annouceFound[i].founder)">
         <ion-grid>
         <ion-row>          
         <ion-col col-5>

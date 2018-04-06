@@ -3,11 +3,10 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 import { PredictProvider } from '../../providers/predict/predict';
 import { LoadingController } from 'ionic-angular';
 import { LostRelatedPage } from '../lost-related/lost-related';
-import { GoogleMaps, GoogleMap, GoogleMapOptions, GoogleMapsEvent, LatLng, MarkerOptions, Marker, CameraPosition } from '@ionic-native/google-maps';
+import { GoogleMaps, GoogleMap, GoogleMapOptions, GoogleMapsEvent, LatLng, MarkerOptions, Marker, CameraPosition,GeocoderResult,Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation'
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { LocationProvider } from '../../providers/location/location'
-
 /**
  * Generated class for the TipPage page.
  *
@@ -28,18 +27,19 @@ export class TipPage {
   coordinates;
   uidList = []
   loc = { lat: 0, lng: 0 };
+  province
+  country
   announcelistRelate: FirebaseListObservable<any>;
   constructor(public _loc: LocationProvider, private db: AngularFireDatabase, public googleMaps: GoogleMaps, public navCtrl: NavController, public navParams: NavParams, public _predict: PredictProvider, public loading: LoadingController, public platform: Platform) {
-    // this.getLocation().then(res => {
+    // this._loc.getLocation().then(res => {
     //   console.log("lat is " + res.coords.latitude);
     //   console.log("long is " + res.coords.longitude);
     //   this.coordinates = new LatLng(res.coords.latitude, res.coords.longitude);
 
     // }).catch(err => {
     //   console.log(err);
-    // // })
+    // })
     // this._loc.getLocation();
-    // console.log("lat : "+this.loc.lat+" long : "+this.loc.lng)
 
 
     this.announcelistRelate = this.db.list('announceMissing/', {
@@ -81,14 +81,16 @@ export class TipPage {
     );
   }
 
-  // ionViewDidLoad() {
+   ionViewDidLoad() {
   //   console.log('ionViewDidLoad TipPage');
   //   // this.dog = this._predict.getJsonData();
   //   // console.log(this.dog)
-  //   this.platform.ready().then(() => {
-  //     this.initMap();
-  //   });
-  // }
+    this.platform.ready().then(() => {
+      this.initMap();
+      
+    }); 
+  }
+
   // getPredict() { 
   //   this._predict.getJsonData().subscribe((data) => { 
   //     this.dogs = data
@@ -101,6 +103,7 @@ export class TipPage {
     this._loc.getLocation().then(data => {
       this.loc.lat = data.coords.latitude;
       this.loc.lng = data.coords.longitude;
+      this.getGeoRequest()
       console.log("p lat : " + this.loc.lat + " p long : " + this.loc.lng);
       var mapOptions: GoogleMapOptions = {
         camera: {
@@ -112,31 +115,47 @@ export class TipPage {
           tilt: 30
         }
       };
+      
       let map: GoogleMap = this.googleMaps.create(this.element.nativeElement, mapOptions);
 
       map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
 
-        // let markerOptions: MarkerOptions = {
-        //   position: this.loc,
-        //   icon: "assets/images/icons8-Marker-64.png",
-        //   title: 'Our first POI'
-        // };
+        let markerOptions: MarkerOptions = {
+          position: this.loc,
+          icon: "assets/images/icons8-Marker-64.png",
+          title: 'Our first POI'
+        };
 
-        // const marker = map.addMarker(markerOptions)
-        //   .then((marker: Marker) => {
-        //     marker.showInfoWindow();
-        //   });
+        const marker = map.addMarker(markerOptions)
+          .then((marker: Marker) => {
+            marker.showInfoWindow();
+          });
       })
     }).catch(err => {
       console.log(err);
     })
-
-
+    
   }
 
   gotoPageRelate() {
     this.navCtrl.push(LostRelatedPage)
   }
+  getGeoRequest() { 
+    let req = {
+      position: {
+        lat: this.loc.lat,
+        lng: this.loc.lng
+      }
+    }
+    Geocoder.geocode(req).then(
+      (res) => {
+        alert(JSON.stringify(res))
+        this.province = res[0]['locality']
+        this.country = res[0]['country']
+      });
+  }
+    
+
 
 
 
