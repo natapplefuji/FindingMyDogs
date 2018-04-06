@@ -20,7 +20,15 @@
         </ion-item>
       </ion-card>-->
       <!-- <p>lat is {{this.lat}} long is {{thislong}}</p> -->
-      
-      <button ion-button (tap)="getList()">getList</button>
+      <button ion-button (tap)="testNoti()">testNoti</button>
+      <button ion-button (tap)="testNoti2()">testNoti2</button>
       <!-- <div  #map id="map" style= "height:100%;"></div> -->
+      <!-- <ion-list *ngFor = "let list of breedList">
+        <ion-item *ngFor="let dog of list | async">
+          <p>{{dog.dogName}} {{dog.breed}}</p>
+        </ion-item>
+      </ion-list> -->
+      <!-- <ion-item *ngFor="let dog of announcelistRelate | async">
+        <p>{{dog.dogName}} {{dog.breed}}</p>
+      </ion-item> -->
 </ion-content>
