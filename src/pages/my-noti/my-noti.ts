@@ -21,11 +21,8 @@ export class MyNotiPage {
 
   dogPhoto: string[]
   notiList
-
   notiVaccine
-
   notiAdopt
-
   annouceFound: any = []
   dogObject: any = []
   announceAdopter: any = []
@@ -97,17 +94,11 @@ export class MyNotiPage {
       dogObject:this.dogObject[index]
     })
   }
-  goToNotiDetailLost(dogName, breed, gender, age, detail, photo, status, lat, lng) {
+  goToNotiDetailLost(annouceFoundDetailKey,notiKey,founder) {
     this.navCtrl.push(MyNotiDetailPage, {
-      dogName: dogName,
-      breed: breed,
-      gender: gender,
-      age: age,
-      detail: detail,
-      photo: photo,
-      status: status,
-      lat: lat,
-      lng: lng
+      annouceFoundDetailKey:annouceFoundDetailKey,
+      notiKey: notiKey,
+      founder:founder
     })
   }
   goToNotiDetailAdopt(photo, dogName, breed, adopterFirstName, adopterLastName, adopterEmail, adopterTel,key,adoptAnnounceKey) {

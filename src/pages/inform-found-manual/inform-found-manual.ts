@@ -98,8 +98,11 @@ export class InformFoundManualPage {
           year: this.year,
           millisec: this.milliTime,
           lat: this.loc.lat,
-          lng: this.loc.lng
-
+          lng: this.loc.lng,
+          district: this.district,
+          province:this.province,
+          country: this.country,
+          status:"lost"
         }).then(() => {
           let notiRef = this.db.database.ref('/notification')
           notiRef.push().set({

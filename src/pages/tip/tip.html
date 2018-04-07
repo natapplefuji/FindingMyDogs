@@ -7,28 +7,49 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>tip</ion-title>
+      <button ion-button menuToggle >
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Tips</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-    <!--<ion-card (tap)="gotoPageRelate()">
-        <ion-item>
-            สุนัขrพันธุ์ใกล้เคียง
-        </ion-item>
-      </ion-card>-->
-      <!-- <p>lat is {{this.lat}} long is {{thislong}}</p> -->
-      <button ion-button (tap)="testNoti()">testNoti</button>
-      <button ion-button (tap)="testNoti2()">testNoti2</button>
-      <!-- <div  #map id="map" style= "height:100%;"></div> -->
-      <!-- <ion-list *ngFor = "let list of breedList">
-        <ion-item *ngFor="let dog of list | async">
-          <p>{{dog.dogName}} {{dog.breed}}</p>
-        </ion-item>
-      </ion-list> -->
-      <!-- <ion-item *ngFor="let dog of announcelistRelate | async">
-        <p>{{dog.dogName}} {{dog.breed}}</p>
-      </ion-item> -->
+<ion-content >
+    <ion-card (tap)= "openBrowser('https://www.dogilike.com/content/caring/6703/')">
+      <img src ="https://image.dogilike.com/shareimg/contentimg/2017/pungpond/12-60/Caring/1/large-dog-travel.jpg">
+      <ion-card-content class = "body">
+        <ion-card-title class = "head">
+            5 สิ่งห้ามทำกับน้องหมาในหน้าร้อน ถ้าทำอยู่เลิกซะ !!
+          </ion-card-title>
+        <p class = "sub">
+            หน้าร้อนนี้ มาดูแลน้องหมากันเถอะ ดูซิว่าที่ทำๆกันอยู่ถูกรึเปล่า
+        </p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card (tap)= "openBrowser('https://www.dogilike.com/content/caring/6566/')">
+        <img class = "img "src ="https://image.dogilike.com/shareimg/contentimg/2018/pungpond/1-61/Caring/3/SV-Salmon-MK3_9397.jpg">
+        <ion-card-content class = "body">
+          <ion-card-title class = "head">
+            11 อาหารของมนุษย์ที่ดีต่อสุขภาพน้องหมา
+            </ion-card-title>
+          <p class = "sub">
+            อาหารของมนุษย์ที่คิดว่าธรรมดา แต่เป็น "Super Food" ที่มีคุณค่าสำหรับน้องหมา
+          </p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card (tap)= "openBrowser('https://www.dogilike.com/content/caring/6614/')">
+        <img class = "img "src ="http://foodstorythai.com/wp-content/uploads/2015/02/%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B9%84%E0%B8%AB%E0%B8%A7%E0%B9%89%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%95%E0%B8%A3%E0%B8%B8%E0%B8%A9%E0%B8%88%E0%B8%B5%E0%B8%99.jpg">
+        <ion-card-content class = "body">
+          <ion-card-title class = "head">
+            ของไหว้ต้องห้าม! ไม่ควรให้น้องหมากินในวันตรุษจีน
+            </ion-card-title>
+          <p class = "sub">
+            อาหารอะไรที่เป็นอันตรายกับน้องหมาบ้างมาดูกัน
+          </p>
+        </ion-card-content>
+      </ion-card>
+        
+         
 </ion-content>

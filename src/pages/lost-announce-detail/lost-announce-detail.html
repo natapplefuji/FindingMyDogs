@@ -27,8 +27,23 @@
         <p>{{announceDetail.gender}}</p>
       </ion-item>
       <ion-item>
-        <h2>นามสกุล</h2>
-        <p>{{announceDetail.age}}</p>
+        <h2>อายุ</h2>
+        <div *ngIf="announceDetail.age_year==undefine&&announceDetail.age_month==undefine&&announceDetail.age_week==undefine">
+          <p>-</p>
+        </div>
+        <div *ngIf="announceDetail.age_year=='0'&&announceDetail.age_month=='0'&&announceDetail.age_week=='0'">
+          <p>-</p>
+        </div>
+        <div *ngIf="announceDetail.age_year!='0'&&announceDetail.age_month!=undefine&&announceDetail.age_week!=undefine">
+        <p>{{announceDetail.age_year}} ปี {{announceDetail.age_month}} เดือน {{announceDetail.age_week}} สัปดาห์</p>
+      </div>
+      <div *ngIf="announceDetail.age_year=='0'&&announceDetail.age_month!='0'">
+        <p>{{announceDetail.age_month}} เดือน {{announceDetail.age_week}} สัปดาห์</p>
+      </div>
+      <div *ngIf="announceDetail.age_year=='0'&&announceDetail.age_month=='0'">
+        <p>{{announceDetail.age_week}} สัปดาห์</p>
+      </div>
+      
       </ion-item>
       <ion-item>
         <h2>ข้อมูลสุนัขเพิ่มเติม</h2>

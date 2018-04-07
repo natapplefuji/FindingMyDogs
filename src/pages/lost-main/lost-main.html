@@ -48,7 +48,7 @@
             <button ion-button clear item-end (tap)="lostAnnounce()">more</button>
           </ion-item-divider>
           <ion-row >
-          <ion-col *ngFor="let dog of announcelist | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)" col-4 >
+          <ion-col *ngFor="let dog of announcelist | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)" col-4 >
             <ion-card>
                 <img style="width: 100%; height: 100px;" src="{{dog.photo}}">
               <!-- <img class="imgDog" src="{{dog.photo}}"> -->

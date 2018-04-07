@@ -98,8 +98,11 @@ export class InformFoundPage {
           year: this.year,
           millisec: this.milliTime,
           lat: this.loc.lat,
-          lng: this.loc.lng
-
+          lng: this.loc.lng,
+          district: this.district,
+          province:this.province,
+          country: this.country,
+          status:"lost"
         }).then(() => {
           this.navCtrl.push(LostInformThankPage, { photo: this.photoName,announceFoundId:key})
         })

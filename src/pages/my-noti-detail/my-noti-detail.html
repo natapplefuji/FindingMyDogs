@@ -20,21 +20,43 @@
     <h2>พันธุ์</h2>
     <p>{{notiDetail.breed}}</p>
   </ion-item>
-  <ion-item>
-    <h2>ช่องทางการติดต่อ</h2>
-    <p>{{notiDetail.contactMiss}}</p>
-  </ion-item>
+  
   <ion-item>
     <h2>รายละเอียดสุนัขเพิ่มเติม</h2>
     <p>{{notiDetail.dogDetail}}</p>
   </ion-item>
   <ion-item>
-    <h2>สถานะ</h2>
-    <p>{{notiDetail.dogWithYou}} ปี</p>
+    <h2>สุนัขอยู่ที่ผู้พบ</h2>
+    <p>{{notiDetail.dogWithYou}}</p>
+  </ion-item>
+  <ion-item>
+    <h2>ประกาศเมื่อวันที่</h2>
+    <p>{{notiDetail.day}}/{{notiDetail.month}}/{{notiDetail.year}}</p>
+  </ion-item>
+  <ion-item-divider color="light">
+    <ion-icon name="book"></ion-icon>รายละเอียดผู้ติดต่อ</ion-item-divider>
+    <ion-item>
+    <h2>ชื่อผู้พบ</h2>
+    <p>{{founderDetail.displayName}}</p>
+  </ion-item>
+  <ion-item>
+    <h2>email</h2>
+    <p>{{founderDetail.email}}</p>
+  </ion-item>
+  <ion-item>
+    <h2>เบอร์โทรติดต่อ</h2>
+    <p>{{founderDetail.tel}}</p>
+  </ion-item>
+  <ion-item>
+    <h2>ช่องทางการติดต่อเพิ่มเติม</h2>
+    <p>{{notiDetail.contactMiss}}</p>
   </ion-item>
 </ion-list>
+<ion-item-divider color="light">
+  <ion-icon name="book"></ion-icon>บริเวณที่พบสุนัข</ion-item-divider>
 <div  #map id="map" style="height:50%;"></div>
 <h2>*กรุณาติดต่อผู้พบเห็นก่อนกดปุ่มด้านล่าง</h2>
-<button ion-button type="submit" color="secondary" (tap)="goToModalNoti()">พบสุนัขของฉันแล้ว</button>
+<button ion-button type="submit" color="secondary" (tap)="notifyFounder()">พบสุนัขของฉันแล้ว</button>
+<button ion-button type="submit" color="danger" (tap)="denyFounder()">ไม่ใช่สุนัขของฉัน</button>
 </ion-content>
 
