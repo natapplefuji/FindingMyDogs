@@ -56,11 +56,11 @@ export class LoginPage {
       this.password)
       .then(authData => {
         this.loading.dismiss().then(() => {
-          window["plugins"].OneSignal.getIds((ids => {
-            this.playerID = ids.userId;
-            firebase.database().ref('userProfile/').child(this.userService.uid).update({ playerID: this.playerID });
-          })
-          )
+          // window["plugins"].OneSignal.getIds((ids => {
+          //   this.playerID = ids.userId;
+          //   firebase.database().ref('userProfile/').child(this.userService.uid).update({ playerID: this.playerID });
+          // })
+          // )
           this.events.publish('user:login'); //ไปเรียก f() ใน app.components.ts ให้อัพเดต userInfo
           this.navCtrl.setRoot(TabPage);
         });

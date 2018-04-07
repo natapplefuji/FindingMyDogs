@@ -15,6 +15,7 @@ import { Facebook } from '@ionic-native/facebook'
 import { HttpModule } from '@angular/http';
 import { GoogleMaps } from '@ionic-native/google-maps'
 import { Geolocation } from '@ionic-native/geolocation'
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -187,6 +188,7 @@ firebase.initializeApp(config);
     Geolocation,
     LocationProvider,
     VaccineProvider,
+    InAppBrowser,
   ]
 })
 export class AppModule {

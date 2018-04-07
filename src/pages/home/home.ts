@@ -17,9 +17,43 @@ import firebase from 'firebase';
 export class HomePage {
   uid;
   result = [];
+  displayName = '';
+  date = new Date().getDate();
+  month = new Date().getMonth()+1
+  monthTH = '';
+  year = new Date().getFullYear();
   constructor(public authProvider: AuthProvider, public navCtrl: NavController, public userService: UserServiceProvider, private db: AngularFireDatabase) {
     this.uid = userService.uid;
+    this.db.database.ref('userProfile/' + this.uid).on('value', (data) => {
+      this.displayName = data.val().displayName;
+    })
     this.checkVaccineNoti();
+    switch (this.month) {
+      case 1: this.monthTH = "มกราคม";
+        break;
+      case 2: this.monthTH = "กุมภาพันธ์";
+        break;
+      case 3: this.monthTH = "มีนาคม";
+        break;
+      case 4: this.monthTH = "เมษายน";
+        break;
+      case 5: this.monthTH = "พฤษภาคม";
+        break;
+      case 6: this.monthTH = "มิถุนายน";
+        break;
+      case 7: this.monthTH = "กรกฎาคม";
+        break;
+      case 8: this.monthTH = "สิงหาคม";
+        break;
+      case 9: this.monthTH = "กันยายน";
+        break;
+      case 10: this.monthTH = "ตุลาคม";
+        break;
+      case 11: this.monthTH = "พฤศจิกายน";
+        break;
+      case 12: this.monthTH = "ธันวาคม";
+        break;
+    }
   }
   checkVaccineNoti() {
     var dog = {};

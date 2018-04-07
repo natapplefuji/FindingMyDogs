@@ -23,7 +23,12 @@
     <p>{{(test | async)?.displayName}}</p>
     <button (click) = "logout()">Logout</button>
  </ion-content> -->
-<ion-content>
+<ion-content >
+    <ion-card class="card-background-page">
+        <img src="assets/img/foggy.jpeg"/>
+        <div class="card-title">สวัสดีคุณ {{displayName}}</div>
+        <div class="card-subtitle">{{date}} {{monthTH}} {{year}}</div>
+      </ion-card>
   <ion-grid>
     <ion-row>
 

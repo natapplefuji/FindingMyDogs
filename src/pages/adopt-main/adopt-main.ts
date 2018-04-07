@@ -287,6 +287,7 @@ export class AdoptMainPage {
   addAdopt() {
     var numChild;
     var ref = firebase.database().ref('dogs/')
+    this.uid = this.userService.uid;
     ref.orderByChild('uid').equalTo(this.uid).on('value', ((data) => {
       numChild = data.numChildren();
       if (numChild == 0) {

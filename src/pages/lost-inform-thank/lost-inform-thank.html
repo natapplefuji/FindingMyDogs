@@ -13,15 +13,17 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
   <!-- <img src="assets/img/happy.png" > -->
-  
-  <h1>สุนัขที่ท่านพบใกล้เคียงกับพันธุ์</h1>
+  <img class = "img" src = "assets/img/happy.png"/>
+  <h1 class = "thank">ได้รับข้อมูลเรียบร้อยแล้ว ขอบคุณสำหรับเบาะแสค่ะ</h1>
+
+  <h2 class = "breed">สุนัขที่ท่านพบใกล้เคียงกับพันธุ์</h2>
     <ion-list inset>
       <ion-item ion-item *ngFor="let dog of dogs">
         {{ dog.dogName }} {{dog.score}}%
       </ion-item>
     </ion-list>
     
-    <button ion-button type="submit" color="secondary" (tap)="goToHome()">กลับหน้าหลัก</button>
+    <button ion-button full type="submit" color="secondary" (tap)="goToHome()">กลับหน้าหลัก</button>
 </ion-content>

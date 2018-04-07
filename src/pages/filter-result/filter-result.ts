@@ -32,7 +32,7 @@ export class FilterResultPage {
   showBreedChild() {
     this.breedResultChild = []; //reset counter เวลา filter ใหม่
     var ref = firebase.database().ref('announceAdopt/')
-    for (let i = this.breedResult.length-1; i >=0;i--) //จาก 0 ไปมันกลับด้าน เลยลบลงมา
+    for (let i = 0; i <=this.breedResult.length-1;i++) 
     ref.orderByChild('breed').equalTo(this.breedResult[i]).on("value",((snapshot) => { //query child ที่ breed ตรงตามพันธุ์ค่อย getChildren
       console.log(this.breedResult[i]+' no. child '+snapshot.numChildren());
       this.num = snapshot.numChildren();

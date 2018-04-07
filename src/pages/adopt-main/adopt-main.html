@@ -19,18 +19,18 @@
     <ion-content>
         <ion-grid>
             <ion-row>    
-                <ion-card (tap)="addAdopt()">
-                    <ion-item>
+                <ion-card class = "button" (tap)="addAdopt()">
+                    <ion-item class = "top">
                         <ion-icon name="add"></ion-icon>  เพิ่มประกาศหาคนอุปการะสุนัข
                     </ion-item>
                   </ion-card>
-                  <ion-card (tap)="getImage()">
-                      <ion-item>
+                  <ion-card class = "button" (tap)="getImage()">
+                      <ion-item class = "normal">
                           <ion-icon name="camera"></ion-icon>  ค้นหาด้วยรูปภาพ
                       </ion-item>
                     </ion-card>
-                  <ion-card (tap)="openModal()">
-                    <ion-item>
+                  <ion-card class = "buttonLow" (tap)="openModal()">
+                    <ion-item class = "normal">
                         <ion-icon name="search"></ion-icon>  ค้นหาสุนัขตามคุณสมบัติ
                     </ion-item>
                   </ion-card>
@@ -38,13 +38,13 @@
             </ion-row>
             <ion-row>
               <ion-item-divider color="light">
-                <ion-icon name="megaphone"></ion-icon> ประกาศหาคนอุปการะสุนัข
+                <ion-icon name="megaphone"></ion-icon> ประกาศหาผู้อุปการะสุนัข
                 <button ion-button clear item-end (tap)="adoptMore($event)">more</button>
               </ion-item-divider>
               
               <ion-row >
                 <ion-col *ngFor="let dog of announcelist | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)" col-4 >
-                  <ion-card>
+                  <ion-card class = "list">
                       <img style="width: 100%; height: 100px;" src="{{dog.photo}}">
                     <!-- <img class="imgDog" src="{{dog.photo}}"> -->
                     <h2>พันธุ์ {{dog.breed}}</h2>

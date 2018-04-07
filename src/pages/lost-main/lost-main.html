@@ -17,31 +17,34 @@
 
 
 <ion-content>
-    <ion-grid>
-        <ion-row>    
-            <ion-card (tap)="lostInformTapped($event)">
-                <ion-item class="aa">
-                      <ion-icon name="add"></ion-icon>  เพิ่มประกาศสุนัขหาย 
-                </ion-item>
-              </ion-card>
-    
-        </ion-row>
-        <ion-row>    
-            <ion-card (tap)="foundInformTapped($event)">
-                <ion-item class="noti">
-                    <ion-icon name="alert"></ion-icon>  แจ้งพบเบาะแสสุนัข
-                </ion-item>
-              </ion-card>
-    
-        </ion-row>
-        <ion-row>    
-          <ion-card (tap)="goToFoundAnnouncePage()">
-              <ion-item class="noti">
-                  <ion-icon name="alert"></ion-icon>  สุนัขที่ถูกพบแล้ว
+    <ion-row >   
+        <ion-card class = "top" (tap)="foundInformTapped($event)">
+            <ion-item class="noti">
+                <ion-icon name="alert"></ion-icon>  แจ้งพบเบาะแสสุนัข
+            </ion-item>
+          </ion-card> 
+       
+    </ion-row>
+    <ion-row >
+      <ion-col col-6 class ="col">
+          <ion-card class = "bottomL"(tap)="lostInformTapped($event)">
+              <ion-item class="aa">
+                    <ion-icon name="add"></ion-icon>  เพิ่มประกาศสุนัขหาย 
               </ion-item>
             </ion-card>
-  
-      </ion-row>
+      </ion-col>  
+      <ion-col col-6 class ="col">
+          <ion-card class = "bottomR"(tap)="goToFoundAnnouncePage()">
+              <ion-item class="aa">
+                  <ion-icon name="eye"></ion-icon>  สุนัขที่ถูกพบแล้ว
+              </ion-item>
+            </ion-card> 
+      </ion-col>
+
+    </ion-row>
+    <ion-grid>
+        
+
         
           <ion-item-divider color="light">
             <ion-icon name="megaphone"></ion-icon> ประกาศสุนัขหาย
@@ -49,7 +52,7 @@
           </ion-item-divider>
           <ion-row >
           <ion-col *ngFor="let dog of announcelist | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)" col-4 >
-            <ion-card>
+            <ion-card class = "list">
                 <img style="width: 100%; height: 100px;" src="{{dog.photo}}">
               <!-- <img class="imgDog" src="{{dog.photo}}"> -->
               <h2>พันธุ์ {{dog.breed}}</h2>
