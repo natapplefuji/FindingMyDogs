@@ -82,7 +82,10 @@ export class LoginPage {
     this.loading.present();
   }
   loginWithFB() {
-    if (this.platform.is('cordova') || this.platform.is('android')) {      
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
+    if (this.platform.is('cordova') || this.platform.is('android')) {  
+      console.log("facebook cordova 1");
       return this.facebook.login(['email', 'public_profile']).then(res => {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
         return firebase.auth().signInWithCredential(facebookCredential)
@@ -110,13 +113,16 @@ export class LoginPage {
                 });
                 this.events.publish('user:login');
             })
-
-            this.navCtrl.setRoot(TabPage);
+            this.loading.dismiss().then(() => {
+              this.navCtrl.setRoot(TabPage);
+            })
+            
           })
 
       })
     }
     else {
+      console.log("facebook else 2")
       return this.afAuth.auth
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(res => {

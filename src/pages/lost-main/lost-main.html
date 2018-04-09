@@ -54,49 +54,11 @@
           <ion-col *ngFor="let dog of announcelist | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)" col-4 >
             <ion-card class = "list">
                 <img style="width: 100%; height: 100px;" src="{{dog.photo}}">
-              <!-- <img class="imgDog" src="{{dog.photo}}"> -->
               <h2>พันธุ์ {{dog.breed}}</h2>
             </ion-card>
           </ion-col>
           </ion-row>
-          <!-- <ion-col col-4>
-              <ion-card>
-                <img src="assets/img/scroll0015.jpg">
-                <h2>หมา</h2>
-              </ion-card>
-            </ion-col>
-            <ion-col col-4>
-                <ion-card>
-                  <img src="assets/img/scroll0015.jpg">
-                  <h2>หมา</h2>
-                </ion-card>
-              </ion-col>
-              <ion-col col-4>
-                  <ion-card>
-                    <img src="assets/img/scroll0015.jpg">
-                    <h2>หมา</h2>
-                  </ion-card>
-                </ion-col>
-                <ion-col col-4>
-                    <ion-card>
-                      <img src="assets/img/scroll0015.jpg">
-                      <h2>หมา</h2>
-                    </ion-card>
-                  </ion-col>
-                  <ion-col col-4>
-                      <ion-card>
-                        <img src="assets/img/scroll0015.jpg">
-                        <h2>หมา</h2>
-                      </ion-card>
-                    </ion-col> -->
+
       </ion-grid>
-  <!-- <ion-card (click)="lostInformTapped()">
-    <div class="card-title">สุนัขของฉันหาย</div>
-  </ion-card>
-  <ion-card>
-    <div class="card-title">ฉันพบสุนัข</div>
-  </ion-card>
-  <ion-card>
-    <div class="card-title">ดูสุนัขในระบบ</div>
-  </ion-card> -->
+
 </ion-content>

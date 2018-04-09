@@ -7,6 +7,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { LostAnnouncePage } from '../lost-announce/lost-announce';
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import firebase from 'firebase';
 
 @Component({
@@ -19,10 +20,12 @@ export class HomePage {
   result = [];
   displayName = '';
   date = new Date().getDate();
-  month = new Date().getMonth()+1
+  month = new Date().getMonth() + 1
   monthTH = '';
   year = new Date().getFullYear();
-  constructor(public authProvider: AuthProvider, public navCtrl: NavController, public userService: UserServiceProvider, private db: AngularFireDatabase) {
+  lostList: FirebaseListObservable<any>;
+  adoptList: FirebaseListObservable<any>;
+  constructor(private browser: InAppBrowser,public authProvider: AuthProvider, public navCtrl: NavController, public userService: UserServiceProvider, private db: AngularFireDatabase) {
     this.uid = userService.uid;
     this.db.database.ref('userProfile/' + this.uid).on('value', (data) => {
       this.displayName = data.val().displayName;
@@ -54,6 +57,30 @@ export class HomePage {
       case 12: this.monthTH = "ธันวาคม";
         break;
     }
+    this.lostList = this.db.list('announceMissing/', {
+      query: {
+        orderByChild: 'status',
+        equalTo: 'lost',
+        limitToLast: 4
+      }
+    }
+    ).map((arr) => {
+      var array = <any>{};
+      array = arr;
+      return array.reverse();
+    }) as FirebaseListObservable<any[]>;
+    this.adoptList = this.db.list('announceAdopt/', {
+      query: {
+        orderByChild: 'status',
+        equalTo: 'wait',
+        limitToLast: 4
+      }
+    }
+    ).map((arr) => {
+      var array = <any>{};
+      array = arr;
+      return array.reverse();
+    }) as FirebaseListObservable<any[]>;
   }
   checkVaccineNoti() {
     var dog = {};
@@ -85,7 +112,7 @@ export class HomePage {
           if (key != "dogID") {
             mykey = key;
             this.db.database.ref('notiVaccine/').push().set({
-              uid:this.uid,
+              uid: this.uid,
               dogID: this.result[i].dogID,
               vaccine: key,
               time: this.result[i][key]
@@ -96,6 +123,9 @@ export class HomePage {
         }
       }
     }
+  }
+  openBrowser(url){
+    this.browser.create(url);
   }
   lostTapped() {
     this.navCtrl.push(LostMainPage);

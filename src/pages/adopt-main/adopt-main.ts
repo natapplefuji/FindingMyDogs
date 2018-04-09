@@ -161,7 +161,7 @@ export class AdoptMainPage {
       query: {
         orderByChild: 'status',
         equalTo: 'wait',
-        limitToLast: 6
+        limitToLast: 9
       }
     }
     ).map((arr) => {
