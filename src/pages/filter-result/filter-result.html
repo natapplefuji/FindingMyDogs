@@ -7,15 +7,18 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>FilterResult</ion-title>
+    <ion-title>ผลลัพธ์พันธุ์</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   
-    <ion-item *ngFor = "let breed of breedResult; let i = index" (tap)="goToBreedListPage(breed)">
-      {{breed}} {{breedResultChild[i]}}
-    </ion-item>
+    <ion-card class ="card-background-page" *ngFor = "let breed of breedResult; let i = index" (tap)="goToBreedListPage(breed)">
+        <img class ="img" src="assets/img/breed/{{breed}}.jpg"/>
+        <div class="card-title">{{breed}}</div>
+        <div class="card-subtitle">พบ {{breedResultChild[i]}} ตัว</div>
+       
+    </ion-card>
 </ion-content>

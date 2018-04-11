@@ -7,6 +7,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { LostAnnouncePage } from '../lost-announce/lost-announce';
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import firebase from 'firebase';
 
 @Component({
@@ -17,9 +18,69 @@ import firebase from 'firebase';
 export class HomePage {
   uid;
   result = [];
-  constructor(public authProvider: AuthProvider, public navCtrl: NavController, public userService: UserServiceProvider, private db: AngularFireDatabase) {
+  displayName = '';
+  date = new Date().getDate();
+  month = new Date().getMonth() + 1
+  monthTH = '';
+  year = new Date().getFullYear();
+  lostList: FirebaseListObservable<any>;
+  adoptList: FirebaseListObservable<any>;
+  constructor(private browser: InAppBrowser,public authProvider: AuthProvider, public navCtrl: NavController, public userService: UserServiceProvider, private db: AngularFireDatabase) {
     this.uid = userService.uid;
+    this.db.database.ref('userProfile/' + this.uid).on('value', (data) => {
+      this.displayName = data.val().displayName;
+    })
     this.checkVaccineNoti();
+    switch (this.month) {
+      case 1: this.monthTH = "มกราคม";
+        break;
+      case 2: this.monthTH = "กุมภาพันธ์";
+        break;
+      case 3: this.monthTH = "มีนาคม";
+        break;
+      case 4: this.monthTH = "เมษายน";
+        break;
+      case 5: this.monthTH = "พฤษภาคม";
+        break;
+      case 6: this.monthTH = "มิถุนายน";
+        break;
+      case 7: this.monthTH = "กรกฎาคม";
+        break;
+      case 8: this.monthTH = "สิงหาคม";
+        break;
+      case 9: this.monthTH = "กันยายน";
+        break;
+      case 10: this.monthTH = "ตุลาคม";
+        break;
+      case 11: this.monthTH = "พฤศจิกายน";
+        break;
+      case 12: this.monthTH = "ธันวาคม";
+        break;
+    }
+    this.lostList = this.db.list('announceMissing/', {
+      query: {
+        orderByChild: 'status',
+        equalTo: 'lost',
+        limitToLast: 4
+      }
+    }
+    ).map((arr) => {
+      var array = <any>{};
+      array = arr;
+      return array.reverse();
+    }) as FirebaseListObservable<any[]>;
+    this.adoptList = this.db.list('announceAdopt/', {
+      query: {
+        orderByChild: 'status',
+        equalTo: 'wait',
+        limitToLast: 4
+      }
+    }
+    ).map((arr) => {
+      var array = <any>{};
+      array = arr;
+      return array.reverse();
+    }) as FirebaseListObservable<any[]>;
   }
   checkVaccineNoti() {
     var dog = {};
@@ -51,7 +112,7 @@ export class HomePage {
           if (key != "dogID") {
             mykey = key;
             this.db.database.ref('notiVaccine/').push().set({
-              uid:this.uid,
+              uid: this.uid,
               dogID: this.result[i].dogID,
               vaccine: key,
               time: this.result[i][key]
@@ -62,6 +123,9 @@ export class HomePage {
         }
       }
     }
+  }
+  openBrowser(url){
+    this.browser.create(url);
   }
   lostTapped() {
     this.navCtrl.push(LostMainPage);

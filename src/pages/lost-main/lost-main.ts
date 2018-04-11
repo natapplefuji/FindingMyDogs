@@ -21,7 +21,9 @@ export class LostMainPage {
     this.uid = userService.uid;
     this.announcelist = this.db.list('announceMissing/', {
       query: {
-        limitToLast:6
+        orderByChild: 'status',
+        equalTo: 'lost',
+        limitToLast:9
       }
     }
     ).map((arr) => {

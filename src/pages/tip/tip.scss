@@ -5,7 +5,16 @@ page-tip{
   agm-map {
     height: 50%;
   }
-  p {
-    color: #ff0000;
+  ion-card-content.body {
+    padding : 10px;
+    
+  }
+
+  .head {
+    margin :0;
+    padding : 2px;
+  }
+  .sub {
+    margin :0;
   }
 }
