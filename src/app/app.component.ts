@@ -41,14 +41,14 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      // var notificationOpenedCallback = function(jsonData) {
-      //   console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-      // };
+      var notificationOpenedCallback = function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      };
   
-      // window["plugins"].OneSignal
-      //   .startInit("7159d3c3-b530-443c-b10e-c45800022beb", "20173837686")
-      //   .handleNotificationOpened(notificationOpenedCallback)
-      //   .endInit();
+      window["plugins"].OneSignal
+        .startInit("7159d3c3-b530-443c-b10e-c45800022beb", "20173837686")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
       
       const unsubscribe = firebase.auth().onAuthStateChanged( user => {
         if (!user) {

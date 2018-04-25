@@ -27,7 +27,9 @@ export class UpdateAnnouceAdoptPage {
       dogName: [navParams.get("dogName"), Validators.required],
       breed: [navParams.get("breed"), Validators.required],
       gender: [navParams.get("gender"), Validators.required],
-      age: [navParams.get("age"), Validators.required],
+      age_year: [navParams.get("ageyear"), Validators.required],
+      age_month: [navParams.get("agemonth"), Validators.required],
+      age_week: [navParams.get("ageweek"), Validators.required],
       contactMiss: [navParams.get("contactMiss")],
       dogDetail: [navParams.get("dogDetail")],
     })
@@ -54,7 +56,9 @@ export class UpdateAnnouceAdoptPage {
       dogName: this.announceadopt.value.dogName,
       breed: this.announceadopt.value.breed,
       gender: this.announceadopt.value.gender,
-      age: this.announceadopt.value.age,
+      age_year: this.announceadopt.value.age_year,
+      age_month: this.announceadopt.value.age_month,
+      age_week: this.announceadopt.value.age_week,
       contactMiss: this.announceadopt.value.contactMiss,
       dogDetail: this.announceadopt.value.dogDetail,
     }).then(() => {

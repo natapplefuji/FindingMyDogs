@@ -26,7 +26,9 @@ export class UpdateAnnouceLostPage {
       dogName: [navParams.get("dogName"), Validators.required],
       breed: [navParams.get("breed"), Validators.required],
       gender: [navParams.get("gender"), Validators.required],
-      age: [navParams.get("age"), Validators.required],
+      age_year: [navParams.get("ageyear"), Validators.required],
+      age_month: [navParams.get("agemonth"), Validators.required],
+      age_week: [navParams.get("ageweek"), Validators.required],
       contactMiss: [navParams.get("contactMiss")],
       dogDetail: [navParams.get("dogDetail")],
       reward: [navParams.get("reward")],
@@ -45,6 +47,7 @@ export class UpdateAnnouceLostPage {
   ionViewDidLoad() {
     
     console.log('ionViewDidLoad UpdateAnnouceLostPage');
+    alert(this.announcelost.value.age_year);
   }
   closeModal() {
     this.viewCtrl.dismiss();
@@ -55,7 +58,9 @@ export class UpdateAnnouceLostPage {
       dogName: this.announcelost.value.dogName,
       breed: this.announcelost.value.breed,
       gender: this.announcelost.value.gender,
-      age: this.announcelost.value.age,
+      age_year: this.announcelost.value.age_year,
+      age_month: this.announcelost.value.age_month,
+      age_week: this.announcelost.value.age_week,
       contactMiss: this.announcelost.value.contactMiss,
       dogDetail: this.announcelost.value.dogDetail,
       reward: this.announcelost.value.reward,
