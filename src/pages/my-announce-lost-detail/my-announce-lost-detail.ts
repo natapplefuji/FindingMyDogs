@@ -66,7 +66,6 @@ export class MyAnnounceLostDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostAnnounceDetailPage');
-    alert(this.userDetail.displayName)
     console.log(this.announceDetail.age_month)
     console.log(this.announceDetail.age_week)
   }
