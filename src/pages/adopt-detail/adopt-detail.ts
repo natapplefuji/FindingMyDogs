@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ToastController} from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable,FirebaseListObservable} from 'angularfire2/database-deprecated'
-import { UserServiceProvider} from '../../providers/user-service/user-service'
+import { UserServiceProvider } from '../../providers/user-service/user-service'
+import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the AdoptDetailPage page.
  *
@@ -39,7 +40,7 @@ export class AdoptDetailPage {
     photo: '',
     tel: ''
   };
-  constructor(private toastCtrl: ToastController,public userService:UserServiceProvider,public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase) {
+  constructor(private toastCtrl: ToastController,public userService:UserServiceProvider,public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,private callNumber: CallNumber) {
     this.announceDetail.dogName = navParams.get("dogName");
     this.announceDetail.breed = navParams.get("breed");
     this.announceDetail.gender = navParams.get("gender");
@@ -107,5 +108,9 @@ export class AdoptDetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdoptDetailPage');
   }
-
+  launchDialer(n:string){
+    this.callNumber.callNumber(n, true)
+    .then(() => console.log('Launched dialer!'))
+    .catch(() => console.log('Error launching dialer'));
+}
 }
