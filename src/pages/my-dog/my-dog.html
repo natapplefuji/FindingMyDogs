@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding class="background">
+<ion-content>
   <ion-fab top right edge>
     <button ion-fab color="fabcolor" (click)="goToAddDog()">
       <ion-icon name="add"></ion-icon>
@@ -38,10 +38,11 @@
       </p>
   </ion-col>
     </ion-row>
-    <ion-row>
-      <button ion-button (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status,dog.lat,dog.lng)">ดูประกาศ</button>
-      <button ion-button [disabled]="!(dog.status == 'safe')" (tap)="createLost(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">สุนัขสูญหาย</button>
-      <button ion-button [disabled]="!(dog.status == 'safe')" (tap)="createAdopt(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">ให้อุปการะสุนัข</button>
+    <ion-row class="btn">
+      <button ion-button color="btncolor" class="btn" style="width:23%" (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status,dog.lat,dog.lng)">ดูประกาศ</button>
+      <button ion-button color="btncolor" class="btn" style="width:23%" (tap)="delete(dog.$key)">ลบสุนัข</button>
+      <button ion-button color="btncolor" class="btn" style="width:23%" [disabled]="!(dog.status == 'safe')" (tap)="createLost(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">สุนัขสูญหาย</button>
+      <button ion-button color="btncolor" class="btn" style="width:25%" [disabled]="!(dog.status == 'safe')" (tap)="createAdopt(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">ให้อุปการะสุนัข</button>
     </ion-row>
   </ion-grid>
   </ion-card>
