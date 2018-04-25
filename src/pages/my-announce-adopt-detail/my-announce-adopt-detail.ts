@@ -65,6 +65,7 @@ export class MyAnnounceAdoptDetailPage {
  
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyAnnounceAdoptDetailPage');
+
   }
 
 }

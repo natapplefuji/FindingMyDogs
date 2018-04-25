@@ -32,8 +32,8 @@
      
   </ion-col>
     </ion-row>
-    <ion-row >
-      <button color="btncolor" class="btn" style = "width:37%;" ion-button (click)="goToAnnouceDetail(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age_year,announceMissing.age_month,announceMissing.age_week,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid)">ดูรายละเอียด</button>
+    <ion-row>
+      <button color="btncolor" class="btn" style = "width:37%;" ion-button (click)="goToAnnouceLostDetail(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age_year,announceMissing.age_month,announceMissing.age_week,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid)">ดูรายละเอียด</button>
       <button color="btncolor" class="btn" style = "width:20%;" ion-button (click)="openUpdateAnnouceLost(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age_year,announceMissing.age_month,announceMissing.age_week,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid,announceMissing.$key)">แก้ไข</button>
       <button color="btncolor" class="btn" style = "width:37%;"ion-button (click)="deleteAnnounceMissing(announceMissing.$key)">ลบประกาศ</button>
     </ion-row>
@@ -58,7 +58,7 @@
   </ion-col>
     </ion-row>
     <ion-row>
-      <button color="btncolor" class="btn" style = "width:37%;" ion-button (click)="goToAnnouceDetail(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age_year,announceAdopt.age_month,announceAdopt.age_week,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid)">ดูรายละเอียด</button>
+      <button color="btncolor" class="btn" style = "width:37%;" ion-button (click)="goToAnnouceAdoptDetail(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age_year,announceAdopt.age_month,announceAdopt.age_week,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid)">ดูรายละเอียด</button>
       <button color="btncolor" class="btn"  style = "width:20%;" ion-button (click)="openUpdateAnnouceAdopt(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age_year,announceAdopt.age_month,announceAdopt.age_week,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid,announceAdopt.$key)">แก้ไข</button>
       <button color="btncolor" class="btn"  style = "width:37%;" ion-button (click)="deleteAnnounceAdopt(announceAdopt.$key)">ลบประกาศ</button>
     </ion-row>

@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
-import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail';
 import { ModalController } from 'ionic-angular';
 import { UpdateAnnouceLostPage } from '../update-annouce-lost/update-annouce-lost';
 import { UpdateAnnouceAdoptPage } from '../update-annouce-adopt/update-annouce-adopt';
 import { ToastController } from 'ionic-angular';
+import { MyAnnounceLostDetailPage } from '../my-announce-lost-detail/my-announce-lost-detail';
+import {MyAnnounceAdoptDetailPage} from '../my-announce-adopt-detail/my-announce-adopt-detail';
 /**
  * Generated class for the MyAnnouncePage page.
  *
@@ -37,16 +38,32 @@ export class MyAnnouncePage {
     console.log(this.announceMissingList)
     console.log(this.announceMissingList)
   }
-  goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid) {
-    this.navCtrl.push(LostAnnounceDetailPage, {
+  goToAnnouceLostDetail(dogName, breed, gender, age_year, age_month, age_week, dogDetail, photo, contactMiss, reward, uid) {
+    this.navCtrl.push(MyAnnounceLostDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
-      age: age,
+      age_year: age_year,
+      age_month: age_month,
+      age_week: age_week,
       dogDetail: dogDetail,
       photo: photo,
       contactMiss: contactMiss,
       reward: reward,
+      uid: uid
+    })
+  }
+  goToAnnouceAdoptDetail(dogName, breed, gender, age_year, age_month, age_week, dogDetail, photo, contactMiss, uid) {
+    this.navCtrl.push(MyAnnounceAdoptDetailPage, {
+      dogName: dogName,
+      breed: breed,
+      gender: gender,
+      age_year: age_year,
+      age_month: age_month,
+      age_week: age_week,
+      dogDetail: dogDetail,
+      photo: photo,
+      contactMiss: contactMiss,
       uid: uid
     })
   }
@@ -65,7 +82,7 @@ export class MyAnnouncePage {
       reward: reward,
       uid: uid
     };
-    console.log(obj.key)
+    
     let myModal = this.modalCtrl.create(UpdateAnnouceLostPage, obj);
     myModal.present();
   }
@@ -82,7 +99,7 @@ export class MyAnnouncePage {
       dogDetail: dogDetail,
       photo: photo,
       contactMiss: contactMiss,
-      uid: uid
+      uid: uid,
     };
     console.log(obj.key)
     let myModal = this.modalCtrl.create(UpdateAnnouceAdoptPage, obj);

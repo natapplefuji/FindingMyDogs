@@ -22,11 +22,11 @@
   </div>
       <div [ngSwitch]="location">
         <ion-list *ngSwitchCase="'nearby'">
-          <ion-item *ngFor="let dog of announcelistNear | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)">
+          <ion-item *ngFor="let dog of announcelistNear | async" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)">
             <ion-thumbnail item-start>
               <img src="{{dog.photo}}">
             </ion-thumbnail>
-            <h2>{{dog.dogName}} พันธุ็ {{dog.breed}} </h2>
+            <h2>{{dog.dogName}} พันธุ์ {{dog.breed}} </h2>
             <p>หายวันที่ {{dog.day}}/{{dog.month}}/{{dog.year}}</p>
             <p>หากพบโปรดแจ้งเบาะแส</p>
             <button ion-button clear item-end (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)"><ion-icon name="arrow-dropright"></ion-icon>
@@ -39,7 +39,7 @@
                 <ion-thumbnail item-start>
                   <img src="{{dog.photo}}">
                 </ion-thumbnail>
-                <h2>{{dog.dogName}} พันธุ็ {{dog.breed}} </h2>
+                <h2>{{dog.dogName}} พันธุ์ {{dog.breed}} </h2>
                 <p>หายวันที่ {{dog.day}}/{{dog.month}}/{{dog.year}}</p>
                 <p>หากพบโปรดแจ้งเบาะแส</p>
                 <button ion-button clear item-end (tap)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)"><ion-icon name="arrow-dropright"></ion-icon>
