@@ -19,23 +19,23 @@
     <ion-row>          
     <ion-col col-5>
         <!-- <p>{{notiTest[i].photo}}</p> -->
-      <img src="{{announceMissing?.photo}}" />
+      <img style= "height:75px;"src="{{announceMissing?.photo}}" />
     </ion-col >
 
   <ion-col col-7>
-      <h1>
-        ประกาศสุนัขหาย:{{announceMissing?.dogName}} 
-      </h1>
-      <p class = "subhead">
+      <h2>
+        ประกาศสุนัขหาย : {{announceMissing?.dogName}} 
+      </h2>
+      <p>
         พันธุ์ {{announceMissing?.breed}}
       </p>
      
   </ion-col>
     </ion-row>
     <ion-row>
-      <button ion-button (click)="goToAnnouceDetail(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid)">ดูรายละเอียด</button>
-      <button ion-button (click)="openUpdateAnnouceLost(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid,announceMissing.$key)">แก้ไข</button>
-      <button ion-button (click)="deleteAnnounceMissing(announceMissing.$key)">ลบประกาศ</button>
+      <button style = "width:37%;" ion-button (click)="goToAnnouceDetail(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid)">ดูรายละเอียด</button>
+      <button style = "width:20%;" ion-button (click)="openUpdateAnnouceLost(announceMissing.dogName,announceMissing.breed,announceMissing.gender,announceMissing.age,announceMissing.dogDetail,announceMissing.photo,announceMissing.contactMiss,announceMissing.reward,announceMissing.uid,announceMissing.$key)">แก้ไข</button>
+      <button style = "width:37%;"ion-button (click)="deleteAnnounceMissing(announceMissing.$key)">ลบประกาศ</button>
     </ion-row>
   </ion-grid>
   </ion-card>
@@ -44,23 +44,23 @@
     <ion-row>          
     <ion-col col-5>
         <!-- <p>{{notiTest[i].photo}}</p> -->
-      <img src="{{announceAdopt?.photo}}" />
+      <img style= "height:75px;" src="{{announceAdopt?.photo}}" />
     </ion-col >
 
   <ion-col col-7>
-      <h1>
-        ประกาศหาคนอุปการะ:{{announceAdopt?.dogName}} 
-      </h1>
-      <p class = "subhead">
+  <h2>
+        ประกาศหาคนอุปการะ : {{announceAdopt?.dogName}} 
+      </h2>
+      <p>
         พันธุ์ {{announceAdopt?.breed}}
       </p>
      
   </ion-col>
     </ion-row>
     <ion-row>
-      <button ion-button (click)="goToAnnouceDetail(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid)">ดูรายละเอียด</button>
-      <button ion-button (click)="openUpdateAnnouceAdopt(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid,announceAdopt.$key)">แก้ไข</button>
-      <button ion-button (click)="deleteAnnounceAdopt(announceAdopt.$key)">ลบประกาศ</button>
+      <button style = "width:37%;" ion-button (click)="goToAnnouceDetail(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid)">ดูรายละเอียด</button>
+      <button style = "width:20%;" ion-button (click)="openUpdateAnnouceAdopt(announceAdopt.dogName,announceAdopt.breed,announceAdopt.gender,announceAdopt.age,announceAdopt.dogDetail,announceAdopt.photo,announceAdopt.contactMiss,announceAdopt.uid,announceAdopt.$key)">แก้ไข</button>
+      <button style = "width:37%;" ion-button (click)="deleteAnnounceAdopt(announceAdopt.$key)">ลบประกาศ</button>
     </ion-row>
 
   </ion-grid>

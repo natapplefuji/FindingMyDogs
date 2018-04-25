@@ -30,19 +30,33 @@
       <h1>
         {{dog.dogName}}
       </h1>
+      
       <p class = "subhead">
         {{dog.breed}}
       </p>
-      <p class = "subhead">
-        สถานะ : <span class = "safe">{{dog.status}}</span>
-      </p>
+      <div *ngIf = "dog.status == 'ปลอดภัย'">
+        <p class = "subhead">
+          สถานะ : <span class = "safe">{{dog.status}}</span>
+        </p>
+      </div>
+      <div *ngIf = "dog.status == 'สูญหาย'">
+        <p class = "subhead">
+          สถานะ : <span class = "lost">{{dog.status}}</span>
+        </p>
+      </div>
+      <div *ngIf = "dog.status == 'รอรับอุปการะ'">
+        <p class = "subhead">
+          สถานะ : <span class = "wait">{{dog.status}}</span>
+        </p>
+      </div>
+      
   </ion-col>
     </ion-row>
     <ion-row class="btn">
       <button ion-button color="btncolor" class="btn" style="width:23%" (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.status,dog.lat,dog.lng)">ดูประกาศ</button>
       <button ion-button color="btncolor" class="btn" style="width:23%" (tap)="delete(dog.$key)">ลบสุนัข</button>
-      <button ion-button color="btncolor" class="btn" style="width:23%" [disabled]="!(dog.status == 'safe')" (tap)="createLost(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">สุนัขสูญหาย</button>
-      <button ion-button color="btncolor" class="btn" style="width:25%" [disabled]="!(dog.status == 'safe')" (tap)="createAdopt(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">ให้อุปการะสุนัข</button>
+      <button ion-button color="btncolor" class="btn" style="width:23%" [disabled]="!(dog.status == 'ปลอดภัย')" (tap)="createLost(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">สุนัขสูญหาย</button>
+      <button ion-button color="btncolor" class="btn" style="width:25%" [disabled]="!(dog.status == 'ปลอดภัย')" (tap)="createAdopt(dog.dogName,dog.breed,dog.detail,dog.gender,dog.photo,dog.age_week,dog.age_month,dog.age_year,dog.lat,dog.lng,dog.photoName,dog.$key)">ให้อุปการะสุนัข</button>
     </ion-row>
   </ion-grid>
   </ion-card>

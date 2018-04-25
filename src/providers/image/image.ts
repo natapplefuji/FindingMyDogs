@@ -60,8 +60,8 @@ export class ImageProvider {
         saveToPhotoAlbum: true,
         encodingType: this.camera.EncodingType.JPEG,
         correctOrientation: true,
-        targetWidth:400,
-        targetHeight: 400,
+        targetWidth: 375,
+        targetHeight: 375,
         allowEdit: true
       };
       this.camera.getPicture(options).then(data => {

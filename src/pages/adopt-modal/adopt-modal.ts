@@ -94,7 +94,7 @@ export class AdoptModalPage {
       age_year: this.infoAdopt.value.age_year,
       age_month: this.infoAdopt.value.age_month,
       age_week: this.infoAdopt.value.age_week,
-      status: 'wait'
+      status: 'รอรับอุปการะ'
     }).then(() => {
       this.db.database.ref('dogs/'+this.dogKey).update({status:'wait'})
       this.view.dismiss();

@@ -217,7 +217,7 @@ export class AdoptMainPage {
       this.photoName = this._DB.imageName;
       loading.present().then(() => {
         this._predict.getJsonData(this.photoName).subscribe((data) => {
-          if (data[0].score > 50) {
+          if (data[0].score > 30) {
             this.dogBreedfromPredict = [];
             this.dogBreedfromPredict.push(data[0].dogName);
             this.dogBreedfromPredict.push(data[1].dogName);

@@ -96,7 +96,7 @@ export class LostModalPage {
             age_year: this.announcelost.value.age_year,
             age_month: this.announcelost.value.age_month,
             age_week: this.announcelost.value.age_week,
-            status:'lost'//lost เป็น default/update เป็น found เมื่อพบเจ้าของแล้ว
+            status:'สูญหาย'//lost เป็น default/update เป็น found เมื่อพบเจ้าของแล้ว
           }).then(() => {
             this.db.database.ref('dog/'+this.dogKey).update({status:'lost'})
             this.view.dismiss();
