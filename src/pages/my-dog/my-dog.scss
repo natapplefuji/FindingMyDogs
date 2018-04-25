@@ -1,7 +1,5 @@
 page-my-dog {
-    .background{
-        background-color: #ffd149;
-    }
+
 p.subhead{
     font-size: 18px;
     
@@ -45,4 +43,11 @@ img{
     display:block;
    
 }
+button.btn {
+    display:block;
+    border-radius: 3px;
+  }
+  span.button-inner{
+    font-size: 16px !important;
+  }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController,AlertController } from 'ionic-angular';
 import { AddMyDogPage } from '../add-my-dog/add-my-dog';
 import { AngularFireDatabase ,FirebaseListObservable} from 'angularfire2/database-deprecated'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
@@ -21,7 +21,7 @@ import { AdoptModalPage } from '../adopt-modal/adopt-modal'
 export class MyDogPage {
   dogList: FirebaseListObservable<any[]>;
 
-  constructor(public modalCtrl: ModalController,private userService: UserServiceProvider,private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public modalCtrl: ModalController,private userService: UserServiceProvider,private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController) {
     let uid = userService.uid;
     this.dogList = db.list('dogs/', { query: { orderByChild: 'uid', equalTo: uid } });
   }
@@ -32,6 +32,31 @@ export class MyDogPage {
   goToAddDog() {
     this.navCtrl.push(AddMyDogPage);
   }
+  delete(dogkey) { 
+    let alert = this.alertCtrl.create({
+      title: 'ลบสุนัขของคุณ',
+      message: 'หากต้องการลบสุนัขของคุณกรุณากดตกลง',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+            console.log(dogkey)
+          }
+        },
+        {
+          text: 'ลบ',
+          handler: () => {
+            this.db.object('dogs/'+dogkey).remove();
+            console.log('Buy clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  
   createLost(dogName,breed,detail,gender,photo,age_week,age_month,age_year,lat,lng,photoName,dogKey) {
     let lostModal = this.modalCtrl.create('LostModalPage', {
       dogName:dogName,
