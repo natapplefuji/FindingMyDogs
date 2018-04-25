@@ -65,6 +65,8 @@ import {InformFoundManualPage} from '../pages/inform-found-manual/inform-found-m
 import { MyNotiDetailAdoptPage } from '../pages/my-noti-detail-adopt/my-noti-detail-adopt'
 import { FoundAnnouncePage } from '../pages/found-announce/found-announce'
 import { FoundAnnounceDetailPage } from '../pages/found-announce-detail/found-announce-detail'
+import { MyAnnounceLostDetailPage } from '../pages/my-announce-lost-detail/my-announce-lost-detail';
+import {MyAnnounceAdoptDetailPage} from '../pages/my-announce-adopt-detail/my-announce-adopt-detail';
 import { CallNumber } from '@ionic-native/call-number';
  
 const config = {
@@ -116,7 +118,9 @@ firebase.initializeApp(config);
     InformFoundManualPage,
     MyNotiDetailAdoptPage,
     FoundAnnouncePage,
-    FoundAnnounceDetailPage
+    FoundAnnounceDetailPage,
+    MyAnnounceLostDetailPage,
+    MyAnnounceAdoptDetailPage
   ],
   imports: [
     BrowserModule,
@@ -165,7 +169,9 @@ firebase.initializeApp(config);
     InformFoundManualPage,
     MyNotiDetailAdoptPage,
     FoundAnnouncePage,
-    FoundAnnounceDetailPage
+    FoundAnnounceDetailPage,
+    MyAnnounceLostDetailPage,
+    MyAnnounceAdoptDetailPage
   ],
   providers: [
     StatusBar,
