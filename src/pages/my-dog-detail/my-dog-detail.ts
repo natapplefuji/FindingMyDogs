@@ -40,39 +40,6 @@ export class MyDogDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyDogDetailPage');
-    this.platform.ready().then(() => {
-      this.initMap();
-    });
   }
-  initMap() {
-
-    var mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: this.dogDetail.lat,
-          lng: this.dogDetail.lng
-        },
-        zoom: 16,
-      }
-    };
-    let map: GoogleMap = this.googleMaps.create(this.element.nativeElement, mapOptions);
   
-    map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
-  
-      // let markerOptions: MarkerOptions = {
-      //   position: this.loc,
-      //   icon: "assets/images/icons8-Marker-64.png",
-      //   title: 'Our first POI'
-      // };
-  
-      // const marker = map.addMarker(markerOptions)
-      //   .then((marker: Marker) => {
-      //     marker.showInfoWindow();
-      //   });
-    })
-  }
-
-
-  
-
 }

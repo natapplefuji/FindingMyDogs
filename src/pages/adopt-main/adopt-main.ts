@@ -316,12 +316,14 @@ export class AdoptMainPage {
       }
     }))
   }
-  goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid) {
+  goToAnnouceDetail(dogName, breed, gender,age_year,age_month,age_week, dogDetail, photo, contactMiss, reward, uid) {
     this.navCtrl.push(AdoptDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
-      age: age,
+      age_year: age_year,
+      age_month: age_month,
+      age_week:age_week,
       dogDetail: dogDetail,
       photo: photo,
       contactMiss: contactMiss,
