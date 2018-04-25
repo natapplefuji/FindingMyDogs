@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component,ViewChild,ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
+import { GoogleMaps, GoogleMap, GoogleMapOptions,GoogleMapsEvent, LatLng, MarkerOptions, Marker, CameraPosition } from '@ionic-native/google-maps';
+
 
 /**
  * Generated class for the FoundAnnounceDetailPage page.
@@ -13,8 +15,10 @@ import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
 @Component({
   selector: 'page-found-announce-detail',
   templateUrl: 'found-announce-detail.html',
-})
+  })
+  
 export class FoundAnnounceDetailPage {
+  @ViewChild('map') element: ElementRef;
   founder
   breed
   contact
@@ -25,7 +29,7 @@ export class FoundAnnounceDetailPage {
   lng
   district = ''
   province = ''
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public googleMaps: GoogleMaps, public platform: Platform) {
     this.founder = this.navParams.get('founder');
     this.breed = this.navParams.get('breed');
     this.contact = this.navParams.get('contact');
@@ -41,6 +45,40 @@ export class FoundAnnounceDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FoundAnnounceDetailPage');
+    this.platform.ready().then(() => {
+      this.initMap();
+    });
+  }
+  initMap() {
+
+    var mapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: this.lat,
+          lng: this.lng
+        },
+        zoom: 16,
+      }
+    };
+    let map: GoogleMap = this.googleMaps.create(this.element.nativeElement, mapOptions);
+    
+    map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
+  
+      let markerOptions: MarkerOptions = {
+        position: {
+          lat: +this.lat,
+          lng: +this.lng
+        },
+        icon: "assets/images/icons8-Marker-64.png",
+        title: 'พบสุนัขบริเวณนี้'
+      };
+  
+      const marker = map.addMarker(markerOptions)
+        .then((marker: Marker) => {
+          marker.showInfoWindow();
+        });
+
+    })
   }
   getGeoRequest() {
     let req = {
