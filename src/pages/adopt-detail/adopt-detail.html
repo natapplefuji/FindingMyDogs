@@ -58,6 +58,11 @@
       <h2>ผู้ประกาศ</h2>
       <p>{{userDetail.displayName}}</p>
     </ion-item>
+    <ion-item>
+      <h2>เบอร์โทรศัพท์ติดต่อ</h2>
+      <p>{{userDetail.tel}}</p>
+      <button ion-button item-end style="height:45px;width:55px;" (click)="launchDialer(userDetail.tel)"> <ion-icon name="call"></ion-icon></button>    
+    </ion-item>
     <button ion-button block (tap)= "askForAdoption()">
       ขอทำการรับเลี้ยง
     </button>
