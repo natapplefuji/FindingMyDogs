@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
-import { AngularFireDatabase ,FirebaseListObservable} from 'angularfire2/database-deprecated'
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { LostAnnounceDetailPage } from '../lost-announce-detail/lost-announce-detail';
 import { ModalController } from 'ionic-angular';
@@ -22,69 +22,73 @@ import { ToastController } from 'ionic-angular';
 export class MyAnnouncePage {
   announceMissingList
   announceAdoptList
-  constructor(private userService: UserServiceProvider,private db: AngularFireDatabase,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,private alertCtrl: AlertController,private toastCtrl: ToastController) {
+  constructor(private userService: UserServiceProvider, private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private alertCtrl: AlertController, private toastCtrl: ToastController) {
     let uid = userService.uid;
     this.announceMissingList = db.list('announceMissing/', { query: { orderByChild: 'uid', equalTo: uid } });
     this.announceAdoptList = db.list('announceAdopt/', { query: { orderByChild: 'uid', equalTo: uid } });
-    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyAnnouncePage');
 
   }
-  getList() { 
+  getList() {
     console.log(this.announceMissingList)
     console.log(this.announceMissingList)
   }
-  goToAnnouceDetail(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid) {
+  goToAnnouceDetail(dogName, breed, gender, age, dogDetail, photo, contactMiss, reward, uid) {
     this.navCtrl.push(LostAnnounceDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
       age: age,
       dogDetail: dogDetail,
-      photo:photo,
+      photo: photo,
       contactMiss: contactMiss,
       reward: reward,
-      uid:uid
+      uid: uid
     })
   }
-  openUpdateAnnouceLost(dogName,breed,gender,age,dogDetail,photo,contactMiss,reward,uid,key) {
+  openUpdateAnnouceLost(dogName, breed, gender, ageyear, agemonth, ageweek, dogDetail, photo, contactMiss, reward, uid, key) {
     let obj = {
-      key:key,
+      key: key,
       dogName: dogName,
       breed: breed,
       gender: gender,
-      age: age,
+      ageyear: ageyear,
+      agemonth: agemonth,
+      ageweek: ageweek,
       dogDetail: dogDetail,
-      photo:photo,
+      photo: photo,
       contactMiss: contactMiss,
       reward: reward,
       uid: uid
     };
     console.log(obj.key)
-    let myModal = this.modalCtrl.create(UpdateAnnouceLostPage,obj);
+    let myModal = this.modalCtrl.create(UpdateAnnouceLostPage, obj);
     myModal.present();
   }
 
-  openUpdateAnnouceAdopt(dogName,breed,gender,age,dogDetail,photo,contactMiss,uid,key) {
+  openUpdateAnnouceAdopt(dogName, breed, gender, ageyear, agemonth, ageweek, dogDetail, photo, contactMiss, uid, key) {
     let obj = {
-      key:key,
+      key: key,
       dogName: dogName,
       breed: breed,
       gender: gender,
-      age: age,
+      ageyear: ageyear,
+      agemonth: agemonth,
+      ageweek: ageweek,
       dogDetail: dogDetail,
-      photo:photo,
+      photo: photo,
       contactMiss: contactMiss,
       uid: uid
     };
     console.log(obj.key)
-    let myModal = this.modalCtrl.create(UpdateAnnouceAdoptPage,obj);
+    let myModal = this.modalCtrl.create(UpdateAnnouceAdoptPage, obj);
     myModal.present();
   }
-  deleteAnnounceAdopt(key) { 
+  deleteAnnounceAdopt(key) {
     let alert = this.alertCtrl.create({
       title: 'ลบประกาศ',
       message: 'หากต้องการลบประกาศรุณากดตกลง',
@@ -106,11 +110,11 @@ export class MyAnnouncePage {
               duration: 2000,
               position: 'top'
             });
-          
+
             // toast.onDidDismiss(() => {
             //   console.log('Dismissed toast');
             // });
-          
+
             toast.present();
           }
         }
@@ -118,7 +122,7 @@ export class MyAnnouncePage {
     });
     alert.present();
   }
-  deleteAnnounceMissing(key) { 
+  deleteAnnounceMissing(key) {
     let alert = this.alertCtrl.create({
       title: 'ลบประกาศ',
       message: 'หากต้องการลบประกาศรุณากดตกลง',
@@ -134,7 +138,7 @@ export class MyAnnouncePage {
         {
           text: 'ตกลง',
           handler: () => {
-            this.db.object('announceMissing/'+key).remove();
+            this.db.object('announceMissing/' + key).remove();
             console.log('Buy clicked');
           }
         }

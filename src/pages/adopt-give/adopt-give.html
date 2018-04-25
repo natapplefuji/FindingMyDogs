@@ -23,18 +23,18 @@
         </div>
       </ion-item>
       <ion-item>
-        <ion-label floating>ชื่อสุนัขของคุณ</ion-label>
+        <ion-label floating>ชื่อสุนัขของคุณ<span style= "color : red">*</span></ion-label>
         <ion-input type="text" formControlName="dogName"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>เพศ</ion-label>
+        <ion-label>เพศ<span style= "color : red">*</span></ion-label>
         <ion-select formControlName="gender">
           <ion-option value="male">เพศผู้</ion-option>
           <ion-option value="female">เพศเมีย</ion-option>
         </ion-select>
       </ion-item>
       <ion-item no-lines>
-        <ion-label>อายุ</ion-label>
+        <ion-label>อายุ<span style= "color : red">*</span></ion-label>
       </ion-item>
       <ion-row>
         <ion-col ion-item col-4>
@@ -86,21 +86,21 @@
         </ion-col>
       </ion-row>
       <ion-item>
-        <ion-label floating>พันธุ์</ion-label>
+        <ion-label floating>พันธุ์<span style= "color : red">*</span></ion-label>
         <ion-select formControlName="breed">
           <ion-option *ngFor="let item of breed">{{item}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label floating>ข้อมูลติดต่อ</ion-label>
+        <ion-label floating>ข้อมูลติดต่อ<span style= "color : red">*</span></ion-label>
         <ion-textarea formControlName="contactMiss"></ion-textarea>
       </ion-item>
       <ion-item>
-        <ion-label floating>ข้อมูลสุนัขเพิ่มเติม</ion-label>
+        <ion-label floating>ข้อมูลสุนัขเพิ่มเติม<span style= "color : red">*</span></ion-label>
         <ion-textarea formControlName="dogDetail"></ion-textarea>
       </ion-item>
       <ion-item>
-        <ion-label floating>สาเหตุในการให้อุปการะ</ion-label>
+        <ion-label floating>สาเหตุในการให้อุปการะ<span style= "color : red">*</span></ion-label>
         <ion-textarea formControlName="reason"></ion-textarea>
       </ion-item>
 

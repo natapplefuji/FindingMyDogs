@@ -10,17 +10,17 @@
 <ion-content padding>
     <form [formGroup]="announcelost" (ngSubmit)="addAnnounceLost()">
         <ion-item>
-          <ion-label>ชื่อสุนัข</ion-label>
+          <ion-label>ชื่อสุนัข<span style= "color : red">*</span></ion-label>
           <ion-input type="text" formControlName="dogName"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>พันธุ์</ion-label>
+          <ion-label>พันธุ์<span style= "color : red">*</span></ion-label>
           <ion-select placeholder="กรุณาเลือกพันธุ์สุนัข"  formControlName="breed">
               <ion-option *ngFor="let item of breed">{{item}}</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label>เพศ</ion-label>
+          <ion-label>เพศ<span style= "color : red">*</span></ion-label>
           <ion-select formControlName="gender">
             <ion-option value="male">เพศผู้</ion-option>
             <ion-option value="female">เพศเมีย</ion-option>
