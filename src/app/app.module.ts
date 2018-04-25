@@ -16,7 +16,6 @@ import { HttpModule } from '@angular/http';
 import { GoogleMaps } from '@ionic-native/google-maps'
 import { Geolocation } from '@ionic-native/geolocation'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -65,7 +64,8 @@ import { UpdateAnnouceAdoptPage } from '../pages/update-annouce-adopt/update-ann
 import {InformFoundManualPage} from '../pages/inform-found-manual/inform-found-manual';
 import { MyNotiDetailAdoptPage } from '../pages/my-noti-detail-adopt/my-noti-detail-adopt'
 import { FoundAnnouncePage } from '../pages/found-announce/found-announce'
-import { FoundAnnounceDetailPage} from '../pages/found-announce-detail/found-announce-detail'
+import { FoundAnnounceDetailPage } from '../pages/found-announce-detail/found-announce-detail'
+import { CallNumber } from '@ionic-native/call-number';
  
 const config = {
   apiKey: "AIzaSyCXIcgmwlCjayssixzkG5xRZm2pZX6rUq0",
@@ -180,6 +180,7 @@ firebase.initializeApp(config);
     Camera,
     File,
     Toast,
+    CallNumber,
     DatabaseProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     BreedProvider,

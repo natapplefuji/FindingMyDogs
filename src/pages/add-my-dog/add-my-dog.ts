@@ -88,7 +88,7 @@ export class AddMyDogPage {
             detail: this.dog.value.detail,
             photo: this.uploadedImage,
             photoName: this.photoName,
-            status: 'safe',
+            status: 'ปลอดภัย',
             day: this.day,
             month: this.month,
             year: this.year,

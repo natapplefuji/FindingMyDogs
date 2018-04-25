@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ข้อมูลประกาศ</ion-title>
+    <ion-title>ข้อมูลประกาศสุนัขหาย</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -59,7 +59,7 @@
       </ion-item>
       <ion-item>
         <h2>เบอร์โทรศัพท์ติดต่อ</h2>
-        <p>{{userDetail.tel}}</p>
+        <button ion-button (click)="launchDialer('+66819081361')">Call {{userDetail.tel}}</button>
       </ion-item>
     </ion-list>
     <button ion-button type="submit" (click)="notiAnnounceLost()">แจ้งพบสุนัข</button>

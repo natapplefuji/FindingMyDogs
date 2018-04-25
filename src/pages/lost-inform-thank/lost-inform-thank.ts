@@ -18,7 +18,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 export class LostInformThankPage {
   dogs: [{
     dogName: string,
-    score: string
+    score :any
   }];
   photoDog //to predict
   annouceFoundId //to store founder id
@@ -46,7 +46,12 @@ export class LostInformThankPage {
           this.dogs = data
           loading.dismiss();
           console.log(this.dogs)
-          this.getBreed(this.dogs[0].dogName); //fn นี้ต้องเรียกใน then เท่านั้น ไม่งั้นจะไมไ่ด้ทำ (ข้าม)
+          if (this.dogs[0].score > 50) {
+            this.getBreed(this.dogs[0].dogName);
+          } else {
+            this.getBreed('พันธุ์ผสม/อื่นๆ');
+          }
+           //fn นี้ต้องเรียกใน then เท่านั้น ไม่งั้นจะไมไ่ด้ทำ (ข้าม)
         });
 
       })

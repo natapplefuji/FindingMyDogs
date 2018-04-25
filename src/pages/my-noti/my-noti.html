@@ -17,21 +17,15 @@
     <ion-card *ngFor="let noti of notiList|async; let i = index" (click)="goToNotiDetailLost(annouceFound[i].$key,noti.$key,annouceFound[i].founder)">
         <ion-grid>
         <ion-row>          
-        <ion-col col-5>
+        <ion-col col-5 >
           <!-- <p>{{notiTest[i].photo}}</p> -->
-          <img src="{{annouceFound[i]?.photo}}" />
+          <img style = "height:75px;"src="{{annouceFound[i]?.photo}}" />
         </ion-col>
 
         <ion-col col-7>
-          <h1>
+          <h2>
             พบเห็นสุนัขที่ลักษณะใกล้เคียง
-          </h1>
-          <p class="subhead">
-            ลักษณะคล้ายสุนัขของคุณ
-          </p>
-          <p>
-            ดูรายละเอียด
-          </p>
+          </h2>
           <div *ngIf="annouceFound[i]?.dogWithYou=='yes'">
             <p class="subhead">
               สถานะ :
@@ -57,34 +51,13 @@
     <ion-row>          
     <ion-col col-5>
       <!-- <p>{{notiTest[i].photo}}</p> -->
-      <img src="{{announceAdoptDetail[i]?.photo}}" />
+      <img style = "height:75px;"src="{{announceAdoptDetail[i]?.photo}}" />
     </ion-col>
 
     <ion-col col-7>
-      <h1>
+      <h2>
           {{announceAdoptDetail[i].dogName}} มีผู้สนใจรับอุปการะแล้ว
-      </h1>
-      <p class="subhead">
-        test test
-      </p>
-      <p>
-        ดูรายละเอียด
-      </p>
-      <!-- <div *ngIf="annouceFound[i]?.dogWithYou=='yes'">
-        <p class="subhead">
-          สถานะ :
-          <span class="safe">อยู่กับผู้พบ</span>
-        </p>
-      </div>
-      <div *ngIf="annouceFound[i]?.dogWithYou!='yes'">
-        <p class="subhead">
-          สถานะ :
-          <span class="danger">ไม่อยู่กับผู้พบ</span>
-        </p>
-      </div> -->
-      <!-- <div *ngIf="{{annouceFound[i].dogWithYou}}!='yes'">
-           <p> class = "subhead" สถานะ : <span class = "safe">ไม่อยู่กับผู้พบ</span></p>
-        </div> -->
+      </h2>
 
     </ion-col>
   </ion-row>
@@ -95,19 +68,13 @@
       <ion-row>
         <ion-col col-5>
           <!-- <p>{{notiTest[i].photo}}</p> -->
-          <img src="{{dogObject[i]?.photo}}" />
+          <img style = "height:75px;"src="{{dogObject[i]?.photo}}" />
         </ion-col>
 
         <ion-col col-7>
-          <h1>
+          <h2>
               {{dogObject[i]?.dogName}} ถึงกำหนดได้รับวัคซีน
-          </h1>
-          <p class="subhead">
-            test test test
-          </p>
-          <p>
-            ดูรายละเอียด
-          </p>
+          </h2>
         </ion-col>
       </ion-row>
     </ion-grid>

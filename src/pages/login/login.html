@@ -11,11 +11,9 @@
 </ion-header>
 
 
-<ion-content  overflow-scroll="false" fixed>
-  <ion-content class="banner">
-    <ion-label>Login</ion-label>
-  </ion-content>
-  <ion-content padding class="loginpage">
+<ion-content class="loginpage" fixed>
+  <div><img src="assets/img/loginui.JPG" ></div>
+  <div padding>
   <ion-list inset>
     <ion-item class="label1">
       <ion-input [(ngModel)]="email" type="email" placeholder="Email"></ion-input>
@@ -28,9 +26,6 @@
   <button ion-button icon-left full class="buttonFace" (click)= "loginWithFB()"><ion-icon name="logo-facebook"> </ion-icon>ลงชื่อเข้าใช้ด้วย Facebook</button>
 </ion-list>
 <div><a (click)="goToRegisterPage()">Create account</a></div>
-
+</div>
   
-
-</ion-content>
-
 </ion-content>

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database-deprecated'
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { ModalController } from 'ionic-angular';
+import { CallNumber } from '@ionic-native/call-number';
 import {InformFoundManualPage} from '../inform-found-manual/inform-found-manual';
 /**
  * Generated class for the LostAnnounceDetailPage page.
@@ -40,7 +41,7 @@ export class LostAnnounceDetailPage {
     photo: '',
     tel: ''
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,private userService: UserServiceProvider,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private db: AngularFireDatabase,private userService: UserServiceProvider,public modalCtrl: ModalController,private callNumber: CallNumber) {
     this.announceDetail.dogName = navParams.get("dogName");
     this.announceDetail.breed = navParams.get("breed");
     this.announceDetail.gender = navParams.get("gender");
@@ -90,4 +91,9 @@ export class LostAnnounceDetailPage {
     //   status: 'lostM'
     // })
   }
+  launchDialer(n:string){
+    this.callNumber.callNumber(n, true)
+    .then(() => console.log('Launched dialer!'))
+    .catch(() => console.log('Error launching dialer'));
+}
 }
