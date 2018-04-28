@@ -109,8 +109,9 @@ export class InformFoundManualPage {
             announceFoundKey: key,
             announceMissingKey: this.announceMissingKey,
             uid: this.uid,
-            status: 'lostM'
+            status: 'lost'
           })
+          alert('ขอบคุณที่แจ้งเบาะแสค่ะ')
           this.viewCtrl.dismiss()
         })
       })

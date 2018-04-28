@@ -19,7 +19,9 @@ export class MyDogDetailPage {
     dogName: '',
     breed: '',
     gender: '',
-    age: '',
+    age_year: '',
+    age_month: '',
+    age_week:'',
     detail: '-',
     photo: '',
     status: '',
@@ -30,7 +32,9 @@ export class MyDogDetailPage {
     this.dogDetail.dogName = navParams.get("dogName");
     this.dogDetail.breed = navParams.get("breed");
     this.dogDetail.gender = navParams.get("gender");
-    this.dogDetail.age = navParams.get("age");
+    this.dogDetail.age_year = navParams.get("age_year");
+    this.dogDetail.age_month = navParams.get("age_month");
+    this.dogDetail.age_week = navParams.get("age_week");
     this.dogDetail.detail = navParams.get("detail");
     this.dogDetail.photo = navParams.get("photo");
     this.dogDetail.status = navParams.get("status");

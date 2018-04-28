@@ -91,12 +91,14 @@ export class MyDogPage {
     })
     adoptModal.present();
   }
-  goToDogDetail(dogName,breed,gender,age,detail,photo,status,lat,lng) {
+  goToDogDetail(dogName,breed,gender,age_year,age_month,age_week,detail,photo,status,lat,lng) {
     this.navCtrl.push(MyDogDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
-      age: age,
+      age_year: age_year,
+      age_month: age_month,
+      age_week: age_week,
       detail: detail,
       photo: photo,
       status: status,

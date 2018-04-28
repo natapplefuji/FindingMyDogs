@@ -16,12 +16,14 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let dog of breedList | async">
-      <ion-thumbnail item-start>
-        <img src="{{dog.photo}}">
-      </ion-thumbnail>
-      <h2>{{dog.dogName}} รอรับอุปการะ Today at 9.51 AM</h2>
-      <p>หากพบโปรดแจ้งเบาะแส</p>
-      <button ion-button clear item-end (tap)="goToDogDetail(dog.dogName,dog.breed,dog.gender,dog.age,dog.detail,dog.photo,dog.lat,dog.lng)">View</button>
+        <ion-thumbnail item-start>
+            <img src="{{dog.photo}}">
+          </ion-thumbnail>
+          <h2>หาคนอุปการะ{{dog.dogName}} พันธุ์ {{dog.breed}} </h2>
+          <p>ประกาศวันที่ {{dog.day}}/{{dog.month}}/{{dog.year}}</p>
+          <p>บริเวณ {{dog.district}},{{dog.province}}</p>
+          <button ion-button clear item-end (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.uid,dog.$key)"><ion-icon name="arrow-dropright"></ion-icon>
+          </button>
     </ion-item>
   </ion-list>
 </ion-content>

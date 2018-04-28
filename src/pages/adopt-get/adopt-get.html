@@ -28,7 +28,7 @@
     <ion-list *ngSwitchCase="'nearby'">
       <!-- แก้เอา div มาครอบจะได้ filter ประกาศที่มี status ยังเป็น wait -->
       <div *ngFor="let dog of announcelistNear | async" >
-      <ion-item *ngIf="dog.status == 'wait'" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid)">
+      <ion-item *ngIf="dog.status == 'wait'" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.uid,dog.$key)">
         <ion-thumbnail item-start>
           <img src="{{dog.photo}}">
         </ion-thumbnail>
@@ -39,27 +39,12 @@
         </button>
       </ion-item>
     </div>
-      <!-- <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/scroll0015.jpg">
-        </ion-thumbnail>
-        <h2>หาคนอุปการะ Turkey2 </h2>
-        <p>อายุ 10 เดือน</p>
-        <button ion-button clear item-end>View</button>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/scroll0015.jpg">
-        </ion-thumbnail>
-        <h2>หาคนอุปการะ Turkey3 </h2>
-        <p>อายุ 8 เดือน</p>
-        <button ion-button clear item-end>View</button>
-      </ion-item> -->
+
     </ion-list>
     
     <ion-list *ngSwitchCase="'all'">
       <div *ngFor="let dog of announcelistAll | async">
-      <ion-item (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.reward,dog.uid,dog.$key)">
+      <ion-item *ngIf="dog.status == 'wait'" (click)="goToAnnouceDetail(dog.dogName,dog.breed,dog.gender,dog.age_year,dog.age_month,dog.age_week,dog.dogDetail,dog.photo,dog.contactMiss,dog.uid,dog.$key)">
         <ion-thumbnail item-start>
           <img src="{{dog.photo}}">
         </ion-thumbnail>

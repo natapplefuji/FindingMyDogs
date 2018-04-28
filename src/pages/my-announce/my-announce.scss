@@ -3,5 +3,24 @@ page-my-announce {
         display:block;
         border-radius: 3px;
       }
-     
+      span.safe {
+        display:inline-block;
+        background: #2ecc71;
+        color:#ffffff;
+        border-radius: 20px;
+        font-size: 18px;
+        width: 80px;
+        text-align: center;
+    
+    }
+    span.lost {
+        display:inline-block;
+        background: #e74c3c;
+        color:#ffffff;
+        border-radius: 20px;
+        font-size: 18px;
+        width: 80px;
+        text-align: center;
+    
+    }
 }

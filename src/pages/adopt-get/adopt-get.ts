@@ -50,7 +50,7 @@ export class AdoptGetPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdoptGetPage');
   }
-  goToAnnouceDetail(dogName, breed, gender, age_year,age_month,age_week, dogDetail, photo, contactMiss, reward, uid, adoptKey) {
+  goToAnnouceDetail(dogName, breed, gender, age_year,age_month,age_week, dogDetail, photo, contactMiss, uid, adoptKey) {
     this.navCtrl.push(AdoptDetailPage, {
       dogName: dogName,
       breed: breed,
@@ -61,7 +61,6 @@ export class AdoptGetPage {
       dogDetail: dogDetail,
       photo: photo,
       contactMiss: contactMiss,
-      reward: reward,
       uid: uid,
       adoptKey: adoptKey
     })

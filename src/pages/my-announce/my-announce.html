@@ -29,7 +29,17 @@
       <p>
         พันธุ์ {{announceMissing?.breed}}
       </p>
-     
+      
+        <div *ngIf = "announceMissing.status == 'lost'">
+          <p class = "subhead">
+            สถานะ : <span class = "lost">หาย</span>
+          </p>
+        </div>
+        <div *ngIf = "announceMissing.status == 'found'">
+            <p class = "subhead">
+              สถานะ : <span class = "safe">พบแล้ว</span>
+            </p>
+          </div>
   </ion-col>
     </ion-row>
     <ion-row>
