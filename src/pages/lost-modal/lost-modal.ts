@@ -70,7 +70,7 @@ export class LostModalPage {
     console.log('ionViewDidLoad LostModalPage');
   }
   addAnnounceLost() {
-    this.db.database.ref('userProfile/' + this.uid).child('tel').update({ tel: this.announcelost.value.tel });
+    this.db.database.ref('userProfile/' + this.uid).update({ tel: this.announcelost.value.tel });
     var myRef = this.db.database.ref('/announceMissing').push()
           var key = myRef.key
           this.db.database.ref('/announceMissing/' + key).set({
@@ -98,7 +98,7 @@ export class LostModalPage {
             age_week: this.announcelost.value.age_week,
             status:'สูญหาย'//lost เป็น default/update เป็น found เมื่อพบเจ้าของแล้ว
           }).then(() => {
-            this.db.database.ref('dog/'+this.dogKey).update({status:'lost'})
+            this.db.database.ref('dogs/'+this.dogKey).update({status:'สูญหาย'})
             this.view.dismiss();
           })
   }

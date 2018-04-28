@@ -185,12 +185,13 @@ export class MyNotiDetailPage {
               duration: 2000,
               position: 'top'
             });
-          
+            
             // toast.onDidDismiss(() => {
             //   console.log('Dismissed toast');
             // });
           
             toast.present();
+            this.navCtrl.pop()
           }
         }
       ]

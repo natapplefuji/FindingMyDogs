@@ -20,8 +20,21 @@
 
   <h2 class = "breed">สุนัขที่ท่านพบใกล้เคียงกับพันธุ์</h2>
     <ion-list inset>
-      <ion-item ion-item *ngFor="let dog of dogs">
-        {{ dog.dogName }} {{dog.score}}%
+      <ion-item ion-item *ngFor="let dog of dogs;let idx = index">
+          <ion-grid>
+              <ion-row>
+                <ion-col col-1>
+                  {{idx}}
+                </ion-col>
+                <ion-col col-5>
+                    {{ dog.dogName }}
+                </ion-col>
+                <ion-col col-4>
+                    {{dog.score}}%
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+         
       </ion-item>
     </ion-list>
     
