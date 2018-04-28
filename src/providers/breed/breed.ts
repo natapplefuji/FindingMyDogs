@@ -49,6 +49,7 @@ export class BreedProvider {
     , 'dhole'
     , 'dingo'
     , 'doberman'
+    , 'english bulldog'
     , 'english foxhound'
     , 'english setter'
     , 'english springer'
