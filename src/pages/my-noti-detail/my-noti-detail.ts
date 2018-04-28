@@ -136,8 +136,8 @@ export class MyNotiDetailPage {
             founderPlayerIDList.push(this.founderDetail.playerID)
             var notificationObj = {
               contents: {
-                en: "Dog's owner accept your annouce that is his/her dog",
-                th: "เจ้าของยืนยันว่าเป็นสุนัขของเขา"
+                en: "Thank you, the dog's already found its home.",
+                th: "ขอบคุณค่ะ คุณได้ช่วยพาสุนัขกลับบ้านแล้ว"
               },
               include_player_ids: founderPlayerIDList
             };

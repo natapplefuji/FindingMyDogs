@@ -7,7 +7,7 @@ import { UpdateAnnouceLostPage } from '../update-annouce-lost/update-annouce-los
 import { UpdateAnnouceAdoptPage } from '../update-annouce-adopt/update-annouce-adopt';
 import { ToastController } from 'ionic-angular';
 import { MyAnnounceLostDetailPage } from '../my-announce-lost-detail/my-announce-lost-detail';
-import {MyAnnounceAdoptDetailPage} from '../my-announce-adopt-detail/my-announce-adopt-detail';
+import { MyAnnounceAdoptDetailPage } from '../my-announce-adopt-detail/my-announce-adopt-detail';
 /**
  * Generated class for the MyAnnouncePage page.
  *
@@ -82,7 +82,7 @@ export class MyAnnouncePage {
       reward: reward,
       uid: uid
     };
-    
+
     let myModal = this.modalCtrl.create(UpdateAnnouceLostPage, obj);
     myModal.present();
   }
@@ -105,10 +105,11 @@ export class MyAnnouncePage {
     let myModal = this.modalCtrl.create(UpdateAnnouceAdoptPage, obj);
     myModal.present();
   }
-  deleteAnnounceAdopt(key) {
+  deleteAnnounceAdopt(key, dogName) {
+    console.log(dogName);
     let alert = this.alertCtrl.create({
       title: 'ลบประกาศ',
-      message: 'หากต้องการลบประกาศรุณากดตกลง',
+      message: 'หากต้องการลบประกาศกรุณากดตกลง',
       buttons: [
         {
           text: 'ยกเลิก',
@@ -121,6 +122,11 @@ export class MyAnnouncePage {
         {
           text: 'ตกลง',
           handler: () => {
+            this.db.database.ref('dogs/').orderByChild('dogName').equalTo(dogName).once('value').then((snapshot) => {
+              snapshot.forEach((childSnapshot)=>{
+                childSnapshot.ref.update({ status: 'ปลอดภัย' });
+              });
+            });
             this.db.object('announceAdopt/' + key).remove();
             let toast = this.toastCtrl.create({
               message: 'ลบข้อมูลเรียบร้อยแล้ว',
@@ -139,10 +145,10 @@ export class MyAnnouncePage {
     });
     alert.present();
   }
-  deleteAnnounceMissing(key) {
+  deleteAnnounceMissing(key, dogName) {
     let alert = this.alertCtrl.create({
       title: 'ลบประกาศ',
-      message: 'หากต้องการลบประกาศรุณากดตกลง',
+      message: 'หากต้องการลบประกาศกรุณากดตกลง',
       buttons: [
         {
           text: 'ยกเลิก',
@@ -155,6 +161,11 @@ export class MyAnnouncePage {
         {
           text: 'ตกลง',
           handler: () => {
+            this.db.database.ref('dogs/').orderByChild('dogName').equalTo(dogName).once('value').then((snapshot) => {
+              snapshot.forEach((childSnapshot)=>{
+                childSnapshot.ref.update({ status: 'ปลอดภัย' });
+              });
+            });
             this.db.object('announceMissing/' + key).remove();
             console.log('Buy clicked');
           }
