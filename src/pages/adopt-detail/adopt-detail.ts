@@ -26,7 +26,6 @@ export class AdoptDetailPage {
     dogDetail: '',
     photo:'',
     contactMiss: '',
-    reward: '',
     uid:'',
     announcer: '',
     key:''

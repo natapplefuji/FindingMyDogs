@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
-import { MyDogDetailPage} from '../my-dog-detail/my-dog-detail'
+import {AdoptDetailPage} from '../adopt-detail/adopt-detail';
 
 /**
  * Generated class for the BreedListPage page.
@@ -27,17 +27,19 @@ export class BreedListPage {
           }
         })
   }
-  goToDogDetail(dogName,breed,gender,age,detail,photo,status,lat,lng) {
-    this.navCtrl.push(MyDogDetailPage, {
+  goToAnnouceDetail(dogName, breed, gender, age_year,age_month,age_week, dogDetail, photo, contactMiss, uid, adoptKey) {
+    this.navCtrl.push(AdoptDetailPage, {
       dogName: dogName,
       breed: breed,
       gender: gender,
-      age: age,
-      detail: detail,
+      age_year: age_year,
+      age_month: age_month,
+      age_week: age_week,
+      dogDetail: dogDetail,
       photo: photo,
-      status: status,
-      lat: lat,
-      lng:lng
+      contactMiss: contactMiss,
+      uid: uid,
+      adoptKey: adoptKey
     })
   }
   

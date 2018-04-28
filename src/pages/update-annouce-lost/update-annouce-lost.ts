@@ -47,7 +47,6 @@ export class UpdateAnnouceLostPage {
   ionViewDidLoad() {
     
     console.log('ionViewDidLoad UpdateAnnouceLostPage');
-    alert(this.announcelost.value.age_year);
   }
   closeModal() {
     this.viewCtrl.dismiss();
