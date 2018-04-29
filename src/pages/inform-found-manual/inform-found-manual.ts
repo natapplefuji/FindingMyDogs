@@ -37,6 +37,7 @@ export class InformFoundManualPage {
   district
   province
   country
+  playerIDList = []
   loc = { lat: 0, lng: 0 };
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -111,7 +112,40 @@ export class InformFoundManualPage {
             uid: this.uid,
             status: 'lost'
           })
-          alert('ขอบคุณที่แจ้งเบาะแสค่ะ')
+
+          this.db.object('announceMissing/' + this.announceMissingKey).subscribe(user => {
+            let uid = user.uid; //uid ของเจ้าของประกาศหมาหาย
+            this.db.object('userProfile/' + uid).subscribe(user => {
+              
+              let playerID = user.playerID;
+              console.log('player id is ' + playerID);
+              this.playerIDList.push(playerID); //เก็บ list playerID ที่จะต้องทำการ pushNoti
+            })  
+          });
+
+          var notificationObj = {
+            contents: {
+              en: "Similar Dog was found! Please check..",
+              th: "พบสุนัขลักษณะใกล้เคียง โปรดตรวจสอบ.."
+            },
+            include_player_ids: this.playerIDList
+          };
+      
+          window["plugins"].OneSignal.postNotification(notificationObj,
+            (successResponse) => {
+              //alert("Notification Post Success:" + JSON.stringify(playerIDList));
+              let toast = this.toastCtrl.create({
+                message: 'ขอบคุณสำหรับการแจ้งเบาะแสค่ะ',
+                duration: 3000,
+                position: 'bottom'
+              });
+              toast.present();
+            },
+            (failedResponse) => {
+              //alert("Notification Post Failed playerID ->: " +JSON.stringify(playerIDList));
+              alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+            }
+          );
           this.viewCtrl.dismiss()
         })
       })
