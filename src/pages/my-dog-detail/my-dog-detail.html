@@ -38,13 +38,13 @@
             <p>-</p>
           </div>
           <div *ngIf="dogDetail.age_year!='0'&&dogDetail.age_month!=undefined&&dogDetail.age_week!=undefined">
-          <p>{{announceDetail.age_year}} ปี {{announceDetail.age_month}} เดือน {{announceDetail.age_week}} สัปดาห์</p>
+          <p>{{dogDetail.age_year}} ปี {{dogDetail.age_month}} เดือน {{dogDetail.age_week}} สัปดาห์</p>
         </div>
         <div *ngIf="dogDetail.age_year=='0'&&dogDetail.age_month!='0'">
-          <p>{{announceDetail.age_month}} เดือน {{announceDetail.age_week}} สัปดาห์</p>
+          <p>{{dogDetail.age_month}} เดือน {{dogDetail.age_week}} สัปดาห์</p>
         </div>
         <div *ngIf="dogDetail.age_year=='0'&&dogDetail.age_month=='0'">
-          <p>{{announceDetail.age_week}} สัปดาห์</p>
+          <p>{{dogDetail.age_week}} สัปดาห์</p>
         </div>
     </ion-item>
     <ion-item>
