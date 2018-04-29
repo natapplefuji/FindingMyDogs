@@ -23,6 +23,16 @@ page-my-noti {
         text-align: center;
     
     }
+    span.warn {
+        display:inline-block;
+        background:#ebae08;
+        color:#ffffff;
+        border-radius: 20px;
+        font-size: 18px;
+        width: 80px;
+        text-align: center;
+    
+    }
     ion-card-title {
         font-weight: bold;
     }

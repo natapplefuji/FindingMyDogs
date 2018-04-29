@@ -5,6 +5,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { UserServiceProvider } from '../../providers/user-service/user-service'
 import { VaccineDetailPage } from '../vaccine-detail/vaccine-detail'
 import { MyNotiDetailAdoptPage } from '../my-noti-detail-adopt/my-noti-detail-adopt';
+import { MyAnnounceAdoptDetailPage } from '../my-announce-adopt-detail/my-announce-adopt-detail';
 /**
  * Generated class for the MyNotiPage page.
  *
@@ -49,7 +50,6 @@ export class MyNotiPage {
     });
     this.notiAccept.forEach(element => {
       this.getFirebaseProperty4(element, element.length)
-      console.log(element)
     });
     // this.dogPhoto= ["assets/img/scroll0015.jpg","assets/img/labrado2.jpg","assets/img/dog_test.jpeg"]
   }
@@ -132,6 +132,20 @@ export class MyNotiPage {
       adopterTel: adopterTel,
       key: key,
       adoptAnnounceKey:adoptAnnounceKey
+    })
+  }
+  goToAnnouceAdoptDetail(dogName, breed, gender, age_year, age_month, age_week, dogDetail, photo, contactMiss, uid) {
+    this.navCtrl.push(MyAnnounceAdoptDetailPage, {
+      dogName: dogName,
+      breed: breed,
+      gender: gender,
+      age_year: age_year,
+      age_month: age_month,
+      age_week: age_week,
+      dogDetail: dogDetail,
+      photo: photo,
+      contactMiss: contactMiss,
+      uid: uid
     })
   }
 }

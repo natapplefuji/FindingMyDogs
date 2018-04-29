@@ -79,7 +79,7 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-  <ion-card *ngFor="let notiResp of notiAccept|async; let i = index" (click)="goToNotiDetailAdopt(announceAdoptDetailR[i].photo,announceAdoptDetailR[i].dogName,announceAdoptDetailR[i].breed,announceAdopterR[i].firstName,announceAdopterR[i].lastName,announceAdopterR[i].email,announceAdopterR[i].tel,noti.$key,noti.adoptAnnounceKey)">
+  <ion-card *ngFor="let notiResp of notiAccept|async; let i = index" (click)="goToAnnouceAdoptDetail(announceAdoptDetailR[i].dogName,announceAdoptDetailR[i].breed,announceAdoptDetailR[i].gender,announceAdoptDetailR[i].age_year,announceAdoptDetailR[i].age_month,announceAdoptDetailR[i].age_week,announceAdoptDetailR[i].dogDetail,announceAdoptDetailR[i].photo,announceAdoptDetailR[i].contactMiss,announceAdoptDetailR[i].uid)">
     <ion-grid>
     <ion-row>          
     <ion-col col-5>
@@ -94,7 +94,7 @@
       <div *ngIf="notiResp.isResponded=='false'">
         <p class="subhead">
           สถานะ :
-          <span class="danger">รอการตอบรับ</span>
+          <span class="warn">รอการตอบรับ</span>
         </p>
       </div>
       <div *ngIf="notiResp.isResponded=='accept'">
