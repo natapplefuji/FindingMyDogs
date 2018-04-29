@@ -72,10 +72,11 @@ export class LostAnnounceDetailPage {
     console.log(this.announceDetail.age_week)
   }
   notiAnnounceLost() { 
+    let uidFounder= this.userService.uid;
     let obj = {
       announceMissingKey: this.navParams.get("key"),
       announceMissingBreed : this.navParams.get("breed"), 
-      uid: this.navParams.get("uid")
+      uid: uidFounder
     };
     
     console.log(obj.announceMissingKey)
