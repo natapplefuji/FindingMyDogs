@@ -31,13 +31,8 @@
     </ion-item>
     <ion-item>
         <h2>อายุ</h2>
-        <div *ngIf="dogDetail.age_year==undefined&&dogDetail.age_month==undefined&&dogDetail.age_week==undefined">
-            <p>-</p>
-          </div>
-          <div *ngIf="dogDetail.age_year=='0'&&dogDetail.age_month=='0'&&dogDetail.age_week=='0'">
-            <p>-</p>
-          </div>
-          <div *ngIf="dogDetail.age_year!='0'&&dogDetail.age_month!=undefined&&dogDetail.age_week!=undefined">
+        
+          <div *ngIf="dogDetail.age_year!='0'">
           <p>{{dogDetail.age_year}} ปี {{dogDetail.age_month}} เดือน {{dogDetail.age_week}} สัปดาห์</p>
         </div>
         <div *ngIf="dogDetail.age_year=='0'&&dogDetail.age_month!='0'">

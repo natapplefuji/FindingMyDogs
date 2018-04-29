@@ -92,6 +92,7 @@ export class MyDogPage {
     adoptModal.present();
   }
   goToDogDetail(dogName,breed,gender,age_year,age_month,age_week,detail,photo,status,lat,lng) {
+    console.log(age_week)
     this.navCtrl.push(MyDogDetailPage, {
       dogName: dogName,
       breed: breed,
