@@ -31,19 +31,19 @@
     </ion-item>
     <ion-item>
         <h2>อายุ</h2>
-        <div *ngIf="announceDetail.age_year==undefine&&announceDetail.age_month==undefine&&announceDetail.age_week==undefine">
+        <div *ngIf="dogDetail.age_year==undefined&&dogDetail.age_month==undefined&&dogDetail.age_week==undefined">
             <p>-</p>
           </div>
-          <div *ngIf="announceDetail.age_year=='0'&&announceDetail.age_month=='0'&&announceDetail.age_week=='0'">
+          <div *ngIf="dogDetail.age_year=='0'&&dogDetail.age_month=='0'&&dogDetail.age_week=='0'">
             <p>-</p>
           </div>
-          <div *ngIf="announceDetail.age_year!='0'&&announceDetail.age_month!=undefine&&announceDetail.age_week!=undefine">
+          <div *ngIf="dogDetail.age_year!='0'&&dogDetail.age_month!=undefined&&dogDetail.age_week!=undefined">
           <p>{{announceDetail.age_year}} ปี {{announceDetail.age_month}} เดือน {{announceDetail.age_week}} สัปดาห์</p>
         </div>
-        <div *ngIf="announceDetail.age_year=='0'&&announceDetail.age_month!='0'">
+        <div *ngIf="dogDetail.age_year=='0'&&dogDetail.age_month!='0'">
           <p>{{announceDetail.age_month}} เดือน {{announceDetail.age_week}} สัปดาห์</p>
         </div>
-        <div *ngIf="announceDetail.age_year=='0'&&announceDetail.age_month=='0'">
+        <div *ngIf="dogDetail.age_year=='0'&&dogDetail.age_month=='0'">
           <p>{{announceDetail.age_week}} สัปดาห์</p>
         </div>
     </ion-item>
