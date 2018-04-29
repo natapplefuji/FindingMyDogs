@@ -91,19 +91,20 @@ export class MyDogPage {
     })
     adoptModal.present();
   }
-  goToDogDetail(dogName,breed,gender,age_year,age_month,age_week,detail,photo,status,lat,lng) {
+  goToDogDetail(key) {
     this.navCtrl.push(MyDogDetailPage, {
-      dogName: dogName,
-      breed: breed,
-      gender: gender,
-      age_year: age_year,
-      age_month: age_month,
-      age_week: age_week,
-      detail: detail,
-      photo: photo,
-      status: status,
-      lat: lat,
-      lng:lng
+      key:key
+      // dogName: dogName,
+      // breed: breed,
+      // gender: gender,
+      // age_year: age_year,
+      // age_month: age_month,
+      // age_week: age_week,
+      // detail: detail,
+      // photo: photo,
+      // status: status,
+      // lat: lat,
+      // lng:lng
     })
   }
 }
