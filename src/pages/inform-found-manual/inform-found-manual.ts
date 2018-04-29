@@ -50,7 +50,8 @@ export class InformFoundManualPage {
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
     public _loc: LocationProvider,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private userService: UserServiceProvider
   ) {
     this.infoFound = this.formBuilder.group({
       contactMiss: ['', Validators.required],
@@ -86,7 +87,7 @@ export class InformFoundManualPage {
         var myRef = this.db.database.ref('/announceFound').push()
         var key = myRef.key
         this.db.database.ref('/announceFound/' + key).set({
-          founder: this.uid,
+          founder: this.userService.uid,
           announcefoundid: key,
           breed: this.breed,
           contactMiss: this.infoFound.value.contactMiss,
