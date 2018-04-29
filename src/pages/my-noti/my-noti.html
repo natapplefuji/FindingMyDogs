@@ -79,7 +79,40 @@
       </ion-row>
     </ion-grid>
   </ion-card>
+  <ion-card *ngFor="let notiResp of notiAccept|async; let i = index" (click)="goToNotiDetailAdopt(announceAdoptDetailR[i].photo,announceAdoptDetailR[i].dogName,announceAdoptDetailR[i].breed,announceAdopterR[i].firstName,announceAdopterR[i].lastName,announceAdopterR[i].email,announceAdopterR[i].tel,noti.$key,noti.adoptAnnounceKey)">
+    <ion-grid>
+    <ion-row>          
+    <ion-col col-5>
+      <!-- <p>{{notiTest[i].photo}}</p> -->
+      <img style = "height:75px;"src="{{announceAdoptDetailR[i]?.photo}}" />
+    </ion-col>
 
+    <ion-col col-7>
+      <h2>
+          การขอรับอุปการะ {{announceAdoptDetailR[i]?.dogName}}
+      </h2>
+      <div *ngIf="notiResp.isResponded=='false'">
+        <p class="subhead">
+          สถานะ :
+          <span class="danger">รอการตอบรับ</span>
+        </p>
+      </div>
+      <div *ngIf="notiResp.isResponded=='accept'">
+        <p class="subhead">
+          สถานะ :
+          <span class="safe">ยอมรับ</span>
+        </p>
+      </div>
+      <div *ngIf="notiResp.isResponded=='deny'">
+        <p class="subhead">
+          สถานะ :
+          <span class="danger">ปฏิเสธ</span>
+        </p>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-card>
   
 
 </ion-content>

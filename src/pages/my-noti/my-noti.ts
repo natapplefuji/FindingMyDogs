@@ -23,10 +23,13 @@ export class MyNotiPage {
   notiList
   notiVaccine
   notiAdopt
+  notiAccept
   annouceFound: any = []
   dogObject: any = []
   announceAdopter: any = []
   announceAdoptDetail = []
+  announceAdopterR: any = []
+  announceAdoptDetailR = []
   index = 0
   index2 = 0;
   constructor(private userService: UserServiceProvider, private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
@@ -34,6 +37,7 @@ export class MyNotiPage {
     this.notiList = db.list('notification/', { query: { orderByChild: 'uid', equalTo: uid } }); //noti missing
     this.notiVaccine = db.list('notiVaccine/', { query: { orderByChild: 'uid', equalTo: uid } });
     this.notiAdopt = db.list('notificationAdopt/', { query: { orderByChild: 'uid', equalTo: uid } });//noti adopt
+    this.notiAccept = db.list('notificationAdopt/', { query: { orderByChild: 'adopter', equalTo: uid } });
     this.notiList.forEach(element => {
       this.getFirebaseProperty(element, element.length)
     });
@@ -42,6 +46,10 @@ export class MyNotiPage {
     });
     this.notiAdopt.forEach(element => {
       this.getFirebaseProperty3(element, element.length)
+    });
+    this.notiAccept.forEach(element => {
+      this.getFirebaseProperty4(element, element.length)
+      console.log(element)
     });
     // this.dogPhoto= ["assets/img/scroll0015.jpg","assets/img/labrado2.jpg","assets/img/dog_test.jpeg"]
   }
@@ -81,6 +89,18 @@ export class MyNotiPage {
       });
       this.db.object('announceAdopt/' + keyAnnounce).subscribe(data => {
         this.announceAdoptDetail.push(data);
+      });
+    }
+  }
+  getFirebaseProperty4(element, length) { //ของ adopt announcementResponse
+    for (var index = 0; index < length; index++) {
+      var key = element[index].uid;
+      var keyAnnounce = element[index].adoptAnnounceKey
+      this.db.object('userProfile/' + key).subscribe(user => {
+        this.announceAdopterR.push(user);
+      });
+      this.db.object('announceAdopt/' + keyAnnounce).subscribe(data => {
+        this.announceAdoptDetailR.push(data);
       });
     }
   }
