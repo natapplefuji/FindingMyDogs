@@ -64,7 +64,16 @@
       <p>
         พันธุ์ {{announceAdopt?.breed}}
       </p>
-     
+      <div *ngIf = "announceAdopt.status == 'wait'">
+        <p class = "subhead">
+          สถานะ : <span class = "lost">รอคนอุปการะ</span>
+        </p>
+      </div>
+      <div *ngIf = "announceAdopt.status == 'adopted'">
+          <p class = "subhead">
+            สถานะ : <span class = "safe">คนอุปการะแล้ว</span>
+          </p>
+        </div>
   </ion-col>
     </ion-row>
     <ion-row>
