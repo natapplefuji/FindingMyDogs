@@ -181,7 +181,7 @@ export class MyNotiDetailPage {
             this.notiAnnounce.remove();
             
             let toast = this.toastCtrl.create({
-              message: 'ลบประกาศแจ้งเตือนเรีบยร้อย',
+              message: 'ลบประกาศแจ้งเตือนเรียบร้อย',
               duration: 2000,
               position: 'top'
             });

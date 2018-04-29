@@ -55,8 +55,8 @@ export class MyNotiDetailAdoptPage {
         this.db.database.ref('announceAdopt/'+this.adoptAnnounceKey).update({status:'adopted'})
         var notificationObj = {
           contents: {
-            en: "Your dog adoption request was accepted.",
-            th: "การขอรับอุปการะสุนัขของคุณได้รับการอนุมัติ"
+            en: "["+this.dogName+"] Your dog adoption request is accepted.",
+            th: "["+this.dogName+"] การขอรับอุปการะสุนัขของคุณได้รับการอนุมัติ"
           },
           include_player_ids: adopterPlayerIDList
         };
@@ -91,8 +91,8 @@ export class MyNotiDetailAdoptPage {
         adopterPlayerIDList.push(adopterPlayerID);
         var notificationObj = {
           contents: {
-            en: "Your dog adoption request was rejected.",
-            th: "การขอรับอุปการะสุนัขของคุณถูกปฏิเสธ"
+            en: "["+this.dogName+"] Your dog adoption request is rejected.",
+            th: "["+this.dogName+"] การขอรับอุปการะสุนัขของคุณถูกปฏิเสธ"
           },
           include_player_ids: adopterPlayerIDList
         };
